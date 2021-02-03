@@ -6,7 +6,7 @@
   <link href="https://www.nixgnauhcuy.top/atom.xml" rel="self"/>
   
   <link href="https://www.nixgnauhcuy.top/"/>
-  <updated>2021-01-26T12:51:41.000Z</updated>
+  <updated>2021-02-03T09:38:41.000Z</updated>
   <id>https://www.nixgnauhcuy.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python 开发环境搭建</title>
+    <link href="https://www.nixgnauhcuy.top/5f9e4d2c65bf/"/>
+    <id>https://www.nixgnauhcuy.top/5f9e4d2c65bf/</id>
+    <published>2021-02-03T09:38:41.000Z</published>
+    <updated>2021-02-03T09:38:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>一个好的程序员应该是那种过单行线都要往两边看的人。</p></blockquote><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Hello，距上次更新居然过了一个多星期。😂可不能怪我懒，我家里工作的笔记本要拿去给家人用，所以最近一直在找替换机，最后在狗东买了联想的拯救者 R7000，工作原因还是笔记本方便，不然组装台台式机也是个不错的选择，下单后隔天傍晚就收到了<del>速度好评👍</del>，验完机后要把我过时的旧笔记本的资料迁移到新机上，平时上班也没空<del>临近过年反而更忙了😩</del>，只有晚上回去才有空折腾。又要装软件，搭建一些开发环境，所以一直没有时间更新。</p><p>再坚挺到 6 号我就放假了！<del>多半更加没时间更新了。</del>公司放假 14 天，😏不知道各位是不是早早就放假舒舒服服过年去了。</p><p>回到正题，因为换了电脑，所以需要重新安装一些开发环境，刚好整理一下一些开发环境的安装流程！</p><hr><h2 id="下载-python"><a href="#下载-python" class="headerlink" title="下载 python"></a>下载 python</h2><p>首先，进入 <a href="https://www.python.org/">python 官网</a>，</p><p><img src= "https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/md/13/00.png"></p><p>找到 <code>Downloads</code> 选择要安装的平台，我的系统是 <code>win10</code> 的，所以选择 <code>Windows</code> 平台，点击进入下载页，这里我选择稳定版 <code>python 3.8.7</code>，然后根据自己操作系统的位数选择 32 位或 64 位来下载，这里我是 64 位的，所以选择 <code>Download Windows installer (64-bit)</code> 点击下载即可，</p><p><img src= "https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/md/13/01.png"></p><blockquote><p>操作系统位数的查看方法：右键我的电脑，打开属性，计算机的基本信息就显示出来了，下图演示电脑是我公司的台式机<br><img src= "https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/md/13/02.png"></p></blockquote><h2 id="安装-python"><a href="#安装-python" class="headerlink" title="安装 python"></a>安装 python</h2><p>下载完成后，双击运行，勾选上 <code>Add Python 3.8 to PATH</code>，让安装程序帮你写入环境变量，省得自己还得跑去设置，增加错误几率。默认安装的地址我不太喜欢，所以这里选择 <code>Customize installation</code> 来自定义安装，</p><p><img src= "https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/md/13/03.png"></p><p>可选功能 <code>Optional Features</code> 这里默认就可以了，进入下一步</p><p><img src= "https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/md/13/04.png"></p><p>高级选项 <code>Advanced Options</code>，勾选上 <code>Install for all users</code>，然后选择要安装的路径，装在其他盘也是可以的，确认无误后，点击 <code>Install</code> 开始安装，并等待安装完成</p><p><img src= "https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/md/13/05.png"></p><p><img src= "https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/md/13/06.png"></p><p>安装完成后，点击 <code>Disable path length limit</code> 来禁用系统的 PATH 长度限制，不点击也是 OK 的，随后点击 <code>close</code> 关闭安装程序即可。</p><p><img src= "https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/md/13/07.png"></p><p>然后我们验证一下是否完成无误，<code>win + R</code> 打开运行框，输入 <code>cmd</code> 后回车，输入 <code>python</code> 即可，</p><p>安装成功会显示：</p><p><img src= "https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/md/13/08.png"></p><p>失败或安装错误则没有显示信息：</p><p><img src= "https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/nixgnauhcuy/cdn/image/md/13/09.png"></p><p>输入 <code>python</code> 后没有打印版本信息的话，则需要检查安装流程和环境变量设置是否有问题！</p>]]></content>
+    
+    
+    <summary type="html">python 开发环境的搭建。</summary>
+    
+    
+    
+    <category term="python" scheme="https://www.nixgnauhcuy.top/categories/python/"/>
+    
+    
+    <category term="python" scheme="https://www.nixgnauhcuy.top/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>python 制作串口工具（二）</title>
