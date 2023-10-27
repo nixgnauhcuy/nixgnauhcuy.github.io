@@ -1,0 +1,620 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Nand Flash 和 Nor Flash 详解 | nixgnauhcuy</title><meta name="keywords" content="嵌入式,Nand Flash,Nor Flash"><meta name="author" content="nixgnauhcuy"><meta name="copyright" content="nixgnauhcuy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Nand Flash 和 Nor Flash 详解"><meta name="application-name" content="Nand Flash 和 Nor Flash 详解"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Nand Flash 和 Nor Flash 详解"><meta property="og:url" content="https://www.nixgnauhcuy.cn/c12055e6ecf6/index.html"><meta property="og:site_name" content="nixgnauhcuy"><meta property="og:description" content="对嵌入式中常用的 Nor Flash 和 Nand Flash 整理。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/01.jpg?_r_=d0cf07ca-561d-3607-7084-d21db2ae4bc3"><meta property="article:author" content="nixgnauhcuy"><meta property="article:tag" content="[&quot;blog&quot;,&quot;博客&quot;,&quot;技术&quot;,&quot;个人&quot;,&quot;学习&quot;,&quot;教程&quot;]"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/01.jpg?_r_=d0cf07ca-561d-3607-7084-d21db2ae4bc3"><meta name="description" content="对嵌入式中常用的 Nor Flash 和 Nand Flash 整理。"><link rel="shortcut icon" href="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/favicon.png"><link rel="canonical" href="https://www.nixgnauhcuy.cn/c12055e6ecf6/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><meta name="google-site-verification" content="T9L_T3an8pckM0Sc0wa17RoeF1zsROoZJdv4B9ltUJM"/><meta name="baidu-site-verification" content="codeva-U5171cz6ED"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e1d8d6cf9206f44c07c598f2d8377c8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2VWCFFF041"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-2VWCFFF041');
+</script><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/people.png"},
+  postHeadAiDescription: undefined,
+  diytitle: undefined,
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":90,"position":"top","messagePrev":"注意：自上次更新以来已有","messageNext":"天，文章的内容可能已过时，如果发现错误，请留言或发送邮件告知我。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: nixgnauhcuy","link":"链接: ","source":"来源: nixgnauhcuy","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'nixgnauhcuy',
+  title: 'Nand Flash 和 Nor Flash 详解',
+  postAI: '',
+  pageFillDescription: '前言, 历史, Nor Flash 和 Nand Flash, 什么是 Nor Flash ？, 什么是 Nand Flash ？, Nor Flash 和 Nand Flash 的共性, Nor Flash 和 Nand Flash 的差异, 结构差异, 可靠性差异, 成本和容量差异, 读写速度的差异, 易用性的差异, 编程角度的差异, 功耗的差异, 整理为表格, 结语代码写的越急程序跑得越慢前言和在各种嵌入式系统中都扮演着不可或缺的角色所以在这里整理下历史以下摘自维基百科闪存无论是型或型是舛冈富士雄博士年申请了一个叫做的专利然而东芝公司的论资排辈却让这项划时代的发明石沉大海直到年之后我终于被提拔了可以不用批准就去工厂让工人们帮忙做出样品了富士雄说据东芝表示闪存之所以命名为是由舛冈博士的同事有泉正二建议因为这种存储器的抹除流程让他想起了相机的闪光灯舛冈博士在年的加州旧金山国际电子组件会议上发表了这项发明看到了这项发明的巨大潜力并于年推出第一款商业性的芯片需要很长的时间进行抹写但是它提供完整的寻址与资料总线并允许随机存取存储器上的任何区域这使的它非常适合取代老式的芯片当时芯片主要用来存储几乎不需更新的代码例如电脑的或机顶盒的固件可以承受一万到一百万次抹写循环它同时也是早期的可移除式快闪存储媒体的基础本来便是以为基础的虽然它之后跳槽到成本较低的舛冈富士雄没有停止追求在年发明了大大降低了制造成本由于他的贡献东芝奖励了他一笔几百美金的奖金和一个位置很高却悠闲的职位做为一个工程师他忍受不了这种待遇不得不辞职进入大学继续科研东芝在年的国际固态电路会议上发表了具有较快的抹写时间而且每个存储单元的面积也较小这让相较于具有较高的存储密度与较低的每比特成本同时它的可抹除次数也高出十倍然而的接口并没有随机存取外部地址总线它必须以区块性的方式进行读取典型的区块大小是数百至数千比特因为多数微处理器与微控制器要求字节等级的随机存取所以不适合取代那些用以装载程序的从这样的角度看来比较像光盘硬盘这类的次级存储设备非常适合用于储存卡之类的大量存储设备第一款创建在基础上的可移除式存储媒体是此后许多存储媒体也跟着采用包括与卡在很长一段时间东芝公司甚至不承认是舛冈富士雄发明的宣称是发明的直到在年颁给舛冈富士雄特殊贡献奖后才改口舛冈富士雄觉得自己的贡献被东芝公司抹杀了于年起诉了东芝公司并索要亿日元的补偿最后和东芝公司达成和解得到万日元合美元和什么是最常用于需要写入和读取单个字节数据的应用程序并且最常用于需要随机访问和就地执行访问技术的应用程序由于每个读取访问都花费相同的时间因此顺序读取访问不会比随机访问快擦除编程周期通常可能很长当今的设备具有几兆比特和几千兆字节的容量根据设备的不同在写入数据之前必须擦除单个字节或扇区擦除编程速度通常低于具有很高的可靠性通常可将其数据完整性保持年或更长时间的特点是芯片内执行这样应用程序可以直接在闪存内运行不必再把代码读到系统中的优点是传输效率很高但是工艺复杂价格较贵在的小容量时具有很高的成本效益但是很低的写入和擦除速度大大影响了它的性能在开发板中应用的非常广泛通过把烧到中通电后自动运行非常适合低密度高速读取应用这些应用大多是只读的通常被称为代码存储应用什么是按块排列可以在其中写入读取或擦除数据在顺序读取期间接收第一个数据字节的等待时间比使用要长得多但是随后读取数据的顺序字节要比使用闪存快得多写入数据时可以将完整的数据块快速传输到设备然后在单个操作中写入该数据块有效的读取和写入速度以及块擦除时间比快得多最适合执行大型顺序数据访问的系统这与当今用作计算系统和带有面向块的存储子系统的操作系统的主要存储设备的映射非常吻合由于闪存单元的物理硅设计对于类似的处理技术单元比单元占用的硅面积大约少其内部采用非线性宏单元模式为固态大容量内存的实现提供了廉价有效的解决方案的优点是容量大便宜改写速度快缺点是无法寻址直接运行程序只能存储数据另外非常容易出现坏区所以需要有校验的算法应用的困难在于的管理和需要特殊的系统接口适用于大量数据的存储因而在业界得到了越来越广泛的应用如嵌入式产品中包括数码相机随身听记忆卡体积小巧的盘等非常适合低成本高密度高速编程擦除应用通常被称为数据存储应用和的共性都是非易失存储介质即掉电都不会丢失内容在写入前都需要擦除实际上的一个可以从变成而要从变就要擦除整块都需要擦除和的差异结构差异体系结构提供了足够的地址线以映射整个存储器范围这具有随机访问和读取时间短的优点非常适合代码执行采用内存的随机读取技术各个存储单元并联连接对存储单元进行统一编址使器件能够实现随机访问既然是统一编址就可以在芯片内执行即应用程序可直接在内运行而无需先拷贝到这种配置能够缩短随机存取微处理器指令所需的读取时间是作为一种针对高密度数据存储进行优化的替代方案开发的它放弃了随机访问能力以实现更小的单元大小为代价这意味着芯片大小会更小和单位成本会更低数据线和地址线共用线需额外联接一些控制的输入输出通过对数据块进行编程来实现更快的写入和擦除可靠性差异寿命耐用性写入和擦除数据时会导致介质的氧化降解的擦写次数是万次的擦写次数是万次坏块处理器件的坏块是随机分布的在使用过程中难免会产生坏块所以在使用时要进行坏块管理以保障数据可靠在的位翻转一个位发生翻转现象上的出现几率要比大得多这个问题在存储关键文件时是致命的所以在使用时建议同时使用等校验算法成本和容量差异的单元尺寸几乎是器件的一半由于生产过程更为简单结构可以在给定的模具尺寸内提供更高的容量也就相应地降低了价格与相比的密度要高得多主要是因为其每比特成本较低通常具有至的容量的密度范围从到由于具有更高的密度因此主要用于数据存储应用读写速度的差异有更快的读取速度有更快的写擦除速度是非易失存储器可以存储器单元块进行擦写和再编程任何器件的写入操作只能在空或已擦除的单元内进行所以大多数情况下在进行写入操作之前必须先执行擦除器件执行擦除操作是十分简单的而则要求在进行擦除前先要将目标块内所有的位都写为由于擦除器件时是以的块进行的执行一个写入擦除操作的时间为与此相反擦除器件是以的块进行的执行相同的操作最多只需要执行擦除时块尺寸的不同进一步拉大了和之间的性能差距易用性的差异有专用的地址引脚来寻址较容易和其他芯片联接还支持本地执行的端口采用复用的数据线和地址线必须先通过寄存器串行地进行数据存取各厂商对信号的定义会有差异增加了应用的难度编程角度的差异采用统一编址有独立地址线可随机读取每个字但不能像以字节改写数据只能按页写故不能代替擦除既可整页擦除也可整块擦除共用地址线和数据线页是读写数据的最小单元块是擦除数据的最小单元另外进行写操作时只能将相应的位由变而擦除才能把块内所有位由变所有写入数据时如果该页已经存在数据必须先擦除再写功耗的差异在功耗方面闪存首次通电时需要比高的电流但是一旦上电的待机功耗就比低得多因此通常更适合于从内存中进行随机读取而在写入擦除和顺序读取方面效率更高整理为表格容量很大较小可执行代码不行可以读写性能读取块顺序读写入块擦除块可按块擦除读取块方式写入慢擦除慢寿命约百万次约十万次访问方式顺序读写随机读写接口方式任意特定完整存储器接口价格低高读取速度与相近根据接口的不同有所差异的写入速度比快很多的擦除速度比快很多最大擦次数比多支持片上执行可以在上面直接运行代码软件驱动比简单可以随机按字节读取数据需要按块进行读取大容量下比成本要低很多体积也更小结语本来是想要学习以及的知识结果网上有非常多相似的文章这方面的信息实在是太多了所以基本就写一点搬运一点了',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2021-01-11 16:07:27',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">nixgnauhcuy</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)" rel="external nofollow noreferrer">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AMS/" style="font-size: 1.05rem;">AMS<sup>1</sup></a><a href="/tags/ANCS/" style="font-size: 1.05rem;">ANCS<sup>1</sup></a><a href="/tags/BLE/" style="font-size: 1.05rem;">BLE<sup>2</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C<sup>3</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>3</sup></a><a href="/tags/IOS/" style="font-size: 1.05rem;">IOS<sup>2</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>1</sup></a><a href="/tags/Nand-Flash/" style="font-size: 1.05rem;">Nand Flash<sup>1</sup></a><a href="/tags/Nor-Flash/" style="font-size: 1.05rem;">Nor Flash<sup>1</sup></a><a href="/tags/keil/" style="font-size: 1.05rem;">keil<sup>3</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>7</sup></a><a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 1.05rem;">串口<sup>2</sup></a><a href="/tags/%E4%BD%8D%E5%9F%9F/" style="font-size: 1.05rem;">位域<sup>1</sup></a><a href="/tags/%E4%BD%8D%E5%AD%97%E6%AE%B5/" style="font-size: 1.05rem;">位字段<sup>1</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 1.05rem;">嵌入式<sup>21</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>5</sup></a><a href="/tags/%E6%8A%80%E5%B7%A7/" style="font-size: 1.05rem;">技巧<sup>2</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.05rem;">生活<sup>1</sup></a><a href="/tags/%E8%8B%B1%E6%96%87/" style="font-size: 1.05rem;">英文<sup>1</sup></a><a href="/tags/%E8%93%9D%E7%89%99/" style="font-size: 1.05rem;">蓝牙<sup>3</sup></a><a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 1.05rem;">踩坑<sup>2</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 1.05rem;">软件<sup>4</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">四月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">三月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/12/"><span class="card-archive-list-date">十二月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">八月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);" rel="external nofollow noreferrer"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url">嵌入式</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>嵌入式</span></a><a class="article-meta__tags" href="/tags/Nand-Flash/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Nand Flash</span></a><a class="article-meta__tags" href="/tags/Nor-Flash/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Nor Flash</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Nand Flash 和 Nor Flash 详解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2021-01-11T08:07:27.000Z" title="发表于 2021-01-11 16:07:27">2021-01-11</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2021-01-11T08:07:27.000Z" title="更新于 2021-01-11 16:07:27">2021-01-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">3.3k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为深圳"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>深圳</span></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://www.nixgnauhcuy.cn/c12055e6ecf6/"><header><a class="post-meta-categories" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url">嵌入式</a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" tabindex="-1" itemprop="url">嵌入式</a><a href="/tags/Nand-Flash/" tabindex="-1" itemprop="url">Nand Flash</a><a href="/tags/Nor-Flash/" tabindex="-1" itemprop="url">Nor Flash</a><h1 id="CrawlerTitle" itemprop="name headline">Nand Flash 和 Nor Flash 详解</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">nixgnauhcuy</span><time itemprop="dateCreated datePublished" datetime="2021-01-11T08:07:27.000Z" title="发表于 2021-01-11 16:07:27">2021-01-11</time><time itemprop="dateCreated datePublished" datetime="2021-01-11T08:07:27.000Z" title="更新于 2021-01-11 16:07:27">2021-01-11</time></header><blockquote>
+<p><strong>代码写的越急，程序跑得越慢。—— Roy Carlson</strong></p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><em><strong>前言</strong></em></h2><p>Nor Flash 和 Nand Flash 在各种嵌入式系统中都扮演着不可或缺的角色，所以在这里整理下。</p>
+<hr>
+<h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a><em><strong>历史</strong></em></h2><blockquote>
+<p>以下摘自<a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/wiki/%E9%97%AA%E5%AD%98">维基百科</a></p>
+<p>闪存（无论是 NOR 型或 NAND 型）是舛冈富士雄博士 1980 年申请了一个叫做 simultaneously erasable EEPROM 的专利。然而，东芝公司的论资排辈却让这项划时代的发明石沉大海，直到4年之后。“我终于被提拔了，可以不用批准就去工厂，让工人们帮忙做出样品了”，富士雄说。 据东芝表示闪存之所以命名为 “Flash” 是由舛冈博士的同事有泉正二建议，因为这种存储器的抹除流程让他想起了相机的闪光灯。舛冈博士在 1984 年的加州旧金山 IEEE 国际电子组件会议 （International Electron Devices Meeting, IEDM） 上发表了这项发明。Intel 看到了这项发明的巨大潜力，并于 1988 年推出第一款商业性的 NOR Flash 芯片。</p>
+<p>NOR Flash 需要很长的时间进行抹写，但是它提供完整的寻址与资料总线，并允许随机存取存储器上的任何区域，这使的它非常适合取代老式的 ROM 芯片。当时 ROM 芯片主要用来存储几乎不需更新的代码，例如电脑的 BIOS 或机顶盒（Set-top Box）的固件。NOR Flash 可以承受一万到一百万次抹写循环，它同时也是早期的可移除式快闪存储媒体的基础。CompactFlash 本来便是以 NOR Flash 为基础的，虽然它之后跳槽到成本较低的 NAND Flash。</p>
+<p>舛冈富士雄没有停止追求，在 1986 年发明了 NAND Flash，大大降低了制造成本。由于他的贡献，东芝奖励了他一笔几百美金的奖金和一个位置很高却悠闲的职位。做为一个工程师，他忍受不了这种待遇，不得不辞职进入大学继续科研。东芝在 1989 年的国际固态电路会议（ISSCC）上发表了 NAND Flash。NAND Flash 具有较快的抹写时间，而且每个存储单元的面积也较小，这让 NAND Flash 相较于 NOR Flash 具有较高的存储密度与较低的每比特成本。同时它的可抹除次数也高出 NOR Flash 十倍。然而 NAND Flash 的I&#x2F;O接口并没有随机存取外部地址总线，它必须以区块性的方式进行读取，NAND Flash 典型的区块大小是数百至数千比特。</p>
+<p>因为多数微处理器与微控制器要求字节等级的随机存取，所以 NAND Flash 不适合取代那些用以装载程序的 ROM。从这样的角度看来，NAND Flash 比较像光盘、硬盘这类的次级存储设备。NAND Flash 非常适合用于储存卡之类的大量存储设备。第一款创建在 NAND Flash 基础上的可移除式存储媒体是 SmartMedia，此后许多存储媒体也跟着采用 NAND Flash，包括 MultiMediaCard、Secure Digital、Memory Stick 与 xD 卡。</p>
+<p>在很长一段时间，东芝公司甚至不承认 NOR flash 是舛冈富士雄发明的，宣称是 Intel 发明的。直到 IEEE 在 1997 年颁给舛冈富士雄特殊贡献奖后才改口。舛冈富士雄觉得自己的贡献被东芝公司抹杀了，于 2006 年起诉了东芝公司，并索要 10 亿日元的补偿，最后和东芝公司达成和解，得到 8700 万日元（合 758,000 美元）。</p>
+</blockquote>
+<hr>
+<h2 id="Nor-Flash-和-Nand-Flash"><a href="#Nor-Flash-和-Nand-Flash" class="headerlink" title="Nor Flash 和 Nand Flash"></a><em><strong>Nor Flash 和 Nand Flash</strong></em></h2><h3 id="什么是-Nor-Flash-？"><a href="#什么是-Nor-Flash-？" class="headerlink" title="什么是 Nor Flash ？"></a><em><strong>什么是 Nor Flash ？</strong></em></h3><p>Nor Flash 最常用于需要写入和读取单个字节数据的应用程序，并且最常用于需要随机访问和就地执行访问技术的应用程序。由于每个读取访问都花费相同的时间，因此顺序读取访问不会比随机访问快。擦除&#x2F;编程周期通常可能很长。</p>
+<p>当今的 Nor Flash 设备具有几兆比特和几千兆字节的容量。根据设备的不同，在写入数据之前必须擦除单个字节或扇区，擦除&#x2F;编程速度通常低于 1MB&#x2F;s。</p>
+<p>Nor Flash 具有很高的可靠性，通常可将其数据完整性保持20年或更长时间。</p>
+<p>Nor Flash 的特点是芯片内执行（XIP, eXecute In Place），这样应用程序可以直接在 flash 闪存内运行，不必再把代码读到系统 RAM 中。Nor Flash 的优点是传输效率很高，但是工艺复杂，价格较贵。在 1~4MB 的小容量时具有很高的成本效益，但是很低的写入和擦除速度大大影响了它的性能。Nor Flash 在开发板中应用的非常广泛，通过 JTAG&#x2F;JLINK 把 boot 烧到 Nor Flash 中，通电后自动运行。</p>
+<p>Nor Flash 非常适合低密度、高速读取应用，这些应用大多是只读的，通常被称为代码存储应用。</p>
+<hr>
+<h3 id="什么是-Nand-Flash-？"><a href="#什么是-Nand-Flash-？" class="headerlink" title="什么是 Nand Flash ？"></a><em><strong>什么是 Nand Flash ？</strong></em></h3><p>Nand Flash 按块排列，可以在其中写入，读取或擦除数据。在顺序读取期间，接收第一个数据字节的等待时间比使用 Nor Flash 要长得多，但是随后读取数据的顺序字节要比使用NOR闪存快得多。写入数据时，可以将完整的数据块快速传输到 Nand Flash 设备，然后在单个操作中写入该数据块。有效的读取和写入速度以及块擦除时间比 Nor Flash 快得多。</p>
+<p>Nand Flash 最适合执行大型顺序数据访问的系统，这与当今用作计算系统和带有面向块的存储子系统的操作系统的主要存储设备的映射非常吻合。</p>
+<p>由于闪存单元的物理硅设计，对于类似的处理技术，Nand Flash 单元比 Nor Flash 单元占用的硅面积大约少 40%。</p>
+<p>Nand Flash 其内部采用非线性宏单元模式，为固态大容量内存的实现提供了廉价有效的解决方案。Nand Flash 的优点是容量大、便宜、改写速度快，缺点是无法寻址直接运行程序，只能存储数据。另外Nand Flash 非常容易出现坏区，所以需要有校验的算法。应用 Nand Flash 的困难在于 Flash 的管理和需要特殊的系统接口。Nand Flash 适用于大量数据的存储，因而在业界得到了越来越广泛的应用，如嵌入式产品中包括数码相机、MP3 随身听记忆卡、体积小巧的U盘等。</p>
+<p>Nand Flash 非常适合低成本、高密度、高速编程&#x2F;擦除应用，通常被称为数据存储应用。</p>
+<hr>
+<h3 id="Nor-Flash-和-Nand-Flash-的共性"><a href="#Nor-Flash-和-Nand-Flash-的共性" class="headerlink" title="Nor Flash 和 Nand Flash 的共性"></a><em><strong>Nor Flash 和 Nand Flash 的共性</strong></em></h3><ul>
+<li>都是非易失存储介质。即掉电都不会丢失内容。</li>
+<li>在写入前都需要擦除。实际上 Nor Flash 的一个 bit 可以从 1 变成 0，而要从 0 变 1 就要擦除整块。NAND flash 都需要擦除。</li>
+</ul>
+<hr>
+<h3 id="Nor-Flash-和-Nand-Flash-的差异"><a href="#Nor-Flash-和-Nand-Flash-的差异" class="headerlink" title="Nor Flash 和 Nand Flash 的差异"></a><em><strong>Nor Flash 和 Nand Flash 的差异</strong></em></h3><h4 id="结构差异"><a href="#结构差异" class="headerlink" title="结构差异"></a><em><strong>结构差异</strong></em></h4><ul>
+<li><p>Nor Flash 体系结构提供了足够的地址线以映射整个存储器范围。这具有随机访问和读取时间短的优点，非常适合代码执行。采用内存的随机读取技术，各个存储单元并联连接，对存储单元进行统一编址，使器件能够实现随机访问。既然是统一编址，Nor Flash 就可以在芯片内执行，即应用程序可直接在 Flash 内运行，而无需先拷贝到 RAM。这种配置能够缩短随机存取微处理器指令所需的读取时间。</p>
+</li>
+<li><p>Nand Flash 是作为一种针对高密度数据存储进行优化的替代方案开发的，它放弃了随机访问能力，以实现更小的单元大小为代价，这意味着芯片大小会更小和单位成本会更低。数据线和地址线共用 I&#x2F;O 线，需额外联接一些控制的输入输出。Nand Flash 通过对数据块进行编程来实现更快的写入和擦除。</p>
+</li>
+</ul>
+<hr>
+<h4 id="可靠性差异"><a href="#可靠性差异" class="headerlink" title="可靠性差异"></a><em><strong>可靠性差异</strong></em></h4><ul>
+<li>寿命（耐用性）：Flash 写入和擦除数据时会导致介质的氧化降解。 Nor Flash 的擦写次数是 10 万次，Nand Flash 的擦写次数是 100 万次。</li>
+<li>坏块处理：Nand Flash 器件的坏块是随机分布的，在使用过程中，难免会产生坏块。所以在使用时要进行坏块管理，以保障数据可靠。在 Flash 的位翻转(一个 bit 位发生翻转)现象上，Nand Flash 的出现几率要比 Nor Flash 大得多.这个问题在 Flash 存储关键文件时是致命的，所以在使用 Nand Flash 时建议同时使用EDC&#x2F;ECC等校验算法.</li>
+</ul>
+<hr>
+<h4 id="成本和容量差异"><a href="#成本和容量差异" class="headerlink" title="成本和容量差异"></a><em><strong>成本和容量差异</strong></em></h4><ul>
+<li><p>Nand Flash 的单元尺寸几乎是 Nor Flash 器件的一半，由于生产过程更为简单，Nand Flash 结构可以在给定的模具尺寸内提供更高的容量，也就相应地降低了价格。</p>
+</li>
+<li><p>与 Nor Flash 相比，Nand Flash 的密度要高得多，主要是因为其每比特成本较低。Nand Flash 通常具有 1Gb 至 16Gb 的容量。Nor Flash 的密度范围从 64Mb 到 2Gb。由于 Nand Flash 具有更高的密度，因此主要用于数据存储应用。</p>
+</li>
+</ul>
+<hr>
+<h4 id="读写速度的差异"><a href="#读写速度的差异" class="headerlink" title="读写速度的差异"></a><em><strong>读写速度的差异</strong></em></h4><ul>
+<li>Nor Flash 有更快的读取速度，Nand Flash 有更快的写、擦除速度。</li>
+<li>Flash 是非易失存储器，可以存储器单元块进行擦写和再编程。任何 Flash 器件的写入操作只能在空或已擦除的单元内进行，所以大多数情况下，在进行写入操作之前必须先执行擦除。Nand Flash 器件执行擦除操作是十分简单的，而 Nor Flash 则要求在进行擦除前先要将目标块内所有的位都写为 0。由于擦除 Nor Flash 器件时是以 64-128KB 的块进行的，执行一个写入&#x2F;擦除操作的时间为 5s，与此相反，擦除 Nand Flash 器件是以 8-32KB 的块进行的，执行相同的操作最多只需要 4ms。执行擦除时块尺寸的不同进一步拉大了 Nor Flash 和 Nand Flash 之间的性能差距。</li>
+</ul>
+<hr>
+<h4 id="易用性的差异"><a href="#易用性的差异" class="headerlink" title="易用性的差异"></a><em><strong>易用性的差异</strong></em></h4><ul>
+<li>Nor Flash 有专用的地址引脚来寻址，较容易和其他芯片联接，还支持本地执行。Nand Flash 的 IO 端口采用复用的数据线和地址线，必须先通过寄存器串行地进行数据存取。各厂商对信号的定义会有差异，增加了应用的难度。</li>
+</ul>
+<hr>
+<h4 id="编程角度的差异"><a href="#编程角度的差异" class="headerlink" title="编程角度的差异"></a><em><strong>编程角度的差异</strong></em></h4><ul>
+<li>Nor Flash 采用统一编址（有独立地址线），可随机读取每个“字”，但 Nor Flash 不能像 RAM 以字节改写数据，只能按“页”写，故 Nor Flash 不能代替 RAM。擦除既可整页擦除，也可整块擦除。Nand Flash 共用地址线和数据线，页是读写数据的最小单元，块是擦除数据的最小单元。另外，Flash 进行写操作时，只能将相应的位由 1 变 0，而擦除才能把块内所有位由 0 变 1。所有写入数据时，如果该页已经存在数据，必须先擦除再写。</li>
+</ul>
+<hr>
+<h4 id="功耗的差异"><a href="#功耗的差异" class="headerlink" title="功耗的差异"></a><em><strong>功耗的差异</strong></em></h4><ul>
+<li>在功耗方面，Nor Flash 闪存首次通电时需要比 Nand Flash 高的电流。但是，一旦上电，Nor Flash 的待机功耗就比 Nand Flash 低得多。因此，Nor Flash 通常更适合于从内存中进行随机读取，而 Nand Flash 在写入，擦除和顺序读取方面效率更高。</li>
+</ul>
+<hr>
+<h4 id="整理为表格"><a href="#整理为表格" class="headerlink" title="整理为表格"></a><em><strong>整理为表格</strong></em></h4><table>
+<thead>
+<tr>
+<th align="center">bin</th>
+<th align="center">Nand Flash</th>
+<th align="center">Nor Flash</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">容量</td>
+<td align="center">很大</td>
+<td align="center">较小</td>
+</tr>
+<tr>
+<td align="center">xip(可执行代码)</td>
+<td align="center">不行</td>
+<td align="center">可以</td>
+</tr>
+<tr>
+<td align="center">读写性能</td>
+<td align="center">读取块(顺序读)、写入块、擦除块(可按块擦除)</td>
+<td align="center">读取块(RAM 方式)、写入慢、擦除慢</td>
+</tr>
+<tr>
+<td align="center">寿命</td>
+<td align="center">约百万次</td>
+<td align="center">约十万次</td>
+</tr>
+<tr>
+<td align="center">访问方式</td>
+<td align="center">顺序读写</td>
+<td align="center">随机读写</td>
+</tr>
+<tr>
+<td align="center">接口方式</td>
+<td align="center">任意 I&#x2F;O</td>
+<td align="center">特定完整存储器接口</td>
+</tr>
+<tr>
+<td align="center">价格</td>
+<td align="center">低</td>
+<td align="center">高</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Nand Flash 读取速度与 Nor Flash 相近，根据接口的不同有所差异；</li>
+<li>Nand Flash 的写入速度比 Nor Flash 快很多；</li>
+<li>Nand Flash 的擦除速度比 Nor Flash 快很多；</li>
+<li>Nand Flash 最大擦次数比 Nor Flash 多；</li>
+<li>Nor Flash 支持片上执行，可以在上面直接运行代码；</li>
+<li>Nor Flash 软件驱动比 Nand Flash 简单；</li>
+<li>Nor Flash 可以随机按字节读取数据，Nand Flash 需要按块进行读取。</li>
+<li>大容量下 Nand Flash 比 Nor Flash 成本要低很多，体积也更小；</li>
+</ul>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a><em><strong>结语</strong></em></h3><p>本来是想要学习 Nor Flash 以及 Nand Flash 的知识，结果网上有非常多相似的文章，这方面的信息实在是太多了，所以基本就”写” 一点，”搬运”一点了。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">nixgnauhcuy</div><div class="post-copyright__author_desc">Life-long learning</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://www.nixgnauhcuy.cn/c12055e6ecf6/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://www.nixgnauhcuy.cn/c12055e6ecf6/')">Nand Flash 和 Nor Flash 详解</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://www.nixgnauhcuy.cn/c12055e6ecf6/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=undefined&amp;url=https://www.nixgnauhcuy.cn/c12055e6ecf6/&amp;pic=undefined" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.nixgnauhcuy.cn" target="_blank">nixgnauhcuy</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>嵌入式<span class="tagsPageCount">21</span></a><a class="post-meta__box__tags" href="/tags/Nand-Flash/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Nand Flash<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/Nor-Flash/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Nor Flash<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231027/cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/df5996b70de7/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/02.png?_r_=493817c4-dd82-0edf-ad34-a422d928c8c6" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">PADS9.5 安装及破解</div></div></a></div><div class="next-post pull-right"><a href="/e39ae38ff688/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/03.jpg?_r_=fbd0add9-26eb-20f9-d8df-7f1d1773151f" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">获取结构体成员偏移量的方法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/f4985376a128/" title="CC2640 仿真烧录方式"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231019/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-19</div><div class="title">CC2640 仿真烧录方式</div></div></a></div><div><a href="/8159bca7abcd/" title="CC2640 OAD 生产烧录单文件实现"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231020/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-20</div><div class="title">CC2640 OAD 生产烧录单文件实现</div></div></a></div><div><a href="/fab2071f499b/" title="ESP32-C3 开发环境搭建"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231027/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-26</div><div class="title">ESP32-C3 开发环境搭建</div></div></a></div><div><a href="/df5996b70de7/" title="PADS9.5 安装及破解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/02.png?_r_=493817c4-dd82-0edf-ad34-a422d928c8c6" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-01-04</div><div class="title">PADS9.5 安装及破解</div></div></a></div><div><a href="/031a4fb624db/" title="imx6ull lvgl 移植"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231025/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-25</div><div class="title">imx6ull lvgl 移植</div></div></a></div><div><a href="/693bccaf2128/" title="keil 软件配置"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201207/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2020-12-22</div><div class="title">keil 软件配置</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">分享一些<b style="color:#fff">学习经验</b>以及一些<b style="color:#fff">杂七杂八的内容</b>。</div><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">相信你可以在这里找到对你有用的<b style="color:#fff">知识</b>和<b style="color:#fff">教程</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><h1 class="author-info__name">nixgnauhcuy</h1><div class="author-info__desc">Life-long learning</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/nixgnauhcuy" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">佛系更新博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/wechat.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%86%E5%8F%B2"><span class="toc-number">2.</span> <span class="toc-text">历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nor-Flash-%E5%92%8C-Nand-Flash"><span class="toc-number">3.</span> <span class="toc-text">Nor Flash 和 Nand Flash</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Nor-Flash-%EF%BC%9F"><span class="toc-number">3.1.</span> <span class="toc-text">什么是 Nor Flash ？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Nand-Flash-%EF%BC%9F"><span class="toc-number">3.2.</span> <span class="toc-text">什么是 Nand Flash ？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nor-Flash-%E5%92%8C-Nand-Flash-%E7%9A%84%E5%85%B1%E6%80%A7"><span class="toc-number">3.3.</span> <span class="toc-text">Nor Flash 和 Nand Flash 的共性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nor-Flash-%E5%92%8C-Nand-Flash-%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="toc-number">3.4.</span> <span class="toc-text">Nor Flash 和 Nand Flash 的差异</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%B7%AE%E5%BC%82"><span class="toc-number">3.4.1.</span> <span class="toc-text">结构差异</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%80%A7%E5%B7%AE%E5%BC%82"><span class="toc-number">3.4.2.</span> <span class="toc-text">可靠性差异</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E6%9C%AC%E5%92%8C%E5%AE%B9%E9%87%8F%E5%B7%AE%E5%BC%82"><span class="toc-number">3.4.3.</span> <span class="toc-text">成本和容量差异</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E5%86%99%E9%80%9F%E5%BA%A6%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="toc-number">3.4.4.</span> <span class="toc-text">读写速度的差异</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%93%E7%94%A8%E6%80%A7%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="toc-number">3.4.5.</span> <span class="toc-text">易用性的差异</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E8%A7%92%E5%BA%A6%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="toc-number">3.4.6.</span> <span class="toc-text">编程角度的差异</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%9F%E8%80%97%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="toc-number">3.4.7.</span> <span class="toc-text">功耗的差异</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B4%E7%90%86%E4%B8%BA%E8%A1%A8%E6%A0%BC"><span class="toc-number">3.4.8.</span> <span class="toc-text">整理为表格</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">3.5.</span> <span class="toc-text">结语</span></a></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By nixgnauhcuy</div><div id="workboard"><div id="runtimeTextTip"></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">11</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" rel="external nofollow noreferrer" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.cbd.int/instant.page/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("11/28/2020 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.8",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 nixgnauhcuy 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("11/28/2020 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = async () => {
+    try {
+      const res = await fetch('https://waline-two.vercel.app/api/comment?type=recent&count=6', { method: 'GET' })
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray)
+    } catch (err) {
+      console.error(err)
+      const $dom = document.querySelector('#card-newest-comments .aside-list')
+      $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('waline-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static/icon/ali_iconfont_css.css"><script src="https://cdn.cbd.int/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'G-2VWCFFF041', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

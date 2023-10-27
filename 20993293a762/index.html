@@ -1,0 +1,553 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>python 制作串口工具（一） | nixgnauhcuy</title><meta name="keywords" content="python,串口,工具"><meta name="author" content="nixgnauhcuy"><meta name="copyright" content="nixgnauhcuy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="python 制作串口工具（一）"><meta name="application-name" content="python 制作串口工具（一）"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="python 制作串口工具（一）"><meta property="og:url" content="https://www.nixgnauhcuy.cn/20993293a762/index.html"><meta property="og:site_name" content="nixgnauhcuy"><meta property="og:description" content="使用 python 制作串口工具（一）。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/cover.png"><meta property="article:author" content="nixgnauhcuy"><meta property="article:tag" content="[&quot;blog&quot;,&quot;博客&quot;,&quot;技术&quot;,&quot;个人&quot;,&quot;学习&quot;,&quot;教程&quot;]"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/cover.png"><meta name="description" content="使用 python 制作串口工具（一）。"><link rel="shortcut icon" href="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/favicon.png"><link rel="canonical" href="https://www.nixgnauhcuy.cn/20993293a762/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><meta name="google-site-verification" content="T9L_T3an8pckM0Sc0wa17RoeF1zsROoZJdv4B9ltUJM"/><meta name="baidu-site-verification" content="codeva-U5171cz6ED"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e1d8d6cf9206f44c07c598f2d8377c8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2VWCFFF041"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-2VWCFFF041');
+</script><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/people.png"},
+  postHeadAiDescription: undefined,
+  diytitle: undefined,
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":90,"position":"top","messagePrev":"注意：自上次更新以来已有","messageNext":"天，文章的内容可能已过时，如果发现错误，请留言或发送邮件告知我。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: nixgnauhcuy","link":"链接: ","source":"来源: nixgnauhcuy","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'nixgnauhcuy',
+  title: 'python 制作串口工具（一）',
+  postAI: '',
+  pageFillDescription: '前言, UI 界面, 实现, 生成对应的 .py 文件, 查看效果, 结语前言工作中偶尔会用到来制作一些小工具所以针对这些小工具做了些简化移除了一些比较复杂的功能拿来分享界面在实现具体逻辑之前我们要先设计好串口工具的界面这里我直接使用的来设计串口界面的布局最终效果布置好布局后是这样的实际预览效果实现打开点击新建窗体进入项目界面后我们需要往里面拖入我们需要的控件先添加两个控件并且设置文本为串口接收设置和串口发送设置一个作为我们的接收区一个作为我们的发送区上面操作完成后我们先来布置我们的接收区先添加控件分别设置文本为串口选择波特率停止位数据位校验位的五个控件然后我们要增加组合框方便后面选择串口的参数同样从左边拖出五个控件然后双击控件这里我只拿波特率的组合框来描述其他的例如停止位数据位还有校验位的操作是一样的除了串口选择的组合框不用设置外其他的都要设置双击波特率的组合框控件后点击左下的号增加我们可选的波特率就可以了其他的控件设置如下停止位分别设置三个选项数据位分别设置四个选项校验位分别设置三个选项这样就把常用的波特率停止位数据位和校验位的选项框设置好了接下来我们增加两个和一个控件分别设置两个文本为和设置文本为时间戳最后增加两个控件还有一个控件分别将文本命名为清除接收和打开串口这样基本上接收区就设置完毕了接下来是发送区发送区中还有上面已经说过了同样设置一下就可以了这里就不占用太多篇幅了随后我们要添加一个控件后面可以作为定时发送的时间这样发送区也设置完毕了上面的接收区和发送区做完后我们要将控件摆放整齐并且设置控件的方便后面编写程序调用控件时一眼就知道编辑的是哪个控件控件的摆放我就不过多赘述了无非就是调整位置和宽高这里我标注一下我设置的控件不然后面看代码的时候就不知道我是对哪个控件操作生成对应的文件完成后我们保存我们做好的到工程下这里我将文件命名为然后保存到后面要编写串口工具的工程目录下保存的文件还不能直接使用要将它转为文件方便后续调用这里我使用的编译器是使用将转为输出要安装的扩展这里我就不多说了网上搜一下就可以了我就直接贴上转化好的代码串口接收设置时间戳校验位数据位停止位波特率串口选择打开串口清除接收串口发送设置定时发送数据清除发送帮助关于查看效果在工程中编写我们的运行看看效果代码如下然后运行效果如下结语串口逻辑代码的编写得留到下一篇了平时工作忙不是特别有空等我空闲的时候再补上我本身不是学的所以难免会有出错或者你认为代码不合理的地方这些也希望多多谅解和指教我会及时修改的关于本篇的相关代码我也上传到上去了有兴趣的可以访问和查看浏览的同时也可以在该仓库中点个支持我一下与本文相关的内容还有开发环境搭建获取已连接密码工具制作串口工具二',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2021-01-19 20:51:41',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">nixgnauhcuy</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)" rel="external nofollow noreferrer">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AMS/" style="font-size: 1.05rem;">AMS<sup>1</sup></a><a href="/tags/ANCS/" style="font-size: 1.05rem;">ANCS<sup>1</sup></a><a href="/tags/BLE/" style="font-size: 1.05rem;">BLE<sup>2</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C<sup>3</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>3</sup></a><a href="/tags/IOS/" style="font-size: 1.05rem;">IOS<sup>2</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>1</sup></a><a href="/tags/Nand-Flash/" style="font-size: 1.05rem;">Nand Flash<sup>1</sup></a><a href="/tags/Nor-Flash/" style="font-size: 1.05rem;">Nor Flash<sup>1</sup></a><a href="/tags/keil/" style="font-size: 1.05rem;">keil<sup>3</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>7</sup></a><a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 1.05rem;">串口<sup>2</sup></a><a href="/tags/%E4%BD%8D%E5%9F%9F/" style="font-size: 1.05rem;">位域<sup>1</sup></a><a href="/tags/%E4%BD%8D%E5%AD%97%E6%AE%B5/" style="font-size: 1.05rem;">位字段<sup>1</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 1.05rem;">嵌入式<sup>21</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>5</sup></a><a href="/tags/%E6%8A%80%E5%B7%A7/" style="font-size: 1.05rem;">技巧<sup>2</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.05rem;">生活<sup>1</sup></a><a href="/tags/%E8%8B%B1%E6%96%87/" style="font-size: 1.05rem;">英文<sup>1</sup></a><a href="/tags/%E8%93%9D%E7%89%99/" style="font-size: 1.05rem;">蓝牙<sup>3</sup></a><a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 1.05rem;">踩坑<sup>2</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 1.05rem;">软件<sup>4</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">四月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">三月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/12/"><span class="card-archive-list-date">十二月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">八月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);" rel="external nofollow noreferrer"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/python/" itemprop="url">python</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>嵌入式</span></a><a class="article-meta__tags" href="/tags/python/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>python</span></a><a class="article-meta__tags" href="/tags/%E5%B7%A5%E5%85%B7/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>工具</span></a><a class="article-meta__tags" href="/tags/%E4%B8%B2%E5%8F%A3/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>串口</span></a></span></div></div><h1 class="post-title" itemprop="name headline">python 制作串口工具（一）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2021-01-19T12:51:41.000Z" title="发表于 2021-01-19 20:51:41">2021-01-19</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2021-01-19T12:51:41.000Z" title="更新于 2021-01-19 20:51:41">2021-01-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">2.8k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为深圳"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>深圳</span></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://www.nixgnauhcuy.cn/20993293a762/"><header><a class="post-meta-categories" href="/categories/python/" itemprop="url">python</a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" tabindex="-1" itemprop="url">嵌入式</a><a href="/tags/python/" tabindex="-1" itemprop="url">python</a><a href="/tags/%E5%B7%A5%E5%85%B7/" tabindex="-1" itemprop="url">工具</a><a href="/tags/%E4%B8%B2%E5%8F%A3/" tabindex="-1" itemprop="url">串口</a><h1 id="CrawlerTitle" itemprop="name headline">python 制作串口工具（一）</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">nixgnauhcuy</span><time itemprop="dateCreated datePublished" datetime="2021-01-19T12:51:41.000Z" title="发表于 2021-01-19 20:51:41">2021-01-19</time><time itemprop="dateCreated datePublished" datetime="2021-01-19T12:51:41.000Z" title="更新于 2021-01-19 20:51:41">2021-01-19</time></header><blockquote>
+<p>Life is short, you need Python. —— Bruce Eckel</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>工作中偶尔会用到 python 来制作一些小工具，所以针对这些小工具，做了些简化，移除了一些比较复杂的功能，拿来分享。</p>
+<hr>
+<h2 id="UI-界面"><a href="#UI-界面" class="headerlink" title="UI 界面"></a>UI 界面</h2><p>在实现具体逻辑之前，我们要先设计好串口工具的 UI 界面，这里我直接使用的 Qt Designer 来设计串口界面的布局。</p>
+<p>最终效果布置好布局后是这样的：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/00.png"></p>
+<p>实际预览效果：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/01.png"></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>打开 Qt Designer，点击新建 Main Window 窗体，</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/02.png"></p>
+<p>进入项目界面后，我们需要往里面拖入我们需要的控件，先添加两个 QGroupBox 控件并且设置文本为串口接收设置和串口发送设置， 一个作为我们的接收区，一个作为我们的发送区。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/03.png"></p>
+<p>上面操作完成后，我们先来布置我们的接收区，先添加 Label 控件，分别设置文本为<code>串口选择、波特率、停止位、数据位、校验位</code>的五个 Label 控件。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/04.png"></p>
+<p>然后，我们要增加组合框，方便后面选择串口的参数，同样从左边拖出五个 Combo Box 控件，然后双击控件，这里我只拿波特率的组合框来描述，其他的例如停止位数据位还有校验位的操作是一样的，除了串口选择的组合框不用设置外，其他的都要设置。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/05.png"></p>
+<p>双击波特率的组合框控件后，点击左下的 + 号，增加我们可选的波特率就可以了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/06.png"></p>
+<blockquote>
+<p>其他的 Combo Box 控件设置如下：</p>
+<p>停止位分别设置 1、1.5、2 三个选项</p>
+<p>数据位分别设置 8、7、6、5 四个选项</p>
+<p>校验位分别设置 None、Odd、Even 三个选项</p>
+</blockquote>
+<p><strong>这样就把常用的波特率、停止位、数据位和校验位的选项框设置好了。</strong></p>
+<p>接下来，我们增加两个 RadioButton 和一个 Check Box 控件，分别设置两个 RadioButton 文本为 <code>ASCII</code> 和 <code>HEX</code>，设置 Check Box 文本为<code>时间戳</code>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/07.png"></p>
+<p>最后，增加两个 Push Button 控件还有一个 TextEdit 控件，Push Button 分别将文本命名为<code>清除接收</code>和<code>打开串口</code>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/08.png"></p>
+<p>这样基本上接收区就设置完毕了。</p>
+<hr>
+<p>接下来是发送区，发送区中 Label、TextEdit、RadioButton、 Push Button 还有 Check Box 上面已经说过了，同样设置一下就可以了，这里就不占用太多篇幅了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/09.png"></p>
+<p>随后，我们要添加一个 LineEdit 控件，后面可以作为定时发送的时间。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/10.png"></p>
+<p>这样，发送区也设置完毕了。</p>
+<hr>
+<p>上面的接收区和发送区做完后，我们要将控件摆放整齐，并且设置控件的 objectName，方便后面编写程序调用控件时，一眼就知道编辑的是哪个控件。</p>
+<p>控件的摆放我就不过多赘述了，无非就是调整位置和宽高，这里我标注一下我设置的控件 objectName，不然后面看代码的时候就不知道我是对哪个控件操作。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/11.png"></p>
+<h3 id="生成对应的-py-文件"><a href="#生成对应的-py-文件" class="headerlink" title="生成对应的 .py 文件"></a>生成对应的 .py 文件</h3><p>完成后，我们保存我们做好的 UI 到工程下，这里我将文件命名为 uart_tool_ui.ui 然后保存到后面要编写串口工具的工程目录下。保存的 .ui 文件还不能直接使用，要将它转为 .py 文件，方便后续调用，这里我使用的编译器是 vscode，使用 vscode 将 .ui 转为 .py 输出，vscode 要安装 pyqt 的扩展，这里我就不多说了，网上搜一下就可以了，我就直接贴上转化好的 .py 代码。</p>
+<p><strong>uart_tool_ui.py</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line"># Form implementation generated from reading ui file &#x27;d:\test\my\python_uart_tool\uart_tool_ui.ui&#x27;</span><br><span class="line">#</span><br><span class="line"># Created by: PyQt5 UI code generator 5.13.0</span><br><span class="line">#</span><br><span class="line"># WARNING! All changes made in this file will be lost!</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">from PyQt5 import QtCore, QtGui, QtWidgets</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Ui_MainWindow(object):</span><br><span class="line">    def setupUi(self, MainWindow):</span><br><span class="line">        MainWindow.setObjectName(&quot;MainWindow&quot;)</span><br><span class="line">        MainWindow.resize(800, 506)</span><br><span class="line">        self.centralwidget = QtWidgets.QWidget(MainWindow)</span><br><span class="line">        self.centralwidget.setObjectName(&quot;centralwidget&quot;)</span><br><span class="line">        self.groupBox = QtWidgets.QGroupBox(self.centralwidget)</span><br><span class="line">        self.groupBox.setGeometry(QtCore.QRect(10, 10, 781, 291))</span><br><span class="line">        self.groupBox.setObjectName(&quot;groupBox&quot;)</span><br><span class="line">        self.timestamp_check_box = QtWidgets.QCheckBox(self.groupBox)</span><br><span class="line">        self.timestamp_check_box.setGeometry(QtCore.QRect(10, 225, 61, 16))</span><br><span class="line">        self.timestamp_check_box.setObjectName(&quot;timestamp_check_box&quot;)</span><br><span class="line">        self.label_7 = QtWidgets.QLabel(self.groupBox)</span><br><span class="line">        self.label_7.setGeometry(QtCore.QRect(10, 175, 54, 12))</span><br><span class="line">        self.label_7.setObjectName(&quot;label_7&quot;)</span><br><span class="line">        self.rec_hex_radio_button = QtWidgets.QRadioButton(self.groupBox)</span><br><span class="line">        self.rec_hex_radio_button.setGeometry(QtCore.QRect(70, 200, 41, 16))</span><br><span class="line">        self.rec_hex_radio_button.setObjectName(&quot;rec_hex_radio_button&quot;)</span><br><span class="line">        self.com_combo_box = QtWidgets.QComboBox(self.groupBox)</span><br><span class="line">        self.com_combo_box.setGeometry(QtCore.QRect(10, 50, 141, 22))</span><br><span class="line">        self.com_combo_box.setObjectName(&quot;com_combo_box&quot;)</span><br><span class="line">        self.stopbit_combo_box = QtWidgets.QComboBox(self.groupBox)</span><br><span class="line">        self.stopbit_combo_box.setGeometry(QtCore.QRect(58, 110, 91, 22))</span><br><span class="line">        self.stopbit_combo_box.setObjectName(&quot;stopbit_combo_box&quot;)</span><br><span class="line">        self.stopbit_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.stopbit_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.stopbit_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.label_6 = QtWidgets.QLabel(self.groupBox)</span><br><span class="line">        self.label_6.setGeometry(QtCore.QRect(10, 145, 54, 12))</span><br><span class="line">        self.label_6.setObjectName(&quot;label_6&quot;)</span><br><span class="line">        self.baud_combo_box = QtWidgets.QComboBox(self.groupBox)</span><br><span class="line">        self.baud_combo_box.setGeometry(QtCore.QRect(58, 80, 91, 22))</span><br><span class="line">        self.baud_combo_box.setObjectName(&quot;baud_combo_box&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.baud_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.label_5 = QtWidgets.QLabel(self.groupBox)</span><br><span class="line">        self.label_5.setGeometry(QtCore.QRect(10, 115, 54, 12))</span><br><span class="line">        self.label_5.setObjectName(&quot;label_5&quot;)</span><br><span class="line">        self.label_4 = QtWidgets.QLabel(self.groupBox)</span><br><span class="line">        self.label_4.setGeometry(QtCore.QRect(10, 85, 54, 12))</span><br><span class="line">        self.label_4.setObjectName(&quot;label_4&quot;)</span><br><span class="line">        self.checkbit_combo_box = QtWidgets.QComboBox(self.groupBox)</span><br><span class="line">        self.checkbit_combo_box.setGeometry(QtCore.QRect(58, 170, 91, 22))</span><br><span class="line">        self.checkbit_combo_box.setObjectName(&quot;checkbit_combo_box&quot;)</span><br><span class="line">        self.checkbit_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.checkbit_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.checkbit_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.label_3 = QtWidgets.QLabel(self.groupBox)</span><br><span class="line">        self.label_3.setGeometry(QtCore.QRect(10, 22, 54, 20))</span><br><span class="line">        self.label_3.setObjectName(&quot;label_3&quot;)</span><br><span class="line">        self.databit_combo_box = QtWidgets.QComboBox(self.groupBox)</span><br><span class="line">        self.databit_combo_box.setGeometry(QtCore.QRect(58, 140, 91, 22))</span><br><span class="line">        self.databit_combo_box.setObjectName(&quot;databit_combo_box&quot;)</span><br><span class="line">        self.databit_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.databit_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.databit_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.databit_combo_box.addItem(&quot;&quot;)</span><br><span class="line">        self.uart_en_push_button = QtWidgets.QPushButton(self.groupBox)</span><br><span class="line">        self.uart_en_push_button.setGeometry(QtCore.QRect(10, 250, 141, 23))</span><br><span class="line">        self.uart_en_push_button.setObjectName(&quot;uart_en_push_button&quot;)</span><br><span class="line">        self.rec_ascii_radio_button = QtWidgets.QRadioButton(self.groupBox)</span><br><span class="line">        self.rec_ascii_radio_button.setGeometry(QtCore.QRect(10, 200, 51, 16))</span><br><span class="line">        self.rec_ascii_radio_button.setObjectName(&quot;rec_ascii_radio_button&quot;)</span><br><span class="line">        self.uart_rec_show = QtWidgets.QTextEdit(self.groupBox)</span><br><span class="line">        self.uart_rec_show.setGeometry(QtCore.QRect(170, 10, 601, 271))</span><br><span class="line">        self.uart_rec_show.setFocusPolicy(QtCore.Qt.NoFocus)</span><br><span class="line">        self.uart_rec_show.setObjectName(&quot;uart_rec_show&quot;)</span><br><span class="line">        self.uart_clear_rec_push_button = QtWidgets.QPushButton(self.groupBox)</span><br><span class="line">        self.uart_clear_rec_push_button.setGeometry(QtCore.QRect(70, 220, 71, 23))</span><br><span class="line">        self.uart_clear_rec_push_button.setObjectName(&quot;uart_clear_rec_push_button&quot;)</span><br><span class="line">        self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)</span><br><span class="line">        self.groupBox_2.setGeometry(QtCore.QRect(10, 300, 781, 151))</span><br><span class="line">        self.groupBox_2.setObjectName(&quot;groupBox_2&quot;)</span><br><span class="line">        self.send_ascii_radio_button = QtWidgets.QRadioButton(self.groupBox_2)</span><br><span class="line">        self.send_ascii_radio_button.setGeometry(QtCore.QRect(10, 20, 51, 16))</span><br><span class="line">        self.send_ascii_radio_button.setObjectName(&quot;send_ascii_radio_button&quot;)</span><br><span class="line">        self.send_hex_radio_button = QtWidgets.QRadioButton(self.groupBox_2)</span><br><span class="line">        self.send_hex_radio_button.setGeometry(QtCore.QRect(70, 20, 41, 16))</span><br><span class="line">        self.send_hex_radio_button.setObjectName(&quot;send_hex_radio_button&quot;)</span><br><span class="line">        self.uart_timer_check_box = QtWidgets.QCheckBox(self.groupBox_2)</span><br><span class="line">        self.uart_timer_check_box.setGeometry(QtCore.QRect(10, 47, 47, 16))</span><br><span class="line">        self.uart_timer_check_box.setObjectName(&quot;uart_timer_check_box&quot;)</span><br><span class="line">        self.uart1_ms_label = QtWidgets.QLabel(self.groupBox_2)</span><br><span class="line">        self.uart1_ms_label.setGeometry(QtCore.QRect(140, 45, 20, 20))</span><br><span class="line">        self.uart1_ms_label.setObjectName(&quot;uart1_ms_label&quot;)</span><br><span class="line">        self.uart_timer_line_edit = QtWidgets.QLineEdit(self.groupBox_2)</span><br><span class="line">        self.uart_timer_line_edit.setGeometry(QtCore.QRect(70, 45, 61, 20))</span><br><span class="line">        self.uart_timer_line_edit.setObjectName(&quot;uart_timer_line_edit&quot;)</span><br><span class="line">        self.uart_send_push_button = QtWidgets.QPushButton(self.groupBox_2)</span><br><span class="line">        self.uart_send_push_button.setGeometry(QtCore.QRect(80, 70, 75, 23))</span><br><span class="line">        self.uart_send_push_button.setObjectName(&quot;uart_send_push_button&quot;)</span><br><span class="line">        self.uart_send_clear_push_button = QtWidgets.QPushButton(self.groupBox_2)</span><br><span class="line">        self.uart_send_clear_push_button.setGeometry(QtCore.QRect(0, 70, 75, 23))</span><br><span class="line">        self.uart_send_clear_push_button.setObjectName(&quot;uart_send_clear_push_button&quot;)</span><br><span class="line">        self.uart_send_show = QtWidgets.QTextEdit(self.groupBox_2)</span><br><span class="line">        self.uart_send_show.setGeometry(QtCore.QRect(170, 10, 601, 131))</span><br><span class="line">        self.uart_send_show.setFocusPolicy(QtCore.Qt.NoFocus)</span><br><span class="line">        self.uart_send_show.setObjectName(&quot;uart_send_show&quot;)</span><br><span class="line">        self.label = QtWidgets.QLabel(self.groupBox_2)</span><br><span class="line">        self.label.setGeometry(QtCore.QRect(10, 100, 18, 12))</span><br><span class="line">        self.label.setObjectName(&quot;label&quot;)</span><br><span class="line">        self.uart_tx_data_count_label = QtWidgets.QLabel(self.groupBox_2)</span><br><span class="line">        self.uart_tx_data_count_label.setGeometry(QtCore.QRect(30, 120, 100, 12))</span><br><span class="line">        self.uart_tx_data_count_label.setObjectName(&quot;uart_tx_data_count_label&quot;)</span><br><span class="line">        self.uart_rx_data_count_label = QtWidgets.QLabel(self.groupBox_2)</span><br><span class="line">        self.uart_rx_data_count_label.setGeometry(QtCore.QRect(30, 100, 100, 12))</span><br><span class="line">        self.uart_rx_data_count_label.setObjectName(&quot;uart_rx_data_count_label&quot;)</span><br><span class="line">        self.label_2 = QtWidgets.QLabel(self.groupBox_2)</span><br><span class="line">        self.label_2.setGeometry(QtCore.QRect(10, 120, 18, 12))</span><br><span class="line">        self.label_2.setObjectName(&quot;label_2&quot;)</span><br><span class="line">        MainWindow.setCentralWidget(self.centralwidget)</span><br><span class="line">        self.statusbar = QtWidgets.QStatusBar(MainWindow)</span><br><span class="line">        self.statusbar.setObjectName(&quot;statusbar&quot;)</span><br><span class="line">        MainWindow.setStatusBar(self.statusbar)</span><br><span class="line">        self.menuBar = QtWidgets.QMenuBar(MainWindow)</span><br><span class="line">        self.menuBar.setGeometry(QtCore.QRect(0, 0, 800, 23))</span><br><span class="line">        self.menuBar.setObjectName(&quot;menuBar&quot;)</span><br><span class="line">        self.menu = QtWidgets.QMenu(self.menuBar)</span><br><span class="line">        self.menu.setObjectName(&quot;menu&quot;)</span><br><span class="line">        MainWindow.setMenuBar(self.menuBar)</span><br><span class="line">        self.actionguanyu = QtWidgets.QAction(MainWindow)</span><br><span class="line">        self.actionguanyu.setObjectName(&quot;actionguanyu&quot;)</span><br><span class="line">        self.menu.addAction(self.actionguanyu)</span><br><span class="line">        self.menuBar.addAction(self.menu.menuAction())</span><br><span class="line"></span><br><span class="line">        self.retranslateUi(MainWindow)</span><br><span class="line">        QtCore.QMetaObject.connectSlotsByName(MainWindow)</span><br><span class="line"></span><br><span class="line">    def retranslateUi(self, MainWindow):</span><br><span class="line">        _translate = QtCore.QCoreApplication.translate</span><br><span class="line">        MainWindow.setWindowTitle(_translate(&quot;MainWindow&quot;, &quot;MainWindow&quot;))</span><br><span class="line">        self.groupBox.setTitle(_translate(&quot;MainWindow&quot;, &quot;串口接收设置&quot;))</span><br><span class="line">        self.timestamp_check_box.setText(_translate(&quot;MainWindow&quot;, &quot;时间戳&quot;))</span><br><span class="line">        self.label_7.setText(_translate(&quot;MainWindow&quot;, &quot;校验位&quot;))</span><br><span class="line">        self.rec_hex_radio_button.setText(_translate(&quot;MainWindow&quot;, &quot;HEX&quot;))</span><br><span class="line">        self.stopbit_combo_box.setItemText(0, _translate(&quot;MainWindow&quot;, &quot;1&quot;))</span><br><span class="line">        self.stopbit_combo_box.setItemText(1, _translate(&quot;MainWindow&quot;, &quot;1.5&quot;))</span><br><span class="line">        self.stopbit_combo_box.setItemText(2, _translate(&quot;MainWindow&quot;, &quot;2&quot;))</span><br><span class="line">        self.label_6.setText(_translate(&quot;MainWindow&quot;, &quot;数据位&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(0, _translate(&quot;MainWindow&quot;, &quot;110&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(1, _translate(&quot;MainWindow&quot;, &quot;300&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(2, _translate(&quot;MainWindow&quot;, &quot;600&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(3, _translate(&quot;MainWindow&quot;, &quot;1200&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(4, _translate(&quot;MainWindow&quot;, &quot;2400&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(5, _translate(&quot;MainWindow&quot;, &quot;4800&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(6, _translate(&quot;MainWindow&quot;, &quot;9600&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(7, _translate(&quot;MainWindow&quot;, &quot;14400&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(8, _translate(&quot;MainWindow&quot;, &quot;19200&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(9, _translate(&quot;MainWindow&quot;, &quot;38400&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(10, _translate(&quot;MainWindow&quot;, &quot;43000&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(11, _translate(&quot;MainWindow&quot;, &quot;57600&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(12, _translate(&quot;MainWindow&quot;, &quot;76800&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(13, _translate(&quot;MainWindow&quot;, &quot;115200&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(14, _translate(&quot;MainWindow&quot;, &quot;128000&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(15, _translate(&quot;MainWindow&quot;, &quot;230400&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(16, _translate(&quot;MainWindow&quot;, &quot;256000&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(17, _translate(&quot;MainWindow&quot;, &quot;460800&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(18, _translate(&quot;MainWindow&quot;, &quot;921600&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(19, _translate(&quot;MainWindow&quot;, &quot;1000000&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(20, _translate(&quot;MainWindow&quot;, &quot;2000000&quot;))</span><br><span class="line">        self.baud_combo_box.setItemText(21, _translate(&quot;MainWindow&quot;, &quot;3000000&quot;))</span><br><span class="line">        self.label_5.setText(_translate(&quot;MainWindow&quot;, &quot;停止位&quot;))</span><br><span class="line">        self.label_4.setText(_translate(&quot;MainWindow&quot;, &quot;波特率&quot;))</span><br><span class="line">        self.checkbit_combo_box.setItemText(0, _translate(&quot;MainWindow&quot;, &quot;None&quot;))</span><br><span class="line">        self.checkbit_combo_box.setItemText(1, _translate(&quot;MainWindow&quot;, &quot;Odd&quot;))</span><br><span class="line">        self.checkbit_combo_box.setItemText(2, _translate(&quot;MainWindow&quot;, &quot;Even&quot;))</span><br><span class="line">        self.label_3.setText(_translate(&quot;MainWindow&quot;, &quot;串口选择&quot;))</span><br><span class="line">        self.databit_combo_box.setItemText(0, _translate(&quot;MainWindow&quot;, &quot;8&quot;))</span><br><span class="line">        self.databit_combo_box.setItemText(1, _translate(&quot;MainWindow&quot;, &quot;7&quot;))</span><br><span class="line">        self.databit_combo_box.setItemText(2, _translate(&quot;MainWindow&quot;, &quot;6&quot;))</span><br><span class="line">        self.databit_combo_box.setItemText(3, _translate(&quot;MainWindow&quot;, &quot;5&quot;))</span><br><span class="line">        self.uart_en_push_button.setText(_translate(&quot;MainWindow&quot;, &quot;打开串口&quot;))</span><br><span class="line">        self.rec_ascii_radio_button.setText(_translate(&quot;MainWindow&quot;, &quot;ASCII&quot;))</span><br><span class="line">        self.uart_clear_rec_push_button.setText(_translate(&quot;MainWindow&quot;, &quot;清除接收&quot;))</span><br><span class="line">        self.groupBox_2.setTitle(_translate(&quot;MainWindow&quot;, &quot;串口发送设置&quot;))</span><br><span class="line">        self.send_ascii_radio_button.setText(_translate(&quot;MainWindow&quot;, &quot;ASCII&quot;))</span><br><span class="line">        self.send_hex_radio_button.setText(_translate(&quot;MainWindow&quot;, &quot;HEX&quot;))</span><br><span class="line">        self.uart_timer_check_box.setText(_translate(&quot;MainWindow&quot;, &quot;定时&quot;))</span><br><span class="line">        self.uart1_ms_label.setText(_translate(&quot;MainWindow&quot;, &quot;ms&quot;))</span><br><span class="line">        self.uart_send_push_button.setText(_translate(&quot;MainWindow&quot;, &quot;发送数据&quot;))</span><br><span class="line">        self.uart_send_clear_push_button.setText(_translate(&quot;MainWindow&quot;, &quot;清除发送&quot;))</span><br><span class="line">        self.label.setText(_translate(&quot;MainWindow&quot;, &quot;R：&quot;))</span><br><span class="line">        self.uart_tx_data_count_label.setText(_translate(&quot;MainWindow&quot;, &quot;0&quot;))</span><br><span class="line">        self.uart_rx_data_count_label.setText(_translate(&quot;MainWindow&quot;, &quot;0&quot;))</span><br><span class="line">        self.label_2.setText(_translate(&quot;MainWindow&quot;, &quot;T：&quot;))</span><br><span class="line">        self.menu.setTitle(_translate(&quot;MainWindow&quot;, &quot;帮助&quot;))</span><br><span class="line">        self.actionguanyu.setText(_translate(&quot;MainWindow&quot;, &quot;关于&quot;))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="查看效果"><a href="#查看效果" class="headerlink" title="查看效果"></a>查看效果</h3><p>在工程中编写我们的 main.py，运行看看效果，</p>
+<p>main.py 代码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">from Ui_uart_tool_ui import Ui_MainWindow</span><br><span class="line">from PyQt5.QtWidgets import (QApplication, QMainWindow)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class MyPyQT_Form(QMainWindow, Ui_MainWindow):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super().__init__()</span><br><span class="line">        self.setupUi(self)</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    </span><br><span class="line">    app = QApplication(sys.argv)</span><br><span class="line">    my_pyqt_form = MyPyQT_Form()</span><br><span class="line">    my_pyqt_form.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+
+<p>然后运行效果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210119/12.gif"></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p><strong>python 串口逻辑代码的编写，得留到下一篇了，平时工作忙不是特别有空，等我空闲的时候再补上！我本身不是学 python 的，所以难免会有出错或者你认为代码不合理的地方，这些也希望多多谅解和指教，我会及时修改的！</strong></p>
+<p><strong>关于本篇的相关代码我也上传到 github 上去了，有兴趣的可以访问 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/nixgnauhcuy/QtComMate">QtComMate</a> 和 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/nixgnauhcuy/python_uart_tool">python_uart_tool</a> 查看，浏览的同时也可以在该 github 仓库中点个 Star 支持我一下😄。</strong></p>
+<p><strong>与本文相关的内容还有：</strong><br><a href="https://www.nixgnauhcuy.cn/5f9e4d2c65bf/">python 开发环境搭建</a><br><a href="https://www.nixgnauhcuy.cn/93bdfa3a6163/">python 获取已连接wifi密码工具</a><br><a href="https://www.nixgnauhcuy.cn/20993293a762/">python 制作串口工具（二）</a> </p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">nixgnauhcuy</div><div class="post-copyright__author_desc">Life-long learning</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://www.nixgnauhcuy.cn/20993293a762/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://www.nixgnauhcuy.cn/20993293a762/')">python 制作串口工具（一）</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://www.nixgnauhcuy.cn/20993293a762/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=undefined&amp;url=https://www.nixgnauhcuy.cn/20993293a762/&amp;pic=undefined" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.nixgnauhcuy.cn" target="_blank">nixgnauhcuy</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>嵌入式<span class="tagsPageCount">21</span></a><a class="post-meta__box__tags" href="/tags/python/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>python<span class="tagsPageCount">7</span></a><a class="post-meta__box__tags" href="/tags/%E5%B7%A5%E5%85%B7/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>工具<span class="tagsPageCount">5</span></a><a class="post-meta__box__tags" href="/tags/%E4%B8%B2%E5%8F%A3/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>串口<span class="tagsPageCount">2</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231027/cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/e39ae38ff688/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/03.jpg?_r_=fbd0add9-26eb-20f9-d8df-7f1d1773151f" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">获取结构体成员偏移量的方法</div></div></a></div><div class="next-post pull-right"><a href="/70458b910afa/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210126/cover.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">python 制作串口工具（二）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/70458b910afa/" title="python 制作串口工具（二）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210126/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-01-26</div><div class="title">python 制作串口工具（二）</div></div></a></div><div><a href="/4a8a40c466f6/" title="PyCharm 2021 安装和破解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20220312/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2022-03-12</div><div class="title">PyCharm 2021 安装和破解</div></div></a></div><div><a href="/93bdfa3a6163/" title="python 获取已连接wifi密码工具"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210807/title.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-08-07</div><div class="title">python 获取已连接wifi密码工具</div></div></a></div><div><a href="/f4985376a128/" title="CC2640 仿真烧录方式"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231019/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-19</div><div class="title">CC2640 仿真烧录方式</div></div></a></div><div><a href="/8159bca7abcd/" title="CC2640 OAD 生产烧录单文件实现"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231020/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-20</div><div class="title">CC2640 OAD 生产烧录单文件实现</div></div></a></div><div><a href="/fab2071f499b/" title="ESP32-C3 开发环境搭建"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231027/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-26</div><div class="title">ESP32-C3 开发环境搭建</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">分享一些<b style="color:#fff">学习经验</b>以及一些<b style="color:#fff">杂七杂八的内容</b>。</div><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">相信你可以在这里找到对你有用的<b style="color:#fff">知识</b>和<b style="color:#fff">教程</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><h1 class="author-info__name">nixgnauhcuy</h1><div class="author-info__desc">Life-long learning</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/nixgnauhcuy" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">佛系更新博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/wechat.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UI-%E7%95%8C%E9%9D%A2"><span class="toc-number">2.</span> <span class="toc-text">UI 界面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.1.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%AF%B9%E5%BA%94%E7%9A%84-py-%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">生成对应的 .py 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%95%88%E6%9E%9C"><span class="toc-number">2.3.</span> <span class="toc-text">查看效果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">3.</span> <span class="toc-text">结语</span></a></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By nixgnauhcuy</div><div id="workboard"><div id="runtimeTextTip"></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">11</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" rel="external nofollow noreferrer" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.cbd.int/instant.page/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("11/28/2020 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.8",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 nixgnauhcuy 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("11/28/2020 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = async () => {
+    try {
+      const res = await fetch('https://waline-two.vercel.app/api/comment?type=recent&count=6', { method: 'GET' })
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray)
+    } catch (err) {
+      console.error(err)
+      const $dom = document.querySelector('#card-newest-comments .aside-list')
+      $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('waline-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static/icon/ali_iconfont_css.css"><script src="https://cdn.cbd.int/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'G-2VWCFFF041', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

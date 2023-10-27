@@ -1,0 +1,939 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>蓝牙开发之 IOS AMS | nixgnauhcuy</title><meta name="keywords" content="BLE,蓝牙,IOS,AMS"><meta name="author" content="nixgnauhcuy"><meta name="copyright" content="nixgnauhcuy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="蓝牙开发之 IOS AMS"><meta name="application-name" content="蓝牙开发之 IOS AMS"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="蓝牙开发之 IOS AMS"><meta property="og:url" content="https://www.nixgnauhcuy.cn/e7b57229acd4/index.html"><meta property="og:site_name" content="nixgnauhcuy"><meta property="og:description" content="蓝牙开发 AMS 相关总结。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20220412/image.png"><meta property="article:author" content="nixgnauhcuy"><meta property="article:tag" content="[&quot;blog&quot;,&quot;博客&quot;,&quot;技术&quot;,&quot;个人&quot;,&quot;学习&quot;,&quot;教程&quot;]"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20220412/image.png"><meta name="description" content="蓝牙开发 AMS 相关总结。"><link rel="shortcut icon" href="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/favicon.png"><link rel="canonical" href="https://www.nixgnauhcuy.cn/e7b57229acd4/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><meta name="google-site-verification" content="T9L_T3an8pckM0Sc0wa17RoeF1zsROoZJdv4B9ltUJM"/><meta name="baidu-site-verification" content="codeva-U5171cz6ED"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e1d8d6cf9206f44c07c598f2d8377c8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2VWCFFF041"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-2VWCFFF041');
+</script><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/people.png"},
+  postHeadAiDescription: undefined,
+  diytitle: undefined,
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":90,"position":"top","messagePrev":"注意：自上次更新以来已有","messageNext":"天，文章的内容可能已过时，如果发现错误，请留言或发送邮件告知我。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: nixgnauhcuy","link":"链接: ","source":"来源: nixgnauhcuy","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'nixgnauhcuy',
+  title: '蓝牙开发之 IOS AMS',
+  postAI: '',
+  pageFillDescription: '前言, 什么是 AMS, 效果展示, AMS 介绍, AMS 字节序和字节码, 依赖性, 术语, AMS Service UUID, AMS Characteristic, 实体, 播放器（Player）属性表, 队列（Queue）属性表, 音轨（Track）属性表, 远程命令(Remote Command), 实体更新(Entity Update), 实体属性(Entity Attribute), 其他, 错误代码(Error Codes), 结语, 参阅前言本篇是针对的进行记录并总结如果对有兴趣可以前往我的另一篇推文蓝牙开发之文章有误或有理解不到位的地方望不吝指教我会及时改正错误什么是效果展示播放暂停进度获取媒体控制切换音乐音量加减介绍全称苹果媒体服务是提供给设备的一种简单控制媒体应用程序的方式并且用于获取已连接的设备的媒体状态信息字节序和字节码除非另有规定否则通过传输的所有数值都应是小端格式除非另有规定否则通过传输的所有字符串值都应是编码的字符所组成的依赖性除了标准的通用属性配置文件子程序集外没有任何依赖性作为客户端的设备在使用时可以自由访问和使用设备提供的其他服务术语称为服务的发布者也就是我们的设备应被称为媒体源服务的客户端也就是我们的蓝牙设备应被称为媒体控制器下面统一使用媒体源和媒体控制器来描述设备和蓝牙设备主服务为服务下的三个特征远程命令实体更新实体属性下图展示了媒体源和媒体控制器间的服务设置媒体控制器发现媒体源的服务和特征媒体控制器订阅媒体源实体更新媒体控制器向媒体源写入需要监听的实体例如监听歌曲变化等当媒体源监听的实体有变动时会通知其变动内容实体定义了个不同的实体每个实体都有一组不同的属性播放器当前活跃的媒体应用该实体属性包括其名称播放状态和播放音量等队列当前加载的播放队列该实体的属性包括其队列数及其随机和重复模式等音轨当前加载的音轨该实体的属性包括其艺术家标题和总的播放时间等播放器属性表包含应用的名称的字符串用三个逗号作为分割分别有播放状态表示播放状态的整数值字符串暂停播放倒带快进播放速率播放速率的浮点值字符串已用时间一个字符串表示当前已用时间的浮点值以秒为单位一个字符串表示音量的浮点值范围从通过播放器属性我们可以获取当前音乐播放器的字符串例如手机使用的网易云音乐那么媒体源推送的字符串转换为编码后再转成中文实际上就是网易云音乐同理其他的音乐也会显示其相应的名称非音乐是不会有推送的可以获取对应的播放状态播放速率以及歌曲经过的时间例如接收到推送为表示当前状态为播放速率已过时间秒用于获取当前的音量浮点值音量最大时为最小时为按一次音量按键每次递进注通过上面的信息我们可以计算出当前经过的时间公式如下上方展示的音乐进度条也是依靠该方式和歌曲总长度计算的队列属性表字符串包含队列索引的整数值从零开始字符串包含队列中项目总数的整数值字符串包含随机播放模式的整数值非随机模式单曲随机没见过这种模式随机播放字符串包含重复模式的整数值非重复模式单曲循环列表循环这一块好理解就不过多解释了切换播放器播放模式时会通知对应的模式变化音轨属性表字符串包含艺术家姓名字符串包含唱片集名称字符串包含曲目标题字符串包含轨道总持续时间的浮点值以秒为单位这一块包含了歌曲名歌手名专辑名称以及当前音乐总时长音乐时长假设为那么媒体控制器接收到的则是秒若媒体控制器订阅了属性那么当媒体源播放音乐时会将音乐的曲名和歌手名推送给媒体控制器每次有变动时都会通知媒体控制器远程命令远程命令这个特征值是用于媒体控制器发送给媒体源的播放状态特征例如播放暂停音量加减上下一首循环播放等媒体控制器发送命令格式如下媒体控制器发现媒体源服务后可以通过发送控制命令播放暂停音量加减等操作媒体源播放器此特性还用于向媒体控制器报告当前媒体源支持的命令集当媒体播放器支持的命令列表发生变化时媒体源会使用如下所示的格式在该特征生产一条通知通知中包括了支持的命令集媒体源返回支持命令集格式如下对应的命令集通过该命令集我们的蓝牙设备就可以对设备的媒体播放器进行控制该方式的音乐控制相比较我觉得更优因为控制只能在媒体播放器界面进行控制模拟按键的方式去控制播放并且的方式不能获取歌曲名歌曲进度等所以相较下如果用于控制媒体播放器那么使用是最优的方式实体更新实体更新特性是媒体控制器通知媒体源其所需实体属性对的特征并在发生更改时告知媒体控制器例如媒体源媒体播放器变动当前歌曲变更等默认情况下媒体控制器不会接收有关实体属性的任何信息所以为了接收此数据媒体控制器首先需要订阅有关实体更新特征的通知然后媒体控制器将命令写入实体更新特征以通知媒体源它想知道哪个实体属性对值媒体控制器发送的实体更新命令的格式如下所示后续属性所对应的实体媒体控制器所需的属性列表写入成功后媒体控制器将立即开始获取其监听的实体属性对的值媒体源通知格式如下后续属性所对应的实体在通知中发送其值的属性一个位掩码其设置位为媒体控制器提供有关通知的特定信息一个字符串对应于与给定属性关联的值实体属性实体属性特征是媒体控制器检索属性拓展值的特征理想情况下仅当实体属性对的值在相应的实体更新通知中标记为已截断并且媒体控制器希望显示更多关联值时才应使用此特征要检索特定实体属性对的完整值媒体控制器必须先通过写入实体属性特征来发送命令实体属性命令的格式如下所示媒体源需要通知的字符过长则会截断发送给媒体控制器若媒体控制器需要被截断的部分则需要通过写入实体属性命令将被截断的部分发送给媒体控制器其他错误代码写入任何特征或读取实体属性时媒体控制器可能会收到以下特定于的错误代码无效状态媒体控制器未正确设置例如写入实体更新或实体属性时未先订阅实体更新特征通知无效的命令该命令的格式不正确缺省属性相应属性为空结语关于蓝牙的的总结就分享到这里了如果在文中发现有误欢迎指出我会及时修改的提前感谢参阅',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2022-04-12 22:47:41',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">nixgnauhcuy</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)" rel="external nofollow noreferrer">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AMS/" style="font-size: 1.05rem;">AMS<sup>1</sup></a><a href="/tags/ANCS/" style="font-size: 1.05rem;">ANCS<sup>1</sup></a><a href="/tags/BLE/" style="font-size: 1.05rem;">BLE<sup>2</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C<sup>3</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>3</sup></a><a href="/tags/IOS/" style="font-size: 1.05rem;">IOS<sup>2</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>1</sup></a><a href="/tags/Nand-Flash/" style="font-size: 1.05rem;">Nand Flash<sup>1</sup></a><a href="/tags/Nor-Flash/" style="font-size: 1.05rem;">Nor Flash<sup>1</sup></a><a href="/tags/keil/" style="font-size: 1.05rem;">keil<sup>3</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>7</sup></a><a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 1.05rem;">串口<sup>2</sup></a><a href="/tags/%E4%BD%8D%E5%9F%9F/" style="font-size: 1.05rem;">位域<sup>1</sup></a><a href="/tags/%E4%BD%8D%E5%AD%97%E6%AE%B5/" style="font-size: 1.05rem;">位字段<sup>1</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 1.05rem;">嵌入式<sup>21</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>5</sup></a><a href="/tags/%E6%8A%80%E5%B7%A7/" style="font-size: 1.05rem;">技巧<sup>2</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.05rem;">生活<sup>1</sup></a><a href="/tags/%E8%8B%B1%E6%96%87/" style="font-size: 1.05rem;">英文<sup>1</sup></a><a href="/tags/%E8%93%9D%E7%89%99/" style="font-size: 1.05rem;">蓝牙<sup>3</sup></a><a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 1.05rem;">踩坑<sup>2</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 1.05rem;">软件<sup>4</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">四月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">三月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/12/"><span class="card-archive-list-date">十二月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">八月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);" rel="external nofollow noreferrer"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%93%9D%E7%89%99/" itemprop="url">蓝牙</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/BLE/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>BLE</span></a><a class="article-meta__tags" href="/tags/%E8%93%9D%E7%89%99/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>蓝牙</span></a><a class="article-meta__tags" href="/tags/IOS/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>IOS</span></a><a class="article-meta__tags" href="/tags/AMS/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>AMS</span></a></span></div></div><h1 class="post-title" itemprop="name headline">蓝牙开发之 IOS AMS</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2022-04-12T14:47:41.000Z" title="发表于 2022-04-12 22:47:41">2022-04-12</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2022-04-12T14:47:41.000Z" title="更新于 2022-04-12 22:47:41">2022-04-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">2.5k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为深圳"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>深圳</span></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://www.nixgnauhcuy.cn/e7b57229acd4/"><header><a class="post-meta-categories" href="/categories/%E8%93%9D%E7%89%99/" itemprop="url">蓝牙</a><a href="/tags/BLE/" tabindex="-1" itemprop="url">BLE</a><a href="/tags/%E8%93%9D%E7%89%99/" tabindex="-1" itemprop="url">蓝牙</a><a href="/tags/IOS/" tabindex="-1" itemprop="url">IOS</a><a href="/tags/AMS/" tabindex="-1" itemprop="url">AMS</a><h1 id="CrawlerTitle" itemprop="name headline">蓝牙开发之 IOS AMS</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">nixgnauhcuy</span><time itemprop="dateCreated datePublished" datetime="2022-04-12T14:47:41.000Z" title="发表于 2022-04-12 22:47:41">2022-04-12</time><time itemprop="dateCreated datePublished" datetime="2022-04-12T14:47:41.000Z" title="更新于 2022-04-12 22:47:41">2022-04-12</time></header><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>本篇是针对 IOS 的 <code>AMS(Apple Media Service)</code> 进行记录并总结，如果对 <code>ANCS(Apple Notification Center Service)</code> 有兴趣，可以前往我的另一篇推文 <a href="https://www.nixgnauhcuy.cn/f0b6078aa8de/">蓝牙开发之 IOS ANCS</a>。</strong></p>
+<p><strong>文章有误或有理解不到位的地方，望不吝指教，我会及时改正错误。</strong></p>
+<h2 id="什么是-AMS"><a href="#什么是-AMS" class="headerlink" title="什么是 AMS"></a>什么是 AMS</h2><h3 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h3><blockquote>
+<p><strong>播放暂停：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20220412/1.gif" alt="播放暂停"></p>
+</blockquote>
+<blockquote>
+<p><strong>进度获取：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20220412/2.gif" alt="进度条"></p>
+</blockquote>
+<blockquote>
+<p><strong>媒体控制：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20220412/3.gif" alt="控制"></p>
+</blockquote>
+<blockquote>
+<p><strong>切换音乐：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20220412/4.gif" alt="切歌"></p>
+</blockquote>
+<blockquote>
+<p><strong>音量加减：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20220412/5.gif" alt="音量"></p>
+</blockquote>
+<h3 id="AMS-介绍"><a href="#AMS-介绍" class="headerlink" title="AMS 介绍"></a>AMS 介绍</h3><p><strong><code>AMS</code> 全称 <code>Apple Media Service</code>(苹果媒体服务)，是提供给 BLE 设备的一种简单控制媒体应用程序的方式，并且用于获取已连接的 IOS 设备的媒体状态信息。</strong></p>
+<h3 id="AMS-字节序和字节码"><a href="#AMS-字节序和字节码" class="headerlink" title="AMS 字节序和字节码"></a>AMS 字节序和字节码</h3><p><strong>除非另有规定，否则通过 AMS 传输的所有数值都应是小端格式。</strong><br><strong>除非另有规定，否则通过 AMS 传输的所有字符串值都应是 UTF-8 编码的 unicode 字符所组成的。</strong></p>
+<h3 id="依赖性"><a href="#依赖性" class="headerlink" title="依赖性"></a>依赖性</h3><p><strong>除了标准的通用属性配置文件(GATT)子程序集外，AMS 没有任何依赖性。作为 GATT 客户端的设备在使用 AMS 时，可以自由访问和使用 iOS 设备提供的其他服务。</strong></p>
+<h3 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h3><ol>
+<li><strong>Apple Media Service 称为 AMS</strong></li>
+<li><strong>AMS 服务的发布者(也就是我们的 <code>iOS 设备</code>)应被称为媒体源(MS)。</strong></li>
+<li><strong>AMS 服务的客户端(也就是我们的<code>蓝牙设备</code>)应被称为媒体控制器(MR)。</strong></li>
+</ol>
+<p><strong>下面统一使用 <code>媒体源</code> 和 <code>媒体控制器</code> 来描述 IOS 设备和蓝牙设备。</strong></p>
+<hr>
+<h2 id="AMS-Service-UUID"><a href="#AMS-Service-UUID" class="headerlink" title="AMS Service UUID"></a>AMS Service UUID</h2><blockquote>
+<p><strong>AMS 主服务(Service) UUID 为 89D3502B-0F36-433A-8EF4-C502AD55F8DC</strong></p>
+<blockquote>
+<p><strong>AMS 服务下的三个特征(Characteristic) UUID:</strong></p>
+<p><strong>远程命令(Remote Command)(writeable, notifiable)</strong></p>
+<blockquote>
+<p> <strong>9B3C81D8-57B1-4A8A-B8DF-0E56F7CA51C2</strong></p>
+</blockquote>
+<p><strong>实体更新(Entity Update)(writeable with response, notifiable)</strong></p>
+<blockquote>
+<p><strong>2F7CABCE-808D-411F-9A0C-BB92BA96C102</strong></p>
+</blockquote>
+<p><strong>实体属性(Entity Attribute)(readable, writeable)</strong></p>
+<blockquote>
+<p><strong>C6B2F38C-23AB-46D8-A6AB-A3A870BBD5D7</strong></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><strong>下图展示了媒体源和媒体控制器间的服务设置：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://developer.apple.com/library/archive/documentation/CoreBluetooth/Reference/AppleMediaService_Reference/Art/Figure%202-2_2x.png" alt="服务设置"></p>
+<ol>
+<li>媒体控制器发现媒体源的 AMS 服务和特征</li>
+<li>媒体控制器订阅媒体源实体更新</li>
+<li>媒体控制器向媒体源写入需要监听的实体(EntityID)，例如监听歌曲变化等</li>
+<li>当媒体源监听的实体(EntityID)有变动时，会通知其变动内容</li>
+</ol>
+<h2 id="AMS-Characteristic"><a href="#AMS-Characteristic" class="headerlink" title="AMS Characteristic"></a>AMS Characteristic</h2><h3 id="实体"><a href="#实体" class="headerlink" title="实体"></a>实体</h3><p><strong>AMS 定义了 3 个不同的实体，每个实体都有一组不同的属性：</strong></p>
+<ul>
+<li><strong>播放器（Player）：当前活跃的媒体应用。该实体属性包括其名称、播放状态和播放音量等。</strong></li>
+<li><strong>队列（Queue）：当前加载的播放队列。该实体的属性包括其队列数及其随机和重复模式等。</strong></li>
+<li><strong>音轨（Track）：当前加载的音轨。该实体的属性包括其艺术家、标题和总的播放时间等。</strong></li>
+</ul>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EntityIDPlayer</td>
+<td>0</td>
+</tr>
+<tr>
+<td>EntityIDQueue</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EntityIDTrack</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Reserved</td>
+<td>3-255</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h4 id="播放器（Player）属性表"><a href="#播放器（Player）属性表" class="headerlink" title="播放器（Player）属性表"></a>播放器（Player）属性表</h4><blockquote>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PlayerAttributeIDName</td>
+<td>0</td>
+</tr>
+<tr>
+<td>PlayerAttributeIDPlaybackInfo</td>
+<td>1</td>
+</tr>
+<tr>
+<td>PlayerAttributeIDVolume</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Reserved</td>
+<td>3-255</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>PlayerAttributeIDName</strong>：包含应用的名称的字符串</li>
+<li><strong>PlayerAttributeIDPlaybackInfo</strong>：用三个逗号作为分割，分别有：<ul>
+<li>PlaybackState(播放状态)：表示播放状态的整数值字符串：<ul>
+<li>PlaybackStatePaused(0)：暂停</li>
+<li>PlaybackStatePlaying(1)：播放</li>
+<li>PlaybackStateRewinding(2)：倒带</li>
+<li>PlaybackStateFastForwarding(3)：快进</li>
+</ul>
+</li>
+<li>PlaybackRate(播放速率)：播放速率的浮点值字符串</li>
+<li>ElapsedTime(已用时间)：一个字符串，表示当前已用时间的浮点值（以秒为单位）</li>
+</ul>
+</li>
+<li><strong>PlayerAttributeIDVolume</strong>：一个字符串，表示音量的浮点值，范围从（0-1）</li>
+</ul>
+</blockquote>
+<p><strong>通过播放器属性，我们可以获取 <code>PlayerAttributeIDName</code> 当前音乐播放器的字符串，例如 IOS 手机使用的网易云音乐，那么媒体源推送的字符串转换为 unicode 编码后再转成中文，实际上就是“网易云音乐”，同理其他的音乐 APP，也会显示其相应的名称，非音乐 APP 是不会有推送的。</strong></p>
+<p><strong><code>PlayerAttributeIDPlaybackInfo</code> 可以获取对应的播放状态、播放速率以及歌曲经过的时间，例如接收到推送为 <code>49 44 49 46 48 44 55 49 46 49 52 55 </code> 表示 <code>1,1.0,71.147</code>，当前状态为播放、速率 1.0、已过时间 71.147 秒。</strong></p>
+<p><strong><code>PlayerAttributeIDVolume</code> 用于获取当前的音量浮点值，音量最大时为 <code>1</code>，最小时为 <code>0</code>，IOS 按一次音量按键，每次递进 <code>0.0625</code>。</strong></p>
+<blockquote>
+<p><strong>注：通过上面的信息，我们可以计算出当前经过的时间，公式如下：</strong></p>
+<p>CurrentElapsedTime &#x3D; ElapsedTime + ((TimeNow–TimePlaybackInfoWasReceived) * PlaybackRate)</p>
+<p><strong>上方展示的音乐进度条，也是依靠该方式和歌曲总长度计算的</strong></p>
+</blockquote>
+<h4 id="队列（Queue）属性表"><a href="#队列（Queue）属性表" class="headerlink" title="队列（Queue）属性表"></a>队列（Queue）属性表</h4><blockquote>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QueueAttributeIDIndex</td>
+<td>0</td>
+</tr>
+<tr>
+<td>QueueAttributeIDCount</td>
+<td>1</td>
+</tr>
+<tr>
+<td>QueueAttributeIDShuffleMode</td>
+<td>2</td>
+</tr>
+<tr>
+<td>QueueAttributeIDRepeatMode</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Reserved</td>
+<td>4-255</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>QueueAttributeIDIndex</strong>：字符串，包含队列索引的整数值，从零开始</li>
+<li><strong>QueueAttributeIDCount</strong>：字符串，包含队列中项目总数的整数值</li>
+<li><strong>QueueAttributeIDShuffleMode</strong>：字符串，包含随机播放模式的整数值<ul>
+<li>ShuffleModeOff(0)：非随机模式</li>
+<li>ShuffleModeOne(1)：单曲随机(没见过这种模式)</li>
+<li>ShuffleModeAll(2)：随机播放</li>
+</ul>
+</li>
+<li><strong>QueueAttributeIDRepeatMode</strong>：字符串，包含重复模式的整数值<ul>
+<li>RepeatModeOff(0)：非重复模式</li>
+<li>RepeatModeOne(1)：单曲循环</li>
+<li>RepeatModeAll(2)：列表循环</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><strong>这一块好理解，就不过多解释了。切换播放器播放模式时，会通知对应的模式变化。</strong></p>
+<h4 id="音轨（Track）属性表"><a href="#音轨（Track）属性表" class="headerlink" title="音轨（Track）属性表"></a>音轨（Track）属性表</h4><blockquote>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TrackAttributeIDArtist</td>
+<td>0</td>
+</tr>
+<tr>
+<td>TrackAttributeIDAlbum</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TrackAttributeIDTitle</td>
+<td>2</td>
+</tr>
+<tr>
+<td>TrackAttributeIDDuration</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Reserved</td>
+<td>4-255</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>QueueAttributeIDIndex</strong>：字符串，包含艺术家姓名</li>
+<li><strong>QueueAttributeIDCount</strong>：字符串，包含唱片集名称</li>
+<li><strong>QueueAttributeIDShuffleMode</strong>：字符串，包含曲目标题</li>
+<li><strong>QueueAttributeIDRepeatMode</strong>：字符串，包含轨道总持续时间的浮点值（以秒为单位）</li>
+</ul>
+</blockquote>
+<p><strong>这一块包含了歌曲名、歌手名、专辑名称以及当前音乐总时长。音乐时长假设为 <code>03:02</code>，那么媒体控制器接收到的则是 <code>182.000</code> 秒。</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://developer.apple.com/library/archive/documentation/CoreBluetooth/Reference/AppleMediaService_Reference/Art/Figure%202-1_2x.png" alt="媒体服务的典型操作"></p>
+<p><strong>若媒体控制器订阅了 <code>Track</code> 属性，那么当媒体源播放音乐时，会将 A 音乐的曲名和歌手名推送给媒体控制器，每次有变动时，都会通知媒体控制器。</strong></p>
+<h3 id="远程命令-Remote-Command"><a href="#远程命令-Remote-Command" class="headerlink" title="远程命令(Remote Command)"></a>远程命令(Remote Command)</h3><p><strong>远程命令这个特征值是用于 <code>媒体控制器</code> 发送给 <code>媒体源</code> 的播放状态特征，例如播放&#x2F;暂停、音量加&#x2F;减、上&#x2F;下一首、循环播放等。</strong></p>
+<blockquote>
+<p><strong><code>媒体控制器</code> 发送命令格式如下：</strong></p>
+<table>
+<thead>
+<tr>
+<th>Byte</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>RemoteCommandID</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://developer.apple.com/library/archive/documentation/CoreBluetooth/Reference/AppleMediaService_Reference/Art/Figure%202-3_2x.png" alt="远程命令"></p>
+<p><strong><code>媒体控制器</code> 发现 <code>媒体源</code> AMS 服务后，可以通过发送控制命令，播放&#x2F;暂停、音量加&#x2F;减等操作<code>媒体源播放器</code>。</strong></p>
+<p><strong>此特性还用于向 <code>媒体控制器</code> 报告当前 <code>媒体源</code> 支持的命令集，当媒体播放器支持的命令列表发生变化时，<code>媒体源</code> 会使用如下所示的格式，在该特征生产一条通知，通知中包括了支持的命令集：</strong></p>
+<blockquote>
+<p><strong><code>媒体源</code> 返回支持命令集格式如下：</strong></p>
+<table>
+<thead>
+<tr>
+<th>Byte</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>RemoteCommandID1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>RemoteCommandID2</td>
+</tr>
+<tr>
+<td>…</td>
+<td>RemoteCommandIDx</td>
+</tr>
+</tbody></table>
+</blockquote>
+<blockquote>
+<p><strong>RemoteCommandID</strong> 对应的命令集：</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RemoteCommandIDPlay</td>
+<td>0</td>
+</tr>
+<tr>
+<td>RemoteCommandIDPause</td>
+<td>1</td>
+</tr>
+<tr>
+<td>RemoteCommandIDTogglePlayPause</td>
+<td>2</td>
+</tr>
+<tr>
+<td>RemoteCommandIDNextTrack</td>
+<td>3</td>
+</tr>
+<tr>
+<td>RemoteCommandIDPreviousTrack</td>
+<td>4</td>
+</tr>
+<tr>
+<td>RemoteCommandIDVolumeUp</td>
+<td>5</td>
+</tr>
+<tr>
+<td>RemoteCommandIDVolumeDown</td>
+<td>6</td>
+</tr>
+<tr>
+<td>RemoteCommandIDAdvanceRepeatMode</td>
+<td>7</td>
+</tr>
+<tr>
+<td>RemoteCommandIDAdvanceShuffleMode</td>
+<td>8</td>
+</tr>
+<tr>
+<td>RemoteCommandIDSkipForward</td>
+<td>9</td>
+</tr>
+<tr>
+<td>RemoteCommandIDSkipBackward</td>
+<td>10</td>
+</tr>
+<tr>
+<td>RemoteCommandIDLikeTrack</td>
+<td>11</td>
+</tr>
+<tr>
+<td>RemoteCommandIDDislikeTrack</td>
+<td>12</td>
+</tr>
+<tr>
+<td>RemoteCommandIDBookmarkTrack</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Reserved</td>
+<td>14-255</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p><strong>通过该命令集，我们的蓝牙设备就可以对 IOS 设备的媒体播放器进行控制，该方式的音乐控制，相比较 HID，我觉得更优，因为 HID 控制只能在媒体播放器界面进行控制，模拟按键的方式去控制播放，并且 HID 的方式不能获取歌曲名、歌曲进度等，所以相较下，如果用于控制 IOS 媒体播放器，那么使用 AMS 是最优的方式。</strong></p>
+<h3 id="实体更新-Entity-Update"><a href="#实体更新-Entity-Update" class="headerlink" title="实体更新(Entity Update)"></a>实体更新(Entity Update)</h3><p><strong>实体更新特性是 <code>媒体控制器</code> 通知 <code>媒体源</code> 其所需实体&#x2F;属性对的特征，并在发生更改时告知 <code>媒体控制器</code>，例如 <code>媒体源</code> 媒体播放器变动、当前歌曲变更等。</strong></p>
+<p><strong>默认情况下，<code>媒体控制器</code> 不会接收有关实体属性的任何信息。所以，为了接收此数据，<code>媒体控制器</code> 首先需要订阅有关实体更新特征的 GATT 通知。然后，<code>媒体控制器</code> 将命令写入实体更新特征，以通知 <code>媒体源</code> 它想知道哪个实体&#x2F;属性对值。</strong></p>
+<blockquote>
+<p><strong><code>媒体控制器</code> 发送的实体更新命令的格式如下所示：</strong></p>
+<ul>
+<li><strong><a href="#%E5%AE%9E%E4%BD%93">EntityID</a>：后续属性所对应的实体</strong></li>
+<li><strong>AttributeID：<code>媒体控制器</code> 所需的属性列表</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Byte</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>EntityID</td>
+</tr>
+<tr>
+<td>2</td>
+<td>AttributeID1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>AttributeID2</td>
+</tr>
+<tr>
+<td>…</td>
+<td>AttributeIDx</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p><strong>写入成功后， <code>媒体控制器</code> 将立即开始获取其监听的实体&#x2F;属性对的值。</strong></p>
+<blockquote>
+<p><strong>媒体源通知格式如下：</strong></p>
+<ul>
+<li><strong><a href="#%E5%AE%9E%E4%BD%93">EntityID</a>：后续属性所对应的实体。</strong></li>
+<li><strong>AttributeID：在通知中发送其值的属性。</strong></li>
+<li><strong>EntityUpdateFlags：一个位掩码，其设置位为 <code>媒体控制器</code> 提供有关通知的特定信息。</strong></li>
+<li><strong>Value：一个字符串，对应于与给定属性关联的值。</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Byte</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>EntityID</td>
+</tr>
+<tr>
+<td>2</td>
+<td>AttributeID</td>
+</tr>
+<tr>
+<td>3</td>
+<td>EntityUpdateFlags</td>
+</tr>
+<tr>
+<td>4…</td>
+<td>Value</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h3 id="实体属性-Entity-Attribute"><a href="#实体属性-Entity-Attribute" class="headerlink" title="实体属性(Entity Attribute)"></a>实体属性(Entity Attribute)</h3><p><strong>实体属性特征是 <code>媒体控制器</code> 检索属性拓展值的特征。理想情况下，仅当实体&#x2F;属性对的值在相应的实体更新通知中标记为已截断，并且 <code>媒体控制器</code> 希望显示更多关联值时，才应使用此特征。</strong></p>
+<p><strong>要检索特定实体&#x2F;属性对的完整值，<code>媒体控制器</code> 必须先通过写入实体属性特征来发送命令。</strong></p>
+<blockquote>
+<p><strong>实体属性命令的格式如下所示：</strong></p>
+<table>
+<thead>
+<tr>
+<th>Byte</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>EntityID</td>
+</tr>
+<tr>
+<td>2</td>
+<td>AttributeID</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://developer.apple.com/library/archive/documentation/CoreBluetooth/Reference/AppleMediaService_Reference/Art/Figure%202-4_2x.png" alt="检索截断值的完整值"></p>
+<p><strong>媒体源需要通知的字符过长，则会截断发送给媒体控制器，若媒体控制器需要被截断的部分，则需要通过写入实体属性命令，将被截断的部分发送给媒体控制器。</strong></p>
+<hr>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="错误代码-Error-Codes"><a href="#错误代码-Error-Codes" class="headerlink" title="错误代码(Error Codes)"></a>错误代码(Error Codes)</h3><p><strong>写入任何特征或读取实体属性时，<code>媒体控制器</code> 可能会收到以下特定于 AMS 的错误代码：</strong></p>
+<ul>
+<li><strong>无效状态 (0xA0): <code>媒体控制器</code> 未正确设置，例如，写入实体更新或实体属性时，未先订阅实体更新特征通知。</strong></li>
+<li><strong>无效的命令 (0xA1): 该命令的格式不正确。</strong></li>
+<li><strong>缺省属性 (0xA2): 相应属性为空。</strong></li>
+</ul>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p><strong>关于蓝牙的 IOS AMS 的总结就分享到这里了，如果在文中发现有误，欢迎指出，我会及时修改的，提前感谢🙏！</strong></p>
+<h3 id="参阅"><a href="#参阅" class="headerlink" title="参阅"></a>参阅</h3><ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.apple.com/library/archive/documentation/CoreBluetooth/Reference/AppleMediaService_Reference/Introduction/Introduction.html">Apple Media Service Reference</a></li>
+</ul>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">nixgnauhcuy</div><div class="post-copyright__author_desc">Life-long learning</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://www.nixgnauhcuy.cn/e7b57229acd4/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://www.nixgnauhcuy.cn/e7b57229acd4/')">蓝牙开发之 IOS AMS</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://www.nixgnauhcuy.cn/e7b57229acd4/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=undefined&amp;url=https://www.nixgnauhcuy.cn/e7b57229acd4/&amp;pic=undefined" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.nixgnauhcuy.cn" target="_blank">nixgnauhcuy</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/BLE/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>BLE<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/%E8%93%9D%E7%89%99/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>蓝牙<span class="tagsPageCount">3</span></a><a class="post-meta__box__tags" href="/tags/IOS/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>IOS<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/AMS/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>AMS<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231027/cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/4a8a40c466f6/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20220312/cover.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">PyCharm 2021 安装和破解</div></div></a></div><div class="next-post pull-right"><a href="/b77d15ce3b54/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/00.jpg?_r_=3a441c2a-1261-8f1b-c772-8faae7e79495" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">编译 Linux 内核，打印 &quot;multiple definition of `yylloc'&quot; 出错</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/f0b6078aa8de/" title="蓝牙开发之 IOS ANCS"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20210315/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-03-15</div><div class="title">蓝牙开发之 IOS ANCS</div></div></a></div><div><a href="/721a3f9ff3ad/" title="nrf52840 内部 flash 结构"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/01.jpg?_r_=0e033829-4b20-6b9a-401e-1ff1d87696ec" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2020-12-27</div><div class="title">nrf52840 内部 flash 结构</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">分享一些<b style="color:#fff">学习经验</b>以及一些<b style="color:#fff">杂七杂八的内容</b>。</div><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">相信你可以在这里找到对你有用的<b style="color:#fff">知识</b>和<b style="color:#fff">教程</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><h1 class="author-info__name">nixgnauhcuy</h1><div class="author-info__desc">Life-long learning</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/nixgnauhcuy" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">佛系更新博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/wechat.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-AMS"><span class="toc-number">2.</span> <span class="toc-text">什么是 AMS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">效果展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AMS-%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.2.</span> <span class="toc-text">AMS 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AMS-%E5%AD%97%E8%8A%82%E5%BA%8F%E5%92%8C%E5%AD%97%E8%8A%82%E7%A0%81"><span class="toc-number">2.3.</span> <span class="toc-text">AMS 字节序和字节码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">依赖性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AF%E8%AF%AD"><span class="toc-number">2.5.</span> <span class="toc-text">术语</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AMS-Service-UUID"><span class="toc-number">3.</span> <span class="toc-text">AMS Service UUID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AMS-Characteristic"><span class="toc-number">4.</span> <span class="toc-text">AMS Characteristic</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93"><span class="toc-number">4.1.</span> <span class="toc-text">实体</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%92%AD%E6%94%BE%E5%99%A8%EF%BC%88Player%EF%BC%89%E5%B1%9E%E6%80%A7%E8%A1%A8"><span class="toc-number">4.1.1.</span> <span class="toc-text">播放器（Player）属性表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%9F%E5%88%97%EF%BC%88Queue%EF%BC%89%E5%B1%9E%E6%80%A7%E8%A1%A8"><span class="toc-number">4.1.2.</span> <span class="toc-text">队列（Queue）属性表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9F%B3%E8%BD%A8%EF%BC%88Track%EF%BC%89%E5%B1%9E%E6%80%A7%E8%A1%A8"><span class="toc-number">4.1.3.</span> <span class="toc-text">音轨（Track）属性表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4-Remote-Command"><span class="toc-number">4.2.</span> <span class="toc-text">远程命令(Remote Command)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93%E6%9B%B4%E6%96%B0-Entity-Update"><span class="toc-number">4.3.</span> <span class="toc-text">实体更新(Entity Update)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93%E5%B1%9E%E6%80%A7-Entity-Attribute"><span class="toc-number">4.4.</span> <span class="toc-text">实体属性(Entity Attribute)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">5.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E4%BB%A3%E7%A0%81-Error-Codes"><span class="toc-number">5.1.</span> <span class="toc-text">错误代码(Error Codes)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">5.2.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E9%98%85"><span class="toc-number">5.3.</span> <span class="toc-text">参阅</span></a></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By nixgnauhcuy</div><div id="workboard"><div id="runtimeTextTip"></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">11</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" rel="external nofollow noreferrer" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.cbd.int/instant.page/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("11/28/2020 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.8",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 nixgnauhcuy 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("11/28/2020 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = async () => {
+    try {
+      const res = await fetch('https://waline-two.vercel.app/api/comment?type=recent&count=6', { method: 'GET' })
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray)
+    } catch (err) {
+      console.error(err)
+      const $dom = document.querySelector('#card-newest-comments .aside-list')
+      $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('waline-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static/icon/ali_iconfont_css.css"><script src="https://cdn.cbd.int/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'G-2VWCFFF041', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

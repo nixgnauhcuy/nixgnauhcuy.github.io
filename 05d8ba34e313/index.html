@@ -1,0 +1,778 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>关于嵌入式的bin、hex、axf、map | nixgnauhcuy</title><meta name="keywords" content="嵌入式"><meta name="author" content="nixgnauhcuy"><meta name="copyright" content="nixgnauhcuy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="关于嵌入式的bin、hex、axf、map"><meta name="application-name" content="关于嵌入式的bin、hex、axf、map"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="关于嵌入式的bin、hex、axf、map"><meta property="og:url" content="https://www.nixgnauhcuy.cn/05d8ba34e313/index.html"><meta property="og:site_name" content="nixgnauhcuy"><meta property="og:description" content="对 bin、hex、axf、map 的一些笔记"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/00.jpg?_r_=d029bd63-9bd5-4597-f4fb-b784ef1a402f"><meta property="article:author" content="nixgnauhcuy"><meta property="article:tag" content="[&quot;blog&quot;,&quot;博客&quot;,&quot;技术&quot;,&quot;个人&quot;,&quot;学习&quot;,&quot;教程&quot;]"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/00.jpg?_r_=d029bd63-9bd5-4597-f4fb-b784ef1a402f"><meta name="description" content="对 bin、hex、axf、map 的一些笔记"><link rel="shortcut icon" href="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/favicon.png"><link rel="canonical" href="https://www.nixgnauhcuy.cn/05d8ba34e313/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><meta name="google-site-verification" content="T9L_T3an8pckM0Sc0wa17RoeF1zsROoZJdv4B9ltUJM"/><meta name="baidu-site-verification" content="codeva-U5171cz6ED"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e1d8d6cf9206f44c07c598f2d8377c8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2VWCFFF041"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-2VWCFFF041');
+</script><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/people.png"},
+  postHeadAiDescription: undefined,
+  diytitle: undefined,
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":90,"position":"top","messagePrev":"注意：自上次更新以来已有","messageNext":"天，文章的内容可能已过时，如果发现错误，请留言或发送邮件告知我。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: nixgnauhcuy","link":"链接: ","source":"来源: nixgnauhcuy","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'nixgnauhcuy',
+  title: '关于嵌入式的bin、hex、axf、map',
+  postAI: '',
+  pageFillDescription: '前言, bin、hex、axf, bin、hex、axf 之间的关系, bin 文件, hex 文件, axf 文件, axf 文件转 bin 文件, fromelf 格式, 将 axf 文件转 bin 文件, hex 文件和bin文件相互转换, srecord 软件, hex 转 bin, bin 转 hex, map, map 文件, Section Cross References, Removing Unused input sections from the image, Image Symbol Table, Symbol 分为两类, Symbol 符号名称, Memory Map of the image, Image component sizes, 结别在注释里陷得太深注释很可能会误导你你要调试的只是代码前言记录工作中学习到的知识在这里做些笔记方便自己后面温习之间的关系数据数据数据地址地址调试信息所以同一工程中的文件大小为假设文件是一个三无产品那么就是一个带有信息的产品而文件则是带有信息并且附了一张使用说明的产品我也不知道这样举例合不合理意思到位就行因为文件没有地址信息而文件带了地址信息所以实际上我们使用烧录软件是这样的导入时因为没有地址信息所以我们需要为它指定烧写的起始地址导入时因为包含了地址信息所以我们不需要指定起始地址烧录工具会自动读取要烧录的地址文件上面已经说了文件起始不包含地址信息所以文件只是单纯的二进制文件是没有格式的程序文件只是包含了程序数据我们看到烧录到单片机的是文件但是实际上烧录软件会帮我们将文件的地址解析提取最后还是烧录的文件下面这张图可以看出解析地址信息后实际上要烧录的还是的内容文件是由制定的一种十六进制标准文件格式是由编译器转换而成的一种用于下载到处理器里面的文件文件格式是由一行一行的十六进制数据组成每行包含开始长度数据类型校验和等重要信息一般文件的记录格式如下冒号数据长度起始地址数据类型数据校验和标记头数据头表示本行的数据长度表示本行数据的起始地址数据类型共分数据记录用来标识文件结束放在文件的最后标识文件的结尾用来标识扩展段地址的记录扩展段地址记录它包含位数据地址段由于普通的的记录文件只能记录的地址范围所以大于的地址数据要靠扩展段地址记录开始段地址记录用来标识扩展线性地址的记录扩展线性地址记录也叫位地址记录或者记录这些记录包含了数据在存储器里真实地址的高位当一个扩展线性地址记录被读取后将一直保持有效直到它被另一个扩展地址记录改变因为它记录的是后面数据在存储器里存放的真实起始地址所以它的起始地址偏移量总是开始线性地址记录数据代表一个字节的数据一个记录可以有许多数据字节数据字节数量应等于一个字节先将此字节前所有字节相加得到校验和说了这么多还是来实际验证一下这里我贴出了的前行和后行中间的其他内容省略略行头本行数据长度为本行数据起始地址偏移为数据类型是标识扩展线性地址的记录本行个数据为和这里为基地址校验和本行数据长度为本行数据起始地址偏移为所以这里记录的地址是这个可以看上面的起始地址刚好是数据类型是标识扩展线性地址的记录本行个数据为校验和尾本行数据长度为本行数据起始地址偏移为数据类型是标识文件结束校验和从上面这些可以验证出文件确实保存了文件的地址信息实际上文件会大于倍的文件大小的文件一个在文件中用编码则需要用两个字符来表示一个字节而且又包括了其他信息所以一般文件全称它是由编译器产生除了包含的内容之外还附加其他调试信息这些调试信息加在可执行的二进制数据之前调试时这些调试信息不会下载到中真正下载到中的信息仅仅是可执行代码调试信息作用可将源代码包括注释夹在反汇编代码中这样我们可随时切换到源代码中进行调试我们还可以对程序中的函数调用情况进行跟踪可以通过查看对变量进行跟踪可以通过查看文件转文件格式命令的格式显示帮助信息显示版本信息输出文件默认的输出为文本格式在生成的映象中不包含调试信息在生成的映象中不包含段的信息生成格式的文件生成位十六进制格式的文件生成位十六进制格式的文件面向字节的位十六进制格式的文件设置格式文件的基地址需要调试信息的格式结构类的汇编语言描述扩展数组内部和外部结构被扩展显示文本信息打印详细信息打印数据地址针对带调试信息的映象打印反汇编代码打印数据段的内容打印表达式表打印调试表打印重定位信息打印字符表打印字符串表打印动态段的内容打印代码和数据大小的信息将文件转文件在的安装目录下我的装在了盘在中可以找到这个可执行文件使用命令行工具例如自带的或者等这里考虑大家不一定有其他命令行工具所以直接用自带的命令行打开运行输入打开运行进入路径这里我将要转化的文件放在盘文件夹中命令格式为文件路径路径文件路径命令行输入可以看到在输出目录中将文件转化生成为了文件并且输出的文件和生成文件大小一致说明是相同的文件文件和文件相互转换软件在找软件时在官网看到翻译一下应用程序是和的绝佳替代品用途更广泛该工具是在上托管的项目的一部分您可以从下载后面我就下载下来研究了一下发现可以替代和所以直接拿来使用转命令指定要转换的文件指定要输出的文件名这个指定偏移要根据工程指定来这里我的偏移是所以我输入的命令是上面转时已经有了文件这里我把放在了中并且把要转换的文件放在了文件夹中可以看到生成的和生成的文件大小一致转参考这里我的命令是这里实际上和生的文件有稍稍区别因为我试了多种方式都没有办法和生成文件一样虽然文件存储的数据一样但是及偏移还是稍微有区别图左边是生成的文件图右边是原先的文件文件文件是我们通过编译器编译生成的映射文件文件包含了五个部分模块段的交叉引用关系移除未使用的段映射符号表列出了各个段所存储的对应地址内存映射分布映像组成大小这里也提一下关于的基本概念段描述映像文件的代码和数据块的缩写包括只读数据和代码的缩写主要是由程序初始化初始值的缩写主要是由编程器初始化为与同义与同义与同义通常是指存放未初始化的全局变量的区域与同义在中我们在中可以看到我们生成的中链接的内容它包含了内存映射图像映射符号交叉引用大小信息统计信息未调用模块段信息装饰信息模块段的交叉引用关系这里主要是各个源文件之间生成的模块段之间相互引用的关系这里我随便找了个简单的延时闪灯程序编译后打开生成的文件这里指出了中模块调用其他模块之间的关系因为我的写在中所以中因为函数调用了中的函数调用了中的函数和函数调用了的函数所以生成的中指出了之前的相互引用关系移除未使用的段这个是我们工程中没有被调用的模块会被编译器移除并标识出来图里列出了被移除的模块信息例如从上面函数的执行中可以看出我没有调用和串口的初始化函数所以编译器把他们找出来并移除共个段没有被调用大小为字节映射符号表列出了各个段所存储的对应地址这里我截取了一些文件中的内容出来分析分为两类局部局部就是在函数内部用声明的变量还有用声明的函数基本上都是属于局部汇编文件里面的变量如果作用域是本文件的就是局部全局全局就是不是用声明的变量和函数是声明的全局变量和文件函数就属于全局汇编文件里面作用域是全工程的就是全局符号名称符号名存储对应的地址指存储在中的代码和变量等指存储在中的变量等符号类型等大小指当前占用的大小段目标指当前段所在的模块及源文件内存映射分布映像文件可以分为加载域和运行域加载域反映了可执行映像文件的各个段存放在存储器中的位置关系指映射入口地址指加载域起始地址为大小是加载域最大大小为运行域起始地址大小是加载域最大大小为运行域起始地址大小是加载域最大大小为对应中设定的和映像组成大小各个映像模块在各个文件中的代码大小主要就是对模块进行汇总存储大小信息指代码的大小指除了内联数据之外的常量数据指可读写已初始化的变量数据指未初始化的变量数据显示调试数据占用了多少字节目标名是我们程序所占的字节总数是我们程序所占的字节总数也就是我们程序所下载到中的大小结写的可能有点乱因为我晚上才有空整理这些上面这些是花了好几个晚上才整理出来所以有点乱也希望大家理解有什么错误也希望能在留言处指出我会及时修改的',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2020-01-05 23:02:04',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">nixgnauhcuy</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)" rel="external nofollow noreferrer">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AMS/" style="font-size: 1.05rem;">AMS<sup>1</sup></a><a href="/tags/ANCS/" style="font-size: 1.05rem;">ANCS<sup>1</sup></a><a href="/tags/BLE/" style="font-size: 1.05rem;">BLE<sup>2</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C<sup>3</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>3</sup></a><a href="/tags/IOS/" style="font-size: 1.05rem;">IOS<sup>2</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>1</sup></a><a href="/tags/Nand-Flash/" style="font-size: 1.05rem;">Nand Flash<sup>1</sup></a><a href="/tags/Nor-Flash/" style="font-size: 1.05rem;">Nor Flash<sup>1</sup></a><a href="/tags/keil/" style="font-size: 1.05rem;">keil<sup>3</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>7</sup></a><a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 1.05rem;">串口<sup>2</sup></a><a href="/tags/%E4%BD%8D%E5%9F%9F/" style="font-size: 1.05rem;">位域<sup>1</sup></a><a href="/tags/%E4%BD%8D%E5%AD%97%E6%AE%B5/" style="font-size: 1.05rem;">位字段<sup>1</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 1.05rem;">嵌入式<sup>21</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>5</sup></a><a href="/tags/%E6%8A%80%E5%B7%A7/" style="font-size: 1.05rem;">技巧<sup>2</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.05rem;">生活<sup>1</sup></a><a href="/tags/%E8%8B%B1%E6%96%87/" style="font-size: 1.05rem;">英文<sup>1</sup></a><a href="/tags/%E8%93%9D%E7%89%99/" style="font-size: 1.05rem;">蓝牙<sup>3</sup></a><a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 1.05rem;">踩坑<sup>2</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 1.05rem;">软件<sup>4</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">四月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">三月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/12/"><span class="card-archive-list-date">十二月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">八月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);" rel="external nofollow noreferrer"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url">嵌入式</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>嵌入式</span></a></span></div></div><h1 class="post-title" itemprop="name headline">关于嵌入式的bin、hex、axf、map</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2020-12-30T15:02:04.000Z" title="发表于 2020-12-30 23:02:04">2020-12-30</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2020-01-05T15:02:04.000Z" title="更新于 2020-01-05 23:02:04">2020-01-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">4.2k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为深圳"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>深圳</span></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://www.nixgnauhcuy.cn/05d8ba34e313/"><header><a class="post-meta-categories" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url">嵌入式</a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" tabindex="-1" itemprop="url">嵌入式</a><h1 id="CrawlerTitle" itemprop="name headline">关于嵌入式的bin、hex、axf、map</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">nixgnauhcuy</span><time itemprop="dateCreated datePublished" datetime="2020-12-30T15:02:04.000Z" title="发表于 2020-12-30 23:02:04">2020-12-30</time><time itemprop="dateCreated datePublished" datetime="2020-01-05T15:02:04.000Z" title="更新于 2020-01-05 23:02:04">2020-01-05</time></header><blockquote>
+<p><strong>别在注释里陷得太深——注释很可能会误导你，你要调试的只是代码。</strong></p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><em><strong>前言</strong></em></h2><p>记录工作中学习到的知识，在这里做些笔记，方便自己后面温习。</p>
+<hr>
+<h2 id="bin、hex、axf"><a href="#bin、hex、axf" class="headerlink" title="bin、hex、axf"></a><em><strong>bin、hex、axf</strong></em></h2><h3 id="bin、hex、axf-之间的关系"><a href="#bin、hex、axf-之间的关系" class="headerlink" title="bin、hex、axf 之间的关系"></a><em><strong>bin、hex、axf 之间的关系</strong></em></h3><table>
+<thead>
+<tr>
+<th align="center">bin</th>
+<th align="center">hex</th>
+<th align="center">axf</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">数据</td>
+<td align="center">数据</td>
+<td align="center">数据</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">地址</td>
+<td align="center">地址</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">调试信息</td>
+</tr>
+</tbody></table>
+<p><strong>所以同一工程中 bin、hex、axf 的文件大小为 <code> .bin &lt; .hex &lt; .axf</code></strong></p>
+<p><strong>假设 bin 文件是一个三无产品，那么hex就是一个带有信息的产品，而 axf 文件则是带有信息并且附了一张使用说明的产品。(<del>我也不知道这样举例合不合理，意思到位就行</del>)</strong></p>
+<p><strong>因为 bin 文件没有地址信息，而 hex 文件带了地址信息，所以实际上我们使用烧录软件 (J-Flash.exe) 是这样的:</strong></p>
+<blockquote>
+<p>导入 .bin 时，因为没有地址信息，所以我们需要为它指定烧写的起始地址</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/00.jpg"></p>
+</blockquote>
+<blockquote>
+<p>导入 .hex 时，因为包含了地址信息，所以我们不需要指定起始地址，烧录工具会自动读取要烧录的地址</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/01.jpg"></p>
+</blockquote>
+<hr>
+<h3 id="bin-文件"><a href="#bin-文件" class="headerlink" title="bin 文件"></a><em><strong>bin 文件</strong></em></h3><p>上面已经说了 bin 文件起始不包含地址信息，所以 bin 文件只是单纯的二进制文件，是没有格式的程序文件，只是包含了程序数据。我们看到烧录到单片机的是 .hex 文件，但是实际上，烧录软件会帮我们将 hex 文件的地址解析提取，最后还是烧录的 .bin 文件</p>
+<p><strong>下面这张图可以看出，J-Flash 解析 test.hex 地址信息后，实际上要烧录的还是 test.bin 的内容：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/02.jpg"></p>
+<hr>
+<h3 id="hex-文件"><a href="#hex-文件" class="headerlink" title="hex 文件"></a><em><strong>hex 文件</strong></em></h3><blockquote>
+<p>Hex 是由 Intel 制定的一种十六进制标准文件格式，是由编译器转换而成的一种用于下载到处理器里面的文件。</p>
+<p>Hex 文件格式是由一行一行的十六进制数据组成，每行包含：开始、长度、数据、类型、校验和等重要信息。</p>
+</blockquote>
+<p><strong>一般 Hex 文件的记录格式如下:</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Record mark</th>
+<th align="center">Length</th>
+<th align="center">Load offset</th>
+<th align="center">Record type</th>
+<th align="center">Info or Data</th>
+<th align="center">Chksum</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">冒号</td>
+<td align="center">byte(1)</td>
+<td align="center">byte(2~3)</td>
+<td align="center">byte(4)</td>
+<td align="center">byte(5~n)</td>
+<td align="center">byte(n+1)</td>
+</tr>
+<tr>
+<td align="center">:</td>
+<td align="center">数据长度</td>
+<td align="center">起始地址</td>
+<td align="center">数据类型</td>
+<td align="center">数据</td>
+<td align="center">校验和</td>
+</tr>
+</tbody></table>
+<blockquote>
+<ul>
+<li><strong>Record mark：标记头(数据头)</strong></li>
+<li><strong>Length：表示本行的数据长度(Info or Data)</strong></li>
+<li><strong>Load offset：表示本行数据的起始地址</strong></li>
+<li><strong>Record type：数据类型，共分：</strong><blockquote>
+<p>0x00 - Data Rrecord，数据记录<br>0x01 - End of FileRecord，用来标识文件结束，放在文件的最后，标识HEX文件的结尾<br>0x02 - Extended Segment Address Record，用来标识扩展段地址的记录，扩展段地址记录(HEX86)，它包含4~19位数据地址段。由于普通的 Intel 的 HEX 记录文件只能记录 64K 的地址范围，所以大于 64K 的地址数据要靠扩展段地址记录<br>0x03 - Start Segment Address Record，开始段地址记录<br>0x04 - Extended Linear Address Record，用来标识扩展线性地址的记录，扩展线性地址记录也叫 32 位地址记录或者 HEX386 记录，这些记录包含了数据在存储器里真实地址的高 16 位。 当一个扩展线性地址记录被读取后，将一直保持有效，直到它被另一个扩展地址记录改变。因为它记录的是后面数据在存储器里存放的真实起始地址，所以它的起始地址偏移量 (Load offset) 总是 0000<br>0x05 - Start Linear Address Record，开始线性地址记录</p>
+</blockquote>
+</li>
+<li><strong>Info or Data：数据代表一个字节的数据，一个记录可以有许多数据字节，数据字节数量应等于 Length</strong></li>
+<li><strong>Chksum：一个字节，先将此字节前所有字节相加得到 sum，校验和&#x3D;(0x100-sum &amp; 0xFF) &amp; 0xFF</strong></li>
+</ul>
+</blockquote>
+<p>说了这么多，还是来实际验证一下，这里我贴出了test.hex的前3行和后3行，中间的其他内容省略：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">:020000040002F8</span><br><span class="line">:1060000070F60320A1640200A96402008D640200FE</span><br><span class="line">:10601000AD640200AF640200B16402000000000041</span><br><span class="line">...(略n行)</span><br><span class="line">:0CA2F000FFBF915A010401789495F0051D</span><br><span class="line">:040000050002620192</span><br><span class="line">:00000001FF</span><br></pre></td></tr></table></figure>
+
+<p><code>:02|0000|04|0002|F8(头):</code></p>
+<ul>
+<li>02 - 本行数据长度为 2</li>
+<li>0000 - 本行数据起始地址偏移为 0x0000</li>
+<li>04 - 数据类型是标识扩展线性地址的记录</li>
+<li>0002 - 本行 2 个数据为0x00和0x02，(这里 0x0002&lt;&lt;16&#x3D;0x00020000，为基地址)</li>
+<li>F8 - 校验和&#x3D;0x100-(0x02+0x00+0x00+0x04+0x00+0x02)&amp;0xFF&#x3D;0xF8</li>
+</ul>
+<p><code>:10|6000|00|70F60320A1640200A96402008D640200|FE</code></p>
+<ul>
+<li>10 - 本行数据长度为16</li>
+<li>6000 - 本行数据起始地址偏移为0x6000，所以这里记录的地址是0x000020000+0x6000&#x3D;0x00026000(这个可以看上面J-Flash，test.hex的起始地址刚好是0x26000)</li>
+<li>00 - 数据类型是标识扩展线性地址的记录</li>
+<li>70F60320A1640200A96402008D640200 - 本行16个数据为0x70,0xF6…..0x02,0x00</li>
+<li>FE - 校验和&#x3D;0x100-(0x10+0x60+0x00…+0x02+0x00)&amp;0xFF&#x3D;0xFE</li>
+</ul>
+<p><code>:00|0000|01|FF(尾)</code>:</p>
+<ul>
+<li>00 - 本行数据长度为0</li>
+<li>0000 - 本行数据起始地址偏移为0x0000</li>
+<li>01 - 数据类型是标识文件结束</li>
+<li>FF - 校验和&#x3D;0x100-(0x00+0x00+0x00+0x01)&amp;0xFF&#x3D;0xFF</li>
+</ul>
+<p><strong>从上面这些可以验证出，hex 文件确实保存了 bin 文件的地址信息</strong></p>
+<p>实际上 hex 文件会大于 2 倍的 bin 文件大小的，bin 文件一个 byte 在 hex 文件中用 Ascill 编码则需要用两个字符来表示一个字节，而且 hex 又包括了其他信息，所以一般 <strong>hex &gt; 2bin</strong>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/03.jpg"></p>
+<hr>
+<h3 id="axf-文件"><a href="#axf-文件" class="headerlink" title="axf 文件"></a><em><strong>axf 文件</strong></em></h3><p><strong>axf,全称 ARM Executable File，它是由 ARM 编译器产生，除了包含 bin 的内容之外，还附加其他调试信息，这些调试信息加在可执行的二进制数据之前。调试时这些调试信息不会下载到 RAM 中，真正下载到 RAM 中的信息仅仅是可执行代码。</strong></p>
+<blockquote>
+<p>调试信息作用：</p>
+<blockquote>
+<ol>
+<li>可将源代码包括注释夹在反汇编代码中，这样我们可随时切换到源代码中进行调试</li>
+<li>我们还可以对程序中的函数调用情况进行跟踪(Keil可以通过Watch &amp; Call Stack Window查看)</li>
+<li>对变量进行跟踪(Keil可以通过Watch &amp; Call Stack Window查看)</li>
+</ol>
+</blockquote>
+</blockquote>
+<h3 id="axf-文件转-bin-文件"><a href="#axf-文件转-bin-文件" class="headerlink" title="axf 文件转 bin 文件"></a><em><strong>axf 文件转 bin 文件</strong></em></h3><h4 id="fromelf-格式"><a href="#fromelf-格式" class="headerlink" title="fromelf 格式"></a><em><strong>fromelf 格式</strong></em></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">fromelf [options] input_file  (命令的格式)</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">       --help         display this help screen (显示帮助信息)</span><br><span class="line">       --vsn          display version information (显示版本信息)</span><br><span class="line">       --output file  the output file. (defaults to stdout for -text format) (输出文件(默认的输出为文本格式))</span><br><span class="line">       --nodebug      do not put debug areas in the output image (在生成的映象中不包含调试信息)</span><br><span class="line">       --nolinkview   do not put sections in the output image (在生成的映象中不包含段的信息)</span><br><span class="line"></span><br><span class="line">Binary Output Formats:</span><br><span class="line">       --bin          Plain Binary (生成Plain Binary格式的文件)</span><br><span class="line">       --m32          Motorola 32 bit Hex (生成Motorola 32位十六进制格式的文件)</span><br><span class="line">       --i32          Intel 32 bit Hex (生成Intel 32位十六进制格式的文件)</span><br><span class="line">       --vhx          Byte Oriented Hex format (面向字节的位十六进制格式的文件t)</span><br><span class="line"></span><br><span class="line">       --base addr    Optionally set base address for m32,i32 (设置m32，i32格式文件的基地址)</span><br><span class="line"></span><br><span class="line">Output Formats Requiring Debug Information (需要调试信息的格式)</span><br><span class="line">       --fieldoffsets Assembly Language Description of Structures/Classes (结构/类的汇编语言描述)</span><br><span class="line">       --expandarrays Arrays inside and outside structures are expanded (扩展数组内部和外部结构被扩展)</span><br><span class="line"></span><br><span class="line">Other Output Formats:</span><br><span class="line">       --elf         ELF</span><br><span class="line">       --text        Text Information (显示文本信息)</span><br><span class="line"></span><br><span class="line">                Flags for Text Information</span><br><span class="line">                -v          verbose (打印详细信息)</span><br><span class="line">                -a          print data addresses (For images built with debug) (打印数据地址(针对带调试信息的映象))</span><br><span class="line">                -c          disassemble code (打印反汇编代码)</span><br><span class="line">                -d          print contents of data section (打印数据段的内容)</span><br><span class="line">                -e          print exception tables (打印表达式表)</span><br><span class="line">                -g          print debug tables (打印调试表)</span><br><span class="line">                -r          print relocation information (打印重定位信息)</span><br><span class="line">                -s          print symbol table (打印字符表)</span><br><span class="line">                -t          print string table (打印字符串表)</span><br><span class="line">                -y          print dynamic segment contents (打印动态段的内容)</span><br><span class="line">                -z          print code and data size information (打印代码和数据大小的信息)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="将-axf-文件转-bin-文件"><a href="#将-axf-文件转-bin-文件" class="headerlink" title="将 axf 文件转 bin 文件"></a><em><strong>将 axf 文件转 bin 文件</strong></em></h4><p>在 Keil 的安装目录下，我的装在了 C 盘，在 <code>C:\Keil_v5\ARM\ARMCC\bin</code> 中，可以找到 <code>fromelf.exe</code> 这个可执行文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/04.jpg"></p>
+<p>使用命令行工具，例如 win10 自带的或者 git 等，这里考虑大家不一定有其他命令行工具，所以直接用 win10 自带的命令行。</p>
+<p><code>win+R</code> 打开运行，输入 <code>cmd</code> 打开运行,进入 <code>fromelf.exe</code> 路径</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/05.png"></p>
+<p>这里我将要转化的文件放在 <code> F 盘 test 文件夹中</code>，</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/06.jpg"></p>
+<p>命令格式为:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[fromelf.exe文件路径] --bin -o [BIN路径] [AXF文件路径]</span><br></pre></td></tr></table></figure>
+<p>命令行输入:</p>
+<blockquote>
+<p>fromelf.exe –bin -o F:\test\test_bin_out.bin F:\test\test.axf</p>
+</blockquote>
+<p>可以看到在输出目录 F:\test 中，将 axf 文件转化生成为了 bin 文件，并且输出的 bin 文件和 keil 生成 bin 文件大小一致，说明是相同的文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/07.jpg"></p>
+<h3 id="hex-文件和bin文件相互转换"><a href="#hex-文件和bin文件相互转换" class="headerlink" title="hex 文件和bin文件相互转换"></a><em><strong>hex 文件和bin文件相互转换</strong></em></h3><h4 id="srecord-软件"><a href="#srecord-软件" class="headerlink" title="srecord 软件"></a><em><strong>srecord 软件</strong></em></h4><p>在找软件时，在Keil官网看到 <a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.keil.com/download/docs/4.asp">BINARY to Motorola S-Record Converter Utility</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/08.jpg"></p>
+<blockquote>
+<p>翻译一下： srec_cat.exe 应用程序是 HEX2BIN，BIN2HEX，BIN2MOT 和 MOT2BIN 的绝佳替代品，用途更广泛。该工具是在 sourceforge.net 上托管的 SRecord 项目的一部分。您可以从 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://sourceforge.net/projects/srecord/files/srecord-win32">https://sourceforge.net/projects/srecord/files/srecord-win32</a> 下载。</p>
+</blockquote>
+<p>后面我就下载下来研究了一下，发现可以替代 hex2bin 和 bin2hex，所以直接拿来使用。</p>
+<h4 id="hex-转-bin"><a href="#hex-转-bin" class="headerlink" title="hex 转 bin"></a><em><strong>hex 转 bin</strong></em></h4><p>命令：</p>
+<blockquote>
+<p>srec_cat.exe *.hex -intel -offset -0x00000 -o *.bin -binary</p>
+<blockquote>
+<p>*.hex指定要转换的hex文件<br>*.bin指定要输出的文件名<br>-offset -0x00000这个指定偏移要根据工程指定来</p>
+</blockquote>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/09.jpg"></p>
+<p>这里我的偏移是0x26000，所以我输入的命令是：</p>
+<blockquote>
+<p>srec_cat.exe test.hex -intel -offset -0x26000 -o test_out.bin -binary</p>
+</blockquote>
+<p>上面转 axf 时，已经有了 test 文件，这里我把 srec_cat.exe 放在了 F:&#x2F;test1&#x2F;srecord 中，并且把要转换的 test.hex 文件放在了 srecord 文件夹中</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/10.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/11.jpg"></p>
+<p><code>可以看到生成的 test_out.bin 和 keil 生成的 test.bin 文件大小一致。</code></p>
+<h4 id="bin-转-hex"><a href="#bin-转-hex" class="headerlink" title="bin 转 hex"></a><em><strong>bin 转 hex</strong></em></h4><p>参考<a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.keil.com/support/docs/2217.htm">Sorting Intel HEX Files</a>，这里我的命令是：</p>
+<blockquote>
+<p>srec_cat.exe test_out.bin -Binary -o test_hex_out.hex -intel -Output-Block-Size&#x3D;16 -Disable_Sequence_Warnings</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/12.jpg"></p>
+<p>这里实际上和 keil 生的 hex 文件有稍稍区别，因为我试了多种方式，都没有办法和 Keil 生成文件一样，虽然 binw 文件存储的数据一样，但是 crc 及偏移还是稍微有区别，</p>
+<p><code>图左边是生成的hex文件，图右边是原先的hex文件</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/13.jpg"></p>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a><em><strong>map</strong></em></h2><h3 id="map-文件"><a href="#map-文件" class="headerlink" title="map 文件"></a><em><strong>map 文件</strong></em></h3><p><strong>map文件是我们通过编译器编译生成的映射文件，map文件包含了五个部分：</strong></p>
+<blockquote>
+<p>A. Section Cross References(模块、段的交叉引用关系)<br>B. Removing Unused input sections from the image(移除未使用的段)<br>C. Image Symbol Table(映射符号表，列出了各个段所存储的对应地址)<br>D. Memory Map of the image(内存(映射)分布)<br>E. Image component sizes(映像组成大小)</p>
+</blockquote>
+<p><strong>这里也提一下关于map的基本概念</strong></p>
+<blockquote>
+<p>section(段)：描述映像文件的代码和数据块<br>RO：Read-Only的缩写，包括RO-data(只读数据)和RO-code(代码)<br>RW：Read-Write的缩写，主要是RW-data，Rw-data由程序初始化初始值<br>ZI：Zero-initialized的缩写，主要是ZI-data，由编程器初始化为0<br>.text：与RO-code同义<br>.constdata：与RO-data同义<br>.bss：与ZI-data同义，通常是指存放未初始化的全局变量的区域<br>.data：与RW-data同义</p>
+</blockquote>
+<p>在Keil中，我们在 <code>Project -&gt; Options for Target -&gt; Listing</code> 中可以看到我们生成的map中链接的内容，</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/14.jpg"></p>
+<p>它包含了:</p>
+<blockquote>
+<ul>
+<li>Memory Map：内存映射</li>
+<li>Callgraph：图像映射</li>
+<li>Symbols：符号</li>
+<li>Cross Reference：交叉引用</li>
+<li>Size Info：大小信息</li>
+<li>Totals Info：统计信息</li>
+<li>Unused Section Info：未调用模块(段)信息</li>
+<li>Veneers Info：装饰信息</li>
+</ul>
+</blockquote>
+<h3 id="Section-Cross-References"><a href="#Section-Cross-References" class="headerlink" title="Section Cross References"></a><em><strong>Section Cross References</strong></em></h3><p><strong>模块、段的交叉引用关系:这里主要是各个源文件之间生成的模块、段之间相互引用的关系。</strong></p>
+<p>这里我随便找了个简单的LED延时闪灯程序，编译后打开生成的 map 文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/15.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/16.jpg"></p>
+<p>这里指出了 test.c 中模块调用其他模块之间的关系：</p>
+<blockquote>
+<p>test.o(i.main) refers to sys.o(i.Stm32_Clock_Init) for Stm32_Clock_Init<br>test.o(i.main) refers to delay.o(i.delay_init) for delay_init<br>test.o(i.main) refers to led.o(i.LED_Init) for LED_Init<br>test.o(i.main) refers to delay.o(i.delay_ms) for delay_ms</p>
+</blockquote>
+<p><strong>因为我的 main 写在 test.c 中，所以 test.c 中因为 main 函数调用了 sys.c 中的 Stm32_Clock_Init 函数、调用了 delay.c 中的 delay_init 函数和 delay_ms 函数、调用了 led.c 的 LED_Init 函数，所以， 生成的 map 中 Section Cross References 指出了之前的相互引用关系。</strong></p>
+<h3 id="Removing-Unused-input-sections-from-the-image"><a href="#Removing-Unused-input-sections-from-the-image" class="headerlink" title="Removing Unused input sections from the image"></a><em><strong>Removing Unused input sections from the image</strong></em></h3><p><strong>移除未使用的段：这个是我们工程中没有被调用的模块，会被编译器移除并标识出来。</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/17.jpg"></p>
+<p>图里列出了被移除的模块信息，例如</p>
+<blockquote>
+<p>Removing delay.o(i.delay_us), (60 bytes).<br>Removing usart.o(i.uart_init), (220 bytes).<br>13 unused section(s) (total 786 bytes) removed from the image.</p>
+</blockquote>
+<p><strong>从上面 main 函数的执行中，可以看出我没有调用 delay_us 和 uart_init 串口的初始化函数，所以编译器把他们找出来并移除，共 13 个段没有被调用，大小为 786 字节。</strong></p>
+<h3 id="Image-Symbol-Table"><a href="#Image-Symbol-Table" class="headerlink" title="Image Symbol Table"></a><em><strong>Image Symbol Table</strong></em></h3><p><strong>映射符号表，列出了各个段所存储的对应地址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">Image Symbol Table</span><br><span class="line"></span><br><span class="line">    Local Symbols</span><br><span class="line"></span><br><span class="line">    Symbol Name                              Value     Ov Type        Size  Object(Section)</span><br><span class="line"></span><br><span class="line">    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE</span><br><span class="line">    ....</span><br><span class="line">    ..\Project\LED\led.c                     0x00000000   Number         0  led.o ABSOLUTE</span><br><span class="line">    ..\SYSTEM\delay\delay.c                  0x00000000   Number         0  delay.o ABSOLUTE</span><br><span class="line">    ..\SYSTEM\sys\sys.c                      0x00000000   Number         0  sys.o ABSOLUTE</span><br><span class="line">    ..\SYSTEM\usart\usart.c                  0x00000000   Number         0  usart.o ABSOLUTE</span><br><span class="line">    ..\\SYSTEM\\sys\\sys.c                   0x00000000   Number         0  sys.o ABSOLUTE</span><br><span class="line">    ....</span><br><span class="line">    RESET                                    0x08000000   Section      304  startup_stm32f10x_hd.o(RESET)</span><br><span class="line">    !!!main                                  0x08000130   Section        8  __main.o(!!!main)</span><br><span class="line">    ....</span><br><span class="line">    fac_us                                   0x20000000   Data           1  delay.o(.data)</span><br><span class="line">    fac_ms                                   0x20000002   Data           2  delay.o(.data)</span><br><span class="line"></span><br><span class="line">    Global Symbols</span><br><span class="line"></span><br><span class="line">    Symbol Name                              Value     Ov Type        Size  Object(Section)</span><br><span class="line">    ....</span><br><span class="line">    ....</span><br><span class="line">    delay_init                               0x08000455   Thumb Code    56  delay.o(i.delay_init)</span><br><span class="line">    delay_ms                                 0x08000495   Thumb Code    56  delay.o(i.delay_ms)</span><br><span class="line">    main                                     0x080004d1   Thumb Code   114  test.o(i.main)</span><br><span class="line">    LED_Init                                 0x08000269   Thumb Code    74  led.o(i.LED_Init)</span><br><span class="line">    USART_RX_STA                             0x20000008   Data           2  usart.o(.data)</span><br><span class="line">    USART_RX_BUF                             0x2000000c   Data         200  usart.o(.bss)</span><br></pre></td></tr></table></figure>
+
+<p>这里我截取了一些 map 文件中 Image Symbol Table 的内容出来分析</p>
+<h3 id="Symbol-分为两类"><a href="#Symbol-分为两类" class="headerlink" title="Symbol 分为两类"></a><em><strong>Symbol 分为两类</strong></em></h3><blockquote>
+<p>Local Symbols(局部)<br>局部就是在函数内部用 static 声明的变量，还有用 static 声明的函数，基本上都是属于局部，汇编文件里面的变量如果作用域是本文件的就是局部。</p>
+</blockquote>
+<blockquote>
+<p>Global Symbols(全局)<br>全局就是不是用 static 声明的变量和函数，是 auto 声明的全局变量和 C 文件函数就属于全局。汇编文件里面作用域是全工程的就是全局。</p>
+</blockquote>
+<h3 id="Symbol-符号名称"><a href="#Symbol-符号名称" class="headerlink" title="Symbol 符号名称"></a><em><strong>Symbol 符号名称</strong></em></h3><blockquote>
+<p>Symbol Name:符号名</p>
+<p>Value:存储对应的地址</p>
+<blockquote>
+<p>0x0800xxxx：指存储在 flash 中的代码和变量等<br>0x2000xxxx：指存储在 RAM 中的变量 Data 等</p>
+</blockquote>
+<p>Ov Type:符号类型</p>
+<blockquote>
+<p>Number、Section、Thumb Code、Data等</p>
+</blockquote>
+<p>Size:大小,指当前Symbol占用的大小</p>
+<p>Object(Section):段目标,指当前段所在的模块及源文件</p>
+</blockquote>
+<h3 id="Memory-Map-of-the-image"><a href="#Memory-Map-of-the-image" class="headerlink" title="Memory Map of the image"></a><em><strong>Memory Map of the image</strong></em></h3><p><strong>内存(映射)分布：映像文件可以分为加载域（Load Region）和运行域（Execution Region）：加载域反映了ARM可执行映像文件的各个段存放在存储器中的位置关系</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Memory Map of the image</span><br><span class="line"></span><br><span class="line">  Image Entry point : 0x08000131</span><br><span class="line"></span><br><span class="line">  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00000578, Max: 0x00080000, ABSOLUTE)</span><br><span class="line"></span><br><span class="line">    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x0000056c, Max: 0x00080000, ABSOLUTE)</span><br><span class="line"></span><br><span class="line">    Base Addr    Size         Type   Attr      Idx    E Section Name        Object</span><br><span class="line"></span><br><span class="line">    0x08000000   0x00000130   Data   RO            3    RESET               startup_stm32f10x_hd.o</span><br><span class="line">    0x08000130   0x00000008   Code   RO          213  * !!!main             c_w.l(__main.o)</span><br><span class="line">    ....</span><br><span class="line">    ....</span><br><span class="line">    </span><br><span class="line">    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00000538, Max: 0x00010000, ABSOLUTE)</span><br><span class="line"></span><br><span class="line">    Base Addr    Size         Type   Attr      Idx    E Section Name        Object</span><br><span class="line"></span><br><span class="line">    0x20000000   0x00000004   Data   RW           49    .data               delay.o</span><br><span class="line">    0x20000004   0x00000006   Data   RW          159    .data               usart.o</span><br><span class="line">    ....</span><br><span class="line">    ....</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Image Entry point : 0x08000131:指映射入口地址。</p>
+<p>Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00000578, Max: 0x00080000, ABSOLUTE):指加载域 LR_IROM1 起始地址为 0x08000000，大小是 0x00000578,加载域最大大小为 0x00080000</p>
+<p>Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x0000056c, Max: 0x00080000, ABSOLUTE)</p>
+<p>Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00000538, Max: 0x00010000, ABSOLUTE)</p>
+<p>运行域 ER_IROM1 起始地址 0x08000000，大小是 0x0000056c,加载域最大大小为 0x00080000</p>
+<p>运行域 RW_IRAM1 起始地址 0x20000000，大小是 0x00000538,加载域最大大小为 0x00010000</p>
+</blockquote>
+<p>对应Keil中设定的IROM1和IRAM1：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20201230/18.jpg"></p>
+<h3 id="Image-component-sizes"><a href="#Image-component-sizes" class="headerlink" title="Image component sizes"></a><em><strong>Image component sizes</strong></em></h3><p><strong>映像组成大小：各个映像模块在各个文件中的代码大小，主要就是对模块进行汇总存储大小信息</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Image component sizes</span><br><span class="line"></span><br><span class="line">      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name</span><br><span class="line"></span><br><span class="line">       124         12          0          4          0       1196   delay.o</span><br><span class="line">        84         10          0          0          0        435   led.o</span><br><span class="line">    ....</span><br><span class="line">    ....</span><br><span class="line">==============================================================================</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   </span><br><span class="line"></span><br><span class="line">      1052        108        336         12       1324     215049   Grand Totals</span><br><span class="line">      1052        108        336         12       1324     215049   ELF Image Totals</span><br><span class="line">      1052        108        336         12          0          0   ROM Totals</span><br><span class="line"></span><br><span class="line">==============================================================================</span><br><span class="line"></span><br><span class="line">    Total RO  Size (Code + RO Data)                 1388 (   1.36kB)</span><br><span class="line">    Total RW  Size (RW Data + ZI Data)              1336 (   1.30kB)</span><br><span class="line">    Total ROM Size (Code + RO Data + RW Data)       1400 (   1.37kB)</span><br><span class="line"></span><br><span class="line">==============================================================================</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">Code</th>
+<th align="center">RO Data</th>
+<th align="center">RW Data</th>
+<th align="center">ZI Data</th>
+<th align="center">Debug</th>
+<th align="center">Object Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">指代码的大小</td>
+<td align="center">指除了内联数据之外的常量数据</td>
+<td align="center">指可读写、已初始化的变量数据</td>
+<td align="center">指未初始化的变量数据</td>
+<td align="center">显示调试数据占用了多少字节</td>
+<td align="center">目标名</td>
+</tr>
+</tbody></table>
+<p><strong>Total RW  Size (RW Data + ZI Data)              1336 (   1.30kB)：是我们程序RAM所占的字节总数，</strong></p>
+<p><strong>Total ROM Size (Code + RO Data + RW Data)       1400 (   1.37kB):是我们程序ROM所占的字节总数，也就是我们程序所下载到ROM Flash中的大小。</strong></p>
+<h2 id="结"><a href="#结" class="headerlink" title="结"></a>结</h2><p><strong>写的可能有点乱，因为我晚上才有空整理这些，上面这些是花了好几个晚上才整理出来，所以有点乱也希望大家理解。有什么错误也希望能在留言处指出，我会及时修改的！</strong></p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">nixgnauhcuy</div><div class="post-copyright__author_desc">Life-long learning</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://www.nixgnauhcuy.cn/05d8ba34e313/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://www.nixgnauhcuy.cn/05d8ba34e313/')">关于嵌入式的bin、hex、axf、map</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://www.nixgnauhcuy.cn/05d8ba34e313/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=undefined&amp;url=https://www.nixgnauhcuy.cn/05d8ba34e313/&amp;pic=undefined" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.nixgnauhcuy.cn" target="_blank">nixgnauhcuy</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>嵌入式<span class="tagsPageCount">21</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231027/cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/db7aa6742c0a/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/03.jpg?_r_=055c1314-9732-f2c2-17c7-5ed72569d18c" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【踩坑】修改头文件 stdint.h</div></div></a></div><div class="next-post pull-right"><a href="/df5996b70de7/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/02.png?_r_=493817c4-dd82-0edf-ad34-a422d928c8c6" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">PADS9.5 安装及破解</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/f4985376a128/" title="CC2640 仿真烧录方式"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231019/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-19</div><div class="title">CC2640 仿真烧录方式</div></div></a></div><div><a href="/8159bca7abcd/" title="CC2640 OAD 生产烧录单文件实现"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231020/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-20</div><div class="title">CC2640 OAD 生产烧录单文件实现</div></div></a></div><div><a href="/fab2071f499b/" title="ESP32-C3 开发环境搭建"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231027/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-26</div><div class="title">ESP32-C3 开发环境搭建</div></div></a></div><div><a href="/c12055e6ecf6/" title="Nand Flash 和 Nor Flash 详解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/01.jpg?_r_=d0cf07ca-561d-3607-7084-d21db2ae4bc3" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-01-11</div><div class="title">Nand Flash 和 Nor Flash 详解</div></div></a></div><div><a href="/df5996b70de7/" title="PADS9.5 安装及破解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/02.png?_r_=493817c4-dd82-0edf-ad34-a422d928c8c6" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-01-04</div><div class="title">PADS9.5 安装及破解</div></div></a></div><div><a href="/031a4fb624db/" title="imx6ull lvgl 移植"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231025/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-25</div><div class="title">imx6ull lvgl 移植</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">分享一些<b style="color:#fff">学习经验</b>以及一些<b style="color:#fff">杂七杂八的内容</b>。</div><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">相信你可以在这里找到对你有用的<b style="color:#fff">知识</b>和<b style="color:#fff">教程</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><h1 class="author-info__name">nixgnauhcuy</h1><div class="author-info__desc">Life-long learning</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/nixgnauhcuy" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">佛系更新博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/wechat.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bin%E3%80%81hex%E3%80%81axf"><span class="toc-number">2.</span> <span class="toc-text">bin、hex、axf</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bin%E3%80%81hex%E3%80%81axf-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.1.</span> <span class="toc-text">bin、hex、axf 之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bin-%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">bin 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hex-%E6%96%87%E4%BB%B6"><span class="toc-number">2.3.</span> <span class="toc-text">hex 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#axf-%E6%96%87%E4%BB%B6"><span class="toc-number">2.4.</span> <span class="toc-text">axf 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#axf-%E6%96%87%E4%BB%B6%E8%BD%AC-bin-%E6%96%87%E4%BB%B6"><span class="toc-number">2.5.</span> <span class="toc-text">axf 文件转 bin 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#fromelf-%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.5.1.</span> <span class="toc-text">fromelf 格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%86-axf-%E6%96%87%E4%BB%B6%E8%BD%AC-bin-%E6%96%87%E4%BB%B6"><span class="toc-number">2.5.2.</span> <span class="toc-text">将 axf 文件转 bin 文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hex-%E6%96%87%E4%BB%B6%E5%92%8Cbin%E6%96%87%E4%BB%B6%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.6.</span> <span class="toc-text">hex 文件和bin文件相互转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#srecord-%E8%BD%AF%E4%BB%B6"><span class="toc-number">2.6.1.</span> <span class="toc-text">srecord 软件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hex-%E8%BD%AC-bin"><span class="toc-number">2.6.2.</span> <span class="toc-text">hex 转 bin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bin-%E8%BD%AC-hex"><span class="toc-number">2.6.3.</span> <span class="toc-text">bin 转 hex</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#map"><span class="toc-number">3.</span> <span class="toc-text">map</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#map-%E6%96%87%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">map 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Section-Cross-References"><span class="toc-number">3.2.</span> <span class="toc-text">Section Cross References</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Removing-Unused-input-sections-from-the-image"><span class="toc-number">3.3.</span> <span class="toc-text">Removing Unused input sections from the image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Image-Symbol-Table"><span class="toc-number">3.4.</span> <span class="toc-text">Image Symbol Table</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Symbol-%E5%88%86%E4%B8%BA%E4%B8%A4%E7%B1%BB"><span class="toc-number">3.5.</span> <span class="toc-text">Symbol 分为两类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Symbol-%E7%AC%A6%E5%8F%B7%E5%90%8D%E7%A7%B0"><span class="toc-number">3.6.</span> <span class="toc-text">Symbol 符号名称</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory-Map-of-the-image"><span class="toc-number">3.7.</span> <span class="toc-text">Memory Map of the image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Image-component-sizes"><span class="toc-number">3.8.</span> <span class="toc-text">Image component sizes</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">结</span></a></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By nixgnauhcuy</div><div id="workboard"><div id="runtimeTextTip"></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">11</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" rel="external nofollow noreferrer" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.cbd.int/instant.page/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("11/28/2020 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.8",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 nixgnauhcuy 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("11/28/2020 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = async () => {
+    try {
+      const res = await fetch('https://waline-two.vercel.app/api/comment?type=recent&count=6', { method: 'GET' })
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray)
+    } catch (err) {
+      console.error(err)
+      const $dom = document.querySelector('#card-newest-comments .aside-list')
+      $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('waline-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static/icon/ali_iconfont_css.css"><script src="https://cdn.cbd.int/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'G-2VWCFFF041', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

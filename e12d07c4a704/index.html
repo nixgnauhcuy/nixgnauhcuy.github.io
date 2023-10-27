@@ -1,0 +1,652 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>编码命名风格 | nixgnauhcuy</title><meta name="keywords" content="风格,编码,编程风格,代码风格"><meta name="author" content="nixgnauhcuy"><meta name="copyright" content="nixgnauhcuy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="编码命名风格"><meta name="application-name" content="编码命名风格"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="编码命名风格"><meta property="og:url" content="https://www.nixgnauhcuy.cn/e12d07c4a704/index.html"><meta property="og:site_name" content="nixgnauhcuy"><meta property="og:description" content="编码命名风格是指在编写代码时使用的变量、函数、类和文件名等标识符的规则和标准。良好的命名风格可以提高代码的可读性、可维护性和可重用性，减少错误和调试时间。在本文中，我们将讨论一些常见的命名风格，例如驼峰命名法、蛇形命名法和匈牙利命名法，以及它们的优缺点和最佳实践。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20230301/cover.png"><meta property="article:author" content="nixgnauhcuy"><meta property="article:tag" content="[&quot;blog&quot;,&quot;博客&quot;,&quot;技术&quot;,&quot;个人&quot;,&quot;学习&quot;,&quot;教程&quot;]"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20230301/cover.png"><meta name="description" content="编码命名风格是指在编写代码时使用的变量、函数、类和文件名等标识符的规则和标准。良好的命名风格可以提高代码的可读性、可维护性和可重用性，减少错误和调试时间。在本文中，我们将讨论一些常见的命名风格，例如驼峰命名法、蛇形命名法和匈牙利命名法，以及它们的优缺点和最佳实践。"><link rel="shortcut icon" href="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/favicon.png"><link rel="canonical" href="https://www.nixgnauhcuy.cn/e12d07c4a704/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><meta name="google-site-verification" content="T9L_T3an8pckM0Sc0wa17RoeF1zsROoZJdv4B9ltUJM"/><meta name="baidu-site-verification" content="codeva-U5171cz6ED"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e1d8d6cf9206f44c07c598f2d8377c8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2VWCFFF041"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-2VWCFFF041');
+</script><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/people.png"},
+  postHeadAiDescription: undefined,
+  diytitle: undefined,
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":90,"position":"top","messagePrev":"注意：自上次更新以来已有","messageNext":"天，文章的内容可能已过时，如果发现错误，请留言或发送邮件告知我。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: nixgnauhcuy","link":"链接: ","source":"来源: nixgnauhcuy","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'nixgnauhcuy',
+  title: '编码命名风格',
+  postAI: '',
+  pageFillDescription: '引言, 常见的编码命名风格, 驼峰式命名法(camel case), 简介, 例子, 优缺点, 蛇形命名法(snake Case), 简介, 例子, 优缺点, 匈牙利命名法(Hungarian Notation), 简介, 例子, 优缺点, 串式命名法(kebab-case), 简介, 例子, 优缺点, 火车命名法(Train-Case), 简介, 例子, 优缺点, 最佳实践, 常见的编程命名错误, 推荐, Google 开源项目风格指南, 《代码整洁之道》引言编码命名风格是在软件开发中起着至关重要作用的一项技能一个好的命名风格可以增强代码的可读性可维护性和可重用性使得代码更加易于理解和修改在本文中我们将深入讨论常见的编码命名风格包括驼峰命名法蛇形命名法和匈牙利命名法并探讨它们的优缺点和最佳实践常见的编码命名风格驼峰式命名法简介驼峰命名法是一种常用的命名风格单词之间不以空格或连接符下划线连接主要分为大驼峰和小驼峰两种形式在大驼峰命名法也被称为命名法中每个单词的首字母都大写而在小驼峰命名法中第一个单词的首字母小写其余单词的首字母大写图片来源于图片来源于例子大驼峰命名法小驼峰命名法优缺点优点可读性由于使用了大小写混合的形式使得单词之间的边界更明显有助于代码更易于阅读和理解美观性使用驼峰命名法可以使代码看起来更加整洁和美观有助于提高代码质量和可维护性与惯例一致性驼峰命名法已经成为许多编程语言等和框架的惯例因此使用它可以使代码更符合行业标准和约定缺点长度使用驼峰命名法可能会导致变量名变得很长尤其是在包含多个单词的情况下驼峰式命名法可能使变量名变得不够易读命名冲突由于驼峰命名法中的大小写形式相同因此如果两个变量名只有大小写不同则可能会导致命名冲突不适合某些情况有时候驼峰命名法可能不适合某些特定的情况比如需要与其他系统或进行交互时可能需要使用特定的命名规范或命名方式蛇形命名法简介蛇形命名法也称为下划线命名法在蛇形命名法中单词之间或逻辑断点之间用下划线分隔例子优缺点优点可读性由于使用单词之间用下划线分隔的形式使得单词之间的边界更明显有助于代码更易于阅读和理解命名风格统一蛇形命名法在许多编程语言中都是常用的命名约定因此可以在不同的编程语言等和环境中使用而不需要进行额外的转换或重命名易于输入在编写代码时输入下划线相对于连字符或驼峰式命名法更加容易和自然缺点代码冗长由于使用下划线分隔单词因此蛇形命名法的变量名通常比其他命名约定的变量名更长美观性蛇形命名法可能会使代码看起来不够美观和整洁因为它在变量名中使用了许多下划线字符不适合网络在开发中蛇形命名法不适合用于中的类名和因为它们会影响可读性和搜索引擎优化匈牙利命名法简介匈牙利命名法是一种命名风格由在公司开发应用程序时提出它的名字匈牙利源于的出生地匈牙利在当时计算机的内存非常昂贵因此使用这种命名约定可以帮助程序员更好地管理内存减少内存浪费和数据类型错误在匈牙利命名法中前缀通常由一个或多个小写字母组成后面跟着变量名这个后半部分的首字母可以大写以区别前面的类型指示字母匈牙利命名法最初的设计目的是提高代码可读性和可维护性例子表示该变量是一个字符串类型的变量表示该变量是一个整型计数器表示该变量是一个布尔型的开关表示该变量是一个以结尾的字符串缓冲区表示该变量是一个窗口句柄表示该变量是一个指向数据的指针表示该变量是一个浮点数优缺点优点可读性匈牙利命名法使用类型前缀或其他含义相关的前缀来表示变量的含义有助于代码可读性和可维护性类型检查修改代码时通过类型前缀可以更容易地找到相应的变量并且可以轻易的对变量类型进行检查减少了在运行时发生类型错误的风险以及提高代码的可维护性防止变量重名通过加上前缀可以避免不同类型的变量同名的情况规范化使用匈牙利命名法可以使代码更加规范化因为多个开发人员可以使用相同的命名规则从而使代码更易于维护缺点代码冗长由于需要加上类型前缀变量名可能会变得很长这使得代码显得冗长而难以阅读不适用于某些场景匈牙利命名法通常不适用于面向对象的程序设计因为它难以表示对象和类之间的关系不兼容由于不同平台使用的类型前缀可能不同因此在跨平台开发时命名可能会变得混乱非强制性匈牙利命名法不是强制性的因此在一个团队中使用时可能会出现有些人使用它有些人不使用的情况这可能会导致代码混乱串式命名法简介命名法是一种命名约定它是一种使用连字符将单词连接在一起的方式来命名变量函数文件等例子优缺点优点可读性由于使用单词之间用连字符分隔的形式使得单词之间的边界更明显有助于代码更易于阅读和理解与没有分隔符的命名方式相比更易于阅读和理解因为单词之间有明显的分隔符与一致在和文件路径中广泛使用因此在开发中非常流行网络友好性在开发钟常用于中的类名和因为它们更易于阅读和缺点不易于使用由于破折号在某些编程语言中具有特殊意义因此使用变量名可能会引起一些问题特别是在使用命令行工具和脚本时代码冗长因为使用了连字符变量名通常比其他命名约定更长这可能会使代码更难以阅读和理解火车命名法简介命名法也称为是一种命名约定它是一种使用连字符将单词连接在一起的方式来命名变量函数文件等并且使用大驼峰命名法的方式首字母大写火车命名法通常用于编程语言文件命名网页等场景中可以提高可读性和可维护性例子优缺点优点可读性由于每个单词首字母大写并且单词之间用连字符分隔的形式使得单词之间的边界更明显有助于代码更易于阅读和理解可维护性好命名规范统一使得代码更易于理解和修改便于维护易于转换相对于驼峰命名法火车命名法更易于与其他命名方式进行转换例如可以将连字符替换为下划线或驼峰命名法缺点代码冗长由于使用连字符分隔单词因此火车命名法的变量名通常比其他命名约定的变量名更长变量名较长因为使用了破折号变量名通常比其他命名约定更长这可能会使代码更难以阅读和理解不适用于所有编程语言某些编程语言或系统可能不支持连字符作为命名中的一部分这可能导致在使用火车命名法时出现一些问题最佳实践选择适合自己和团队的命名约定是一种非常主观的决策不同的团队和项目可能会有不同的偏好和要求以下是一些通用的最佳实践可以帮助您选择和使用适合自己和团队的命名约定保持一致性在整个项目中使用相同的命名约定以确保代码的一致性和可读性使用有意义的名称使用能够准确反映变量函数或类目的名称使代码更容易理解和维护避免过长的名称尽量使用简短和明了的名称同时避免使用过长的名称以提高代码的可读性避免缩写尽量避免使用缩写因为缩写可能会导致代码难以理解选择流行的命名约定流行的命名约定通常在广泛使用中并且已被证明在许多项目中具有可靠性和可读性总之选择一个适合自己和团队的命名约定并不是一件容易的事情最重要的是选择一个命名约定并坚持使用它在整个项目中保持一致性和规范性可以帮助提高代码的可读性和可维护性常见的编程命名错误拼写错误拼写错误可能是最常见的错误之一如果你不小心将变量或函数名拼错了编译器将无法识别它们并给出错误提示不规范的命名不规范的命名可能会导致代码难以理解例如使用单个字母或数字作为变量名可能会让人感到困惑因为它们不清楚地描述变量的含义混淆变量名在一些情况下程序员可能会使用类似的变量名来表示不同的变量这可能会导致混淆和错误例如使用类似于和这样的变量名因为它们在某些字体中很难区分不一致的命名约定使用不一致的命名约定可能会使代码难以阅读例如有时使用下划线分隔单词有时使用驼峰命名法有时使用全大写字母等等保留字冲突如果你不小心使用保留字作为变量名编译器将无法识别它们并给出错误提示不恰当的长度变量和函数名应该既不太短也不太长如果变量名太短它们可能不足以描述其含义如果太长则可能会使代码难以阅读忘记使用标准命名规则某些编程语言有一些标准的命名规则例如中的驼峰命名法如果你忘记了这些规则可能会使代码难以阅读和维护没有使用有意义的命名变量和函数名应该有意义并能够清晰地表达它们所代表的含义如果命名没有意义代码可能会难以理解不一致的缩写如果你使用了缩写应该确保它们的使用是一致的例如如果你将缩写为那么你应该在整个代码中都使用这个缩写推荐开源项目风格指南经常会发布一些开源项目意味着会接受来自其他代码贡献者的代码但是如果代码贡献者的编程风格与的不一致会给代码阅读者和其他代码提交者造成不小的困扰因此发布了这份自己的编程风格指南使所有提交代码的人都能获知的编程风格开源项目风格指南目前已经发布了七份中文版的风格指南包括可以在上相应的跳转到对应的风格指南去代码整洁之道代码整洁之道是由编写的一本经典的软件工程书籍是软件开发者必读的一本书这本书主要讲述了如何编写清晰可读易于维护的代码作者提出了许多有用的原则和实践涵盖了代码组织命名注释测试等方面的内容书中提倡使用简单的代码结构清晰的命名精简的函数规范的注释等技术来提高代码的质量该书主要包含以下内容代码整洁的重要性及其对软件开发的影响如何命名变量函数类等如何组织代码使用类函数等基本元素以及如何避免重复代码如何编写有意义的注释以及何时应该避免注释如何编写有效的单元测试以及测试的重要性如何处理异常和错误以及如何编写可恢复的代码如何编写简洁的代码以及如何避免复杂的逻辑和表达式如何使用工具和技术来提高代码质量总的来说代码整洁之道是一本非常实用的书籍其中提出的许多原则和实践都是经过实践验证的可以帮助开发者编写更好的代码提高软件开发效率和质量如果您想要提高自己的编程技能我非常推荐这本书',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2023-03-01 10:45:45',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">nixgnauhcuy</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)" rel="external nofollow noreferrer">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AMS/" style="font-size: 1.05rem;">AMS<sup>1</sup></a><a href="/tags/ANCS/" style="font-size: 1.05rem;">ANCS<sup>1</sup></a><a href="/tags/BLE/" style="font-size: 1.05rem;">BLE<sup>2</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C<sup>3</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>3</sup></a><a href="/tags/IOS/" style="font-size: 1.05rem;">IOS<sup>2</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>1</sup></a><a href="/tags/Nand-Flash/" style="font-size: 1.05rem;">Nand Flash<sup>1</sup></a><a href="/tags/Nor-Flash/" style="font-size: 1.05rem;">Nor Flash<sup>1</sup></a><a href="/tags/keil/" style="font-size: 1.05rem;">keil<sup>3</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>7</sup></a><a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 1.05rem;">串口<sup>2</sup></a><a href="/tags/%E4%BD%8D%E5%9F%9F/" style="font-size: 1.05rem;">位域<sup>1</sup></a><a href="/tags/%E4%BD%8D%E5%AD%97%E6%AE%B5/" style="font-size: 1.05rem;">位字段<sup>1</sup></a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 1.05rem;">嵌入式<sup>21</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>5</sup></a><a href="/tags/%E6%8A%80%E5%B7%A7/" style="font-size: 1.05rem;">技巧<sup>2</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.05rem;">生活<sup>1</sup></a><a href="/tags/%E8%8B%B1%E6%96%87/" style="font-size: 1.05rem;">英文<sup>1</sup></a><a href="/tags/%E8%93%9D%E7%89%99/" style="font-size: 1.05rem;">蓝牙<sup>3</sup></a><a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 1.05rem;">踩坑<sup>2</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 1.05rem;">软件<sup>4</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">四月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">三月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/12/"><span class="card-archive-list-date">十二月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">八月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);" rel="external nofollow noreferrer"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url">嵌入式</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>嵌入式</span></a></span></div></div><h1 class="post-title" itemprop="name headline">编码命名风格</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-03-01T02:45:45.000Z" title="发表于 2023-03-01 10:45:45">2023-03-01</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2023-03-01T02:45:45.000Z" title="更新于 2023-03-01 10:45:45">2023-03-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">3.8k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为深圳"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>深圳</span></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://www.nixgnauhcuy.cn/e12d07c4a704/"><header><a class="post-meta-categories" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url">嵌入式</a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" tabindex="-1" itemprop="url">嵌入式</a><h1 id="CrawlerTitle" itemprop="name headline">编码命名风格</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">nixgnauhcuy</span><time itemprop="dateCreated datePublished" datetime="2023-03-01T02:45:45.000Z" title="发表于 2023-03-01 10:45:45">2023-03-01</time><time itemprop="dateCreated datePublished" datetime="2023-03-01T02:45:45.000Z" title="更新于 2023-03-01 10:45:45">2023-03-01</time></header><blockquote>
+<p>“There are only two hard things in Computer Science: cache invalidation and naming things.”</p>
+</blockquote>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>编码命名风格是在软件开发中起着至关重要作用的一项技能。一个好的命名风格可以增强代码的可读性、可维护性和可重用性，使得代码更加易于理解和修改。在本文中，我们将深入讨论常见的编码命名风格，包括驼峰命名法、蛇形命名法和匈牙利命名法，并探讨它们的优缺点和最佳实践。</p>
+<hr>
+<h2 id="常见的编码命名风格"><a href="#常见的编码命名风格" class="headerlink" title="常见的编码命名风格"></a>常见的编码命名风格</h2><h3 id="驼峰式命名法-camel-case"><a href="#驼峰式命名法-camel-case" class="headerlink" title="驼峰式命名法(camel case)"></a>驼峰式命名法(camel case)</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>驼峰命名法是一种常用的命名风格，单词之间不以空格或连接符 “-”、下划线 “_” 连接，主要分为大驼峰和小驼峰两种形式。</p>
+<p>在大驼峰命名法(upper camel case，也被称为 Pascal 命名法)中，每个单词的首字母都大写，而在小驼峰命名法(lower camel case)中，第一个单词的首字母小写，其余单词的首字母大写。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20230301/00.png" alt="大驼峰命名法"></p>
+<p>(图片来源于 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/wiki/%E9%A7%9D%E5%B3%B0%E5%BC%8F%E5%A4%A7%E5%B0%8F%E5%AF%AB">Wiki</a>)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20230301/01.png" alt="小驼峰命名法"></p>
+<p>(图片来源于 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://zh.wikipedia.org/wiki/%E9%A7%9D%E5%B3%B0%E5%BC%8F%E5%A4%A7%E5%B0%8F%E5%AF%AB">Wiki</a>)</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p><strong>大驼峰命名法：</strong></p>
+<ul>
+<li>FirstName</li>
+<li>UserName</li>
+<li>TmpData</li>
+</ul>
+<p><strong>小驼峰命名法：</strong></p>
+<ul>
+<li>firstName</li>
+<li>userName</li>
+<li>lowerCamelCase</li>
+</ul>
+<h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h4><p>优点：</p>
+<ul>
+<li>可读性：由于使用了大小写混合的形式，使得单词之间的边界更明显，有助于代码更易于阅读和理解。</li>
+<li>美观性：使用驼峰命名法可以使代码看起来更加整洁和美观，有助于提高代码质量和可维护性。</li>
+<li>与惯例一致性：驼峰命名法已经成为许多编程语言(C#、Java、JavaScript、PHP 等)和框架的惯例，因此使用它可以使代码更符合行业标准和约定。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>长度：使用驼峰命名法可能会导致变量名变得很长，尤其是在包含多个单词的情况下，驼峰式命名法可能使变量名变得不够易读。</li>
+<li>命名冲突：由于驼峰命名法中的大小写形式相同，因此如果两个变量名只有大小写不同，则可能会导致命名冲突。</li>
+<li>不适合某些情况：有时候，驼峰命名法可能不适合某些特定的情况，比如需要与其他系统或API进行交互时，可能需要使用特定的命名规范或命名方式。</li>
+</ul>
+<h3 id="蛇形命名法-snake-Case"><a href="#蛇形命名法-snake-Case" class="headerlink" title="蛇形命名法(snake Case)"></a>蛇形命名法(snake Case)</h3><h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p>蛇形命名法，也称为下划线命名法。在蛇形命名法中，单词之间或逻辑断点之间用下划线 “-”分隔。</p>
+<h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><ul>
+<li>first_name</li>
+<li>user_name</li>
+<li>tmp_data</li>
+</ul>
+<h4 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h4><p>优点：</p>
+<ul>
+<li>可读性：由于使用单词之间用下划线分隔的形式，使得单词之间的边界更明显，有助于代码更易于阅读和理解。</li>
+<li>命名风格统一：蛇形命名法在许多编程语言中都是常用的命名约定，因此可以在不同的编程语言(Python、Ruby、JavaScript、PHP 等)和环境中使用，而不需要进行额外的转换或重命名。</li>
+<li>易于输入：在编写代码时，输入下划线相对于连字符或驼峰式命名法更加容易和自然。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>代码冗长：由于使用下划线分隔单词，因此蛇形命名法的变量名通常比其他命名约定的变量名更长。</li>
+<li>美观性：蛇形命名法可能会使代码看起来不够美观和整洁，因为它在变量名中使用了许多下划线字符。</li>
+<li>不适合网络：在 Web 开发中，蛇形命名法不适合用于 HTML&#x2F;CSS 中的类名和 ID，因为它们会影响可读性和 SEO（搜索引擎优化）。</li>
+</ul>
+<h3 id="匈牙利命名法-Hungarian-Notation"><a href="#匈牙利命名法-Hungarian-Notation" class="headerlink" title="匈牙利命名法(Hungarian Notation)"></a>匈牙利命名法(Hungarian Notation)</h3><h4 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h4><p>匈牙利命名法是一种命名风格，由 Charles Simonyi 在 Microsoft 公司开发 Windows 应用程序时提出。它的名字“匈牙利”源于 Simonyi 的出生地匈牙利。在当时，计算机的内存非常昂贵，因此使用这种命名约定可以帮助程序员更好地管理内存，减少内存浪费和数据类型错误。在匈牙利命名法中，前缀通常由一个或多个小写字母组成，后面跟着变量名。这个后半部分的首字母可以大写，以区别前面的类型指示字母，匈牙利命名法最初的设计目的是提高代码可读性和可维护性。</p>
+<h4 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h4><ul>
+<li>strName - 表示该变量是一个字符串类型的变量</li>
+<li>iCount - 表示该变量是一个整型计数器</li>
+<li>bEnabled - 表示该变量是一个布尔型的开关</li>
+<li>szBuffer - 表示该变量是一个以 null 结尾的字符串缓冲区</li>
+<li>hWnd - 表示该变量是一个窗口句柄(handle to window)</li>
+<li>lpData - 表示该变量是一个指向数据的指针(pointer to data)</li>
+<li>fValue - 表示该变量是一个浮点数(floating-point value)</li>
+</ul>
+<h4 id="优缺点-2"><a href="#优缺点-2" class="headerlink" title="优缺点"></a>优缺点</h4><p>优点：</p>
+<ul>
+<li>可读性：匈牙利命名法使用类型前缀或其他含义相关的前缀来表示变量的含义，有助于代码可读性和可维护性。</li>
+<li>类型检查：修改代码时，通过类型前缀可以更容易地找到相应的变量，并且可以轻易的对变量类型进行检查，减少了在运行时发生类型错误的风险以及提高代码的可维护性。</li>
+<li>防止变量重名：通过加上前缀，可以避免不同类型的变量同名的情况。</li>
+<li>规范化：使用匈牙利命名法可以使代码更加规范化，因为多个开发人员可以使用相同的命名规则，从而使代码更易于维护。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>代码冗长：由于需要加上类型前缀，变量名可能会变得很长，这使得代码显得冗长而难以阅读。</li>
+<li>不适用于某些场景：匈牙利命名法通常不适用于面向对象的程序设计，因为它难以表示对象和类之间的关系。</li>
+<li>不兼容：由于不同平台使用的类型前缀可能不同，因此在跨平台开发时，命名可能会变得混乱。</li>
+<li>非强制性：匈牙利命名法不是强制性的，因此在一个团队中使用时，可能会出现有些人使用它，有些人不使用的情况，这可能会导致代码混乱。</li>
+</ul>
+<h3 id="串式命名法-kebab-case"><a href="#串式命名法-kebab-case" class="headerlink" title="串式命名法(kebab-case)"></a>串式命名法(kebab-case)</h3><h4 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h4><p>Kebab-case 命名法是一种命名约定，它是一种使用连字符 “-” 将单词连接在一起的方式来命名变量、函数、文件等。</p>
+<h4 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h4><ul>
+<li>user-name</li>
+<li>tmp-data</li>
+<li>first-name</li>
+</ul>
+<h4 id="优缺点-3"><a href="#优缺点-3" class="headerlink" title="优缺点"></a>优缺点</h4><p>优点：</p>
+<ul>
+<li>可读性：由于使用单词之间用连字符分隔的形式，使得单词之间的边界更明显，有助于代码更易于阅读和理解。</li>
+<li>与没有分隔符的命名方式相比，kebab-case 更易于阅读和理解，因为单词之间有明显的分隔符。</li>
+<li>与URL一致：kebab-case 在 URL 和文件路径中广泛使用，因此在 Web 开发中非常流行</li>
+<li>网络友好性：在 Web 开发钟，kebab-case 常用于 HTML&#x2F;CSS 中的类名和 ID，因为它们更易于阅读和 SEO。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>不易于使用：由于破折号(-)在某些编程语言中具有特殊意义，因此使用 kebab-case 变量名可能会引起一些问题，特别是在使用命令行工具和脚本时。</li>
+<li>代码冗长：因为使用了连字符 “-”，kebab-case 变量名通常比其他命名约定更长，这可能会使代码更难以阅读和理解。</li>
+</ul>
+<h3 id="火车命名法-Train-Case"><a href="#火车命名法-Train-Case" class="headerlink" title="火车命名法(Train-Case)"></a>火车命名法(Train-Case)</h3><h4 id="简介-4"><a href="#简介-4" class="headerlink" title="简介"></a>简介</h4><p>Train-Case 命名法（也称为 Pascal-Case-With-Dashes）是一种命名约定，它是一种使用连字符将单词连接在一起的方式来命名变量、函数、文件等，并且使用大驼峰命名法的方式首字母大写。火车命名法通常用于编程语言、文件命名、网页URL等场景中，可以提高可读性和可维护性。</p>
+<h4 id="例子-4"><a href="#例子-4" class="headerlink" title="例子"></a>例子</h4><ul>
+<li>User-Name</li>
+<li>Tmp-Data</li>
+<li>First-Name</li>
+</ul>
+<h4 id="优缺点-4"><a href="#优缺点-4" class="headerlink" title="优缺点"></a>优缺点</h4><p>优点：</p>
+<ul>
+<li>可读性：由于每个单词首字母大写并且单词之间用连字符分隔的形式，使得单词之间的边界更明显，有助于代码更易于阅读和理解。</li>
+<li>可维护性好：命名规范统一，使得代码更易于理解和修改，便于维护。</li>
+<li>易于转换：相对于驼峰命名法，火车命名法更易于与其他命名方式进行转换，例如可以将连字符 “-“ 替换为下划线 “_” 或驼峰命名法。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>代码冗长：由于使用连字符 “-“ 分隔单词，因此火车命名法的变量名通常比其他命名约定的变量名更长。</li>
+<li>变量名较长：因为使用了破折号 ‘-‘，kebab-case 变量名通常比其他命名约定更长，这可能会使代码更难以阅读和理解。</li>
+<li>不适用于所有编程语言：某些编程语言或系统可能不支持连字符 “-“ 作为命名中的一部分，这可能导致在使用火车命名法时出现一些问题。</li>
+</ul>
+<hr>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><p>选择适合自己和团队的命名约定是一种非常主观的决策，不同的团队和项目可能会有不同的偏好和要求。以下是一些通用的最佳实践，可以帮助您选择和使用适合自己和团队的命名约定：</p>
+<ol>
+<li>保持一致性：在整个项目中使用相同的命名约定，以确保代码的一致性和可读性。</li>
+<li>使用有意义的名称：使用能够准确反映变量、函数或类目的名称，使代码更容易理解和维护。</li>
+<li>避免过长的名称：尽量使用简短和明了的名称，同时避免使用过长的名称，以提高代码的可读性。</li>
+<li>避免缩写：尽量避免使用缩写，因为缩写可能会导致代码难以理解。</li>
+<li>选择流行的命名约定：流行的命名约定通常在广泛使用中，并且已被证明在许多项目中具有可靠性和可读性。</li>
+</ol>
+<p>总之，选择一个适合自己和团队的命名约定并不是一件容易的事情。最重要的是选择一个命名约定，并坚持使用它。在整个项目中保持一致性和规范性，可以帮助提高代码的可读性和可维护性。</p>
+<hr>
+<h2 id="常见的编程命名错误"><a href="#常见的编程命名错误" class="headerlink" title="常见的编程命名错误"></a>常见的编程命名错误</h2><ol>
+<li>拼写错误：拼写错误可能是最常见的错误之一。如果你不小心将变量或函数名拼错了，编译器将无法识别它们，并给出错误提示。</li>
+<li>不规范的命名：不规范的命名可能会导致代码难以理解。例如，使用单个字母或数字作为变量名可能会让人感到困惑，因为它们不清楚地描述变量的含义。</li>
+<li>混淆变量名：在一些情况下，程序员可能会使用类似的变量名来表示不同的变量，这可能会导致混淆和错误。例如，使用类似于 “i” 和 “l” 这样的变量名，因为它们在某些字体中很难区分。</li>
+<li>不一致的命名约定：使用不一致的命名约定可能会使代码难以阅读。例如，有时使用下划线分隔单词，有时使用驼峰命名法，有时使用全大写字母等等。</li>
+<li>保留字冲突：如果你不小心使用保留字作为变量名，编译器将无法识别它们，并给出错误提示。</li>
+<li>不恰当的长度：变量和函数名应该既不太短也不太长。如果变量名太短，它们可能不足以描述其含义，如果太长，则可能会使代码难以阅读。</li>
+<li>忘记使用标准命名规则：某些编程语言有一些标准的命名规则，例如，Java中的 “驼峰命名法”，如果你忘记了这些规则，可能会使代码难以阅读和维护。</li>
+<li>没有使用有意义的命名：变量和函数名应该有意义，并能够清晰地表达它们所代表的含义。如果命名没有意义，代码可能会难以理解。</li>
+<li>不一致的缩写：如果你使用了缩写，应该确保它们的使用是一致的。例如，如果你将 “maximum” 缩写为 “max”，那么你应该在整个代码中都使用这个缩写。</li>
+</ol>
+<hr>
+<h2 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h2><h3 id="Google-开源项目风格指南"><a href="#Google-开源项目风格指南" class="headerlink" title="Google 开源项目风格指南"></a>Google 开源项目风格指南</h3><blockquote>
+<p>Google 经常会发布一些开源项目, 意味着会接受来自其他代码贡献者的代码. 但是如果代码贡献者的编程风格与 Google 的不一致,  会给代码阅读者和其他代码提交者造成不小的困扰. Google 因此发布了这份自己的编程风格指南, 使所有提交代码的人都能获知 Google  的编程风格.</p>
+</blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/zh-google-styleguide/zh-google-styleguide">Google 开源项目风格指南</a>目前已经发布了七份中文版的风格指南，包括 C++、Objective-C、Python、JavaScript、Shell、JSON、TypeScript，可以在 Github 上，相应的跳转到对应的风格指南去。</p>
+<h3 id="《代码整洁之道》"><a href="#《代码整洁之道》" class="headerlink" title="《代码整洁之道》"></a>《代码整洁之道》</h3><p>《代码整洁之道》（Clean Code）是由 Robert C. Martin 编写的一本经典的软件工程书籍，是软件开发者必读的一本书。</p>
+<p>这本书主要讲述了如何编写清晰、可读、易于维护的代码。作者提出了许多有用的原则和实践，涵盖了代码组织、命名、注释、测试等方面的内容。书中提倡使用简单的代码结构、清晰的命名、精简的函数、规范的注释等技术来提高代码的质量。</p>
+<p>该书主要包含以下内容：</p>
+<ol>
+<li>代码整洁的重要性及其对软件开发的影响。</li>
+<li>如何命名变量、函数、类等。</li>
+<li>如何组织代码，使用类、函数等基本元素，以及如何避免重复代码。</li>
+<li>如何编写有意义的注释，以及何时应该避免注释。</li>
+<li>如何编写有效的单元测试，以及测试的重要性。</li>
+<li>如何处理异常和错误，以及如何编写可恢复的代码。</li>
+<li>如何编写简洁的代码，以及如何避免复杂的逻辑和表达式。</li>
+<li>如何使用工具和技术来提高代码质量。</li>
+</ol>
+<p>总的来说，《代码整洁之道》是一本非常实用的书籍，其中提出的许多原则和实践都是经过实践验证的，可以帮助开发者编写更好的代码，提高软件开发效率和质量。如果您想要提高自己的编程技能，我非常推荐这本书。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">nixgnauhcuy</div><div class="post-copyright__author_desc">Life-long learning</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://www.nixgnauhcuy.cn/e12d07c4a704/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://www.nixgnauhcuy.cn/e12d07c4a704/')">编码命名风格</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://www.nixgnauhcuy.cn/e12d07c4a704/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=undefined&amp;url=https://www.nixgnauhcuy.cn/e12d07c4a704/&amp;pic=undefined" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.nixgnauhcuy.cn" target="_blank">nixgnauhcuy</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>嵌入式<span class="tagsPageCount">21</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231027/cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/b77d15ce3b54/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/00.jpg?_r_=3a441c2a-1261-8f1b-c772-8faae7e79495" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">编译 Linux 内核，打印 &quot;multiple definition of `yylloc'&quot; 出错</div></div></a></div><div class="next-post pull-right"><a href="/15e677942aff/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20230317/cover.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">英文芯片手册阅读技巧</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/f4985376a128/" title="CC2640 仿真烧录方式"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231019/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-19</div><div class="title">CC2640 仿真烧录方式</div></div></a></div><div><a href="/8159bca7abcd/" title="CC2640 OAD 生产烧录单文件实现"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231020/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-20</div><div class="title">CC2640 OAD 生产烧录单文件实现</div></div></a></div><div><a href="/fab2071f499b/" title="ESP32-C3 开发环境搭建"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231027/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-26</div><div class="title">ESP32-C3 开发环境搭建</div></div></a></div><div><a href="/c12055e6ecf6/" title="Nand Flash 和 Nor Flash 详解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/01.jpg?_r_=d0cf07ca-561d-3607-7084-d21db2ae4bc3" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-01-11</div><div class="title">Nand Flash 和 Nor Flash 详解</div></div></a></div><div><a href="/df5996b70de7/" title="PADS9.5 安装及破解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/default_cover/02.png?_r_=493817c4-dd82-0edf-ad34-a422d928c8c6" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-01-04</div><div class="title">PADS9.5 安装及破解</div></div></a></div><div><a href="/031a4fb624db/" title="imx6ull lvgl 移植"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20231025/cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-25</div><div class="title">imx6ull lvgl 移植</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">分享一些<b style="color:#fff">学习经验</b>以及一些<b style="color:#fff">杂七杂八的内容</b>。</div><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">相信你可以在这里找到对你有用的<b style="color:#fff">知识</b>和<b style="color:#fff">教程</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><h1 class="author-info__name">nixgnauhcuy</h1><div class="author-info__desc">Life-long learning</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/nixgnauhcuy" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">佛系更新博客~</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/other/wechat.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BC%96%E7%A0%81%E5%91%BD%E5%90%8D%E9%A3%8E%E6%A0%BC"><span class="toc-number">2.</span> <span class="toc-text">常见的编码命名风格</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A9%BC%E5%B3%B0%E5%BC%8F%E5%91%BD%E5%90%8D%E6%B3%95-camel-case"><span class="toc-number">2.1.</span> <span class="toc-text">驼峰式命名法(camel case)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">2.1.2.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">2.1.3.</span> <span class="toc-text">优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%9B%87%E5%BD%A2%E5%91%BD%E5%90%8D%E6%B3%95-snake-Case"><span class="toc-number">2.2.</span> <span class="toc-text">蛇形命名法(snake Case)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90-1"><span class="toc-number">2.2.2.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-1"><span class="toc-number">2.2.3.</span> <span class="toc-text">优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%88%E7%89%99%E5%88%A9%E5%91%BD%E5%90%8D%E6%B3%95-Hungarian-Notation"><span class="toc-number">2.3.</span> <span class="toc-text">匈牙利命名法(Hungarian Notation)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-2"><span class="toc-number">2.3.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90-2"><span class="toc-number">2.3.2.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-2"><span class="toc-number">2.3.3.</span> <span class="toc-text">优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%BC%8F%E5%91%BD%E5%90%8D%E6%B3%95-kebab-case"><span class="toc-number">2.4.</span> <span class="toc-text">串式命名法(kebab-case)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-3"><span class="toc-number">2.4.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90-3"><span class="toc-number">2.4.2.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-3"><span class="toc-number">2.4.3.</span> <span class="toc-text">优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%AB%E8%BD%A6%E5%91%BD%E5%90%8D%E6%B3%95-Train-Case"><span class="toc-number">2.5.</span> <span class="toc-text">火车命名法(Train-Case)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-4"><span class="toc-number">2.5.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90-4"><span class="toc-number">2.5.2.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-4"><span class="toc-number">2.5.3.</span> <span class="toc-text">优缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">3.</span> <span class="toc-text">最佳实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BC%96%E7%A8%8B%E5%91%BD%E5%90%8D%E9%94%99%E8%AF%AF"><span class="toc-number">4.</span> <span class="toc-text">常见的编程命名错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90"><span class="toc-number">5.</span> <span class="toc-text">推荐</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Google-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97"><span class="toc-number">5.1.</span> <span class="toc-text">Google 开源项目风格指南</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%8A%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E3%80%8B"><span class="toc-number">5.2.</span> <span class="toc-text">《代码整洁之道》</span></a></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By nixgnauhcuy</div><div id="workboard"><div id="runtimeTextTip"></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">11</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" rel="external nofollow noreferrer" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.cbd.int/instant.page/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("11/28/2020 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.8",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 nixgnauhcuy 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("11/28/2020 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = async () => {
+    try {
+      const res = await fetch('https://waline-two.vercel.app/api/comment?type=recent&count=6', { method: 'GET' })
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray)
+    } catch (err) {
+      console.error(err)
+      const $dom = document.querySelector('#card-newest-comments .aside-list')
+      $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('waline-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static/icon/ali_iconfont_css.css"><script src="https://cdn.cbd.int/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'G-2VWCFFF041', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
