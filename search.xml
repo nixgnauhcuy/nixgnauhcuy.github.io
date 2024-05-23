@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Keil5 Build Command 技巧</title>
+      <link href="/2b6702a14918/"/>
+      <url>/2b6702a14918/</url>
+      
+        <content type="html"><![CDATA[<h1>前言</h1><p>Keil mdk 是嵌入式开发中高频使用的 IDE 工具，许多芯片的 SDK 都会包含 keil 对应的开发工程。</p><p>最近使用时，同事提了一个需求，希望将编译的输出文件（bin、hex、axf、map）统一输出到整个项目的根目录，统一管理，这样就不用每次进入项目里，一层一层的进去找到输出的文件，并且这些文件还可能在不同的地方，例如 <code>./Listings</code> 和 <code>./Objects</code>，一个存放了 <code>.bin</code>、<code>.map</code>，另一个又存放了 <code>.axf</code> 和 <code>.hex</code>，对不懂这个项目的工程师不是很友好。</p><p>对于他的考虑，我当然表示认同，因为一个项目可能后边接手的人不需要了解代码怎么写，工程结构是这样的，他只需要找到输出文件，对芯片进行烧录。</p><p>既然需求有了，那么就需要看怎样实现了，原先我想的是在根目录里，写一个 python 脚本，直接运行定位到具体文件路径并拷贝出来，但是这样还需要多一个步骤，就是手动运行脚本，所以不是特别的自动化，那么有没有办法直接在运行的过程中，就将文件处理好呢？</p><p>当然是有的，不然就没有这篇文章了，Keil 提供了 <code>Command Items</code>，可以实现上面的需求。</p><h1>Build Command</h1><p>Keil 提供的 Command Items，在 <code>Keil - 魔术棒 - User</code> 里，分别给：</p><ul><li>Before Compile C/C++ File - 编译 C/C++ 文件之前运行</li><li>Before Build/Rebuild - 编译之前运行</li><li>After Build/Rebuild - 编译之后运行<br>提供了各 2 条可运行项，需要我们根据自己的需求填入 User Command，实现对应的功能。</li></ul><p><img src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20240523/00.png" alt=""></p><p>我们上述的需求，则是建立在编译之后，所以我们需要考虑的是 <code>After Build/Rebuild</code>，编译完文件后，运行对应命令，将输出拷贝到目标文件里。</p><p>但是 Keil 只提供了两条可运行的命令，显然是不够用的，所以，我保留了将 .axf 文件转换 .bin 的命令，将另一条命令拿来实现我们的需求。</p><p>首先，在工程所在目录，也就是 <code>.uvprojx</code> 目录，创建一个 <code>.bat</code> 文件，这里我命名为 <code>build_script.bat</code>，内容如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">set BUILD_NAME=%1</span><br><span class="line">set OUTPUT_PATH=&quot;..\..\build_out&quot;</span><br><span class="line"></span><br><span class="line">mkdir %OUTPUT_PATH% 2&gt;nul</span><br><span class="line"></span><br><span class="line">copy Listings\%BUILD_NAME%.bin %OUTPUT_PATH% &gt;nul</span><br><span class="line">copy Listings\%BUILD_NAME%.map %OUTPUT_PATH% &gt;nul</span><br><span class="line">copy Objects\%BUILD_NAME%.hex %OUTPUT_PATH% &gt;nul</span><br><span class="line">copy Objects\%BUILD_NAME%.axf %OUTPUT_PATH% &gt;nul</span><br><span class="line"></span><br><span class="line">echo Done</span><br><span class="line"></span><br><span class="line">exit /b 0</span><br></pre></td></tr></table></figure><p>Keil 中填入的命令如图：</p><p><img src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20240523/01.png" alt=""></p><p>命令为：<code>.\build_script.bat test_project</code></p><p>简单描述下 <code>.bat</code> 的作用，首先，<code>set BUILD_NAME=%1</code>，用于接收传参，对应的就是上述命令的 <code>test_project</code>，随后 <code>set OUTPUT_PATH=&quot;..\..\build_out&quot;</code> 标注了我要输出的文件路径，<code>mkdir %OUTPUT_PATH% 2&gt;nul</code> 创建输出对应的文件夹，接下来使用 copy 命令，将 <code>Listings\test_project.bin</code> 复制到输出文件中，其他的命令一样，执行完后输出 <code>Done</code>.</p><p><img src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20240523/02.png" alt=""></p><p><img src="https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn/img/markdown/20240523/03.png" alt=""></p><p>所以每次编译完，就会运行对应的 .bat 脚本，将输出的内容 copy 到对应的文件，这样，就完成了之前提出的需求了。</p><h1>结语</h1><p>所以善用，Keil 的 Build Command，可以实现不同的效果，不需要局限与我上述的需求例子。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 嵌入式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 嵌入式 </tag>
+            
+            <tag> keil </tag>
+            
+            <tag> 软件 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>蓝牙多点测距小记</title>
       <link href="/91206d67d16b/"/>
       <url>/91206d67d16b/</url>
@@ -978,9 +1007,9 @@
             
             <tag> 嵌入式 </tag>
             
-            <tag> 软件 </tag>
-            
             <tag> keil </tag>
+            
+            <tag> 软件 </tag>
             
         </tags>
       
@@ -1034,9 +1063,9 @@
             
             <tag> 嵌入式 </tag>
             
-            <tag> 软件 </tag>
-            
             <tag> keil </tag>
+            
+            <tag> 软件 </tag>
             
         </tags>
       
@@ -1063,9 +1092,9 @@
             
             <tag> 嵌入式 </tag>
             
-            <tag> 软件 </tag>
-            
             <tag> keil </tag>
+            
+            <tag> 软件 </tag>
             
         </tags>
       

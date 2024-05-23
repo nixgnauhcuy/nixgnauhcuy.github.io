@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.nixgnauhcuy.cn/2b6702a14918/</loc>
+    
+    <lastmod>2024-05-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.nixgnauhcuy.cn/essay/index.html</loc>
     
     <lastmod>2024-04-10</lastmod>
@@ -74,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/comments/index.html</loc>
+    <loc>https://www.nixgnauhcuy.cn/categories/index.html</loc>
     
     <lastmod>2023-10-26</lastmod>
     
@@ -83,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/index.html</loc>
+    <loc>https://www.nixgnauhcuy.cn/comments/index.html</loc>
     
     <lastmod>2023-10-26</lastmod>
     
@@ -416,14 +425,14 @@
 
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/</loc>
+    <loc>https://www.nixgnauhcuy.cn/tags/GPT/</loc>
     <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/GPT/</loc>
+    <loc>https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/</loc>
     <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -507,14 +516,7 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/python/</loc>
-    <lastmod>2024-05-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <loc>https://www.nixgnauhcuy.cn/tags/keil/</loc>
     <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -528,7 +530,14 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/keil/</loc>
+    <loc>https://www.nixgnauhcuy.cn/tags/python/</loc>
+    <lastmod>2024-05-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.nixgnauhcuy.cn/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -579,14 +588,14 @@
 
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/</loc>
+    <loc>https://www.nixgnauhcuy.cn/categories/GPT/</loc>
     <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/GPT/</loc>
+    <loc>https://www.nixgnauhcuy.cn/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/</loc>
     <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -614,14 +623,14 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/python/</loc>
+    <loc>https://www.nixgnauhcuy.cn/categories/%E8%BD%AF%E4%BB%B6/</loc>
     <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/%E8%BD%AF%E4%BB%B6/</loc>
+    <loc>https://www.nixgnauhcuy.cn/categories/python/</loc>
     <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -649,14 +658,14 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/Linux/</loc>
+    <loc>https://www.nixgnauhcuy.cn/categories/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/%E5%B7%A5%E5%85%B7/</loc>
+    <loc>https://www.nixgnauhcuy.cn/categories/Linux/</loc>
     <lastmod>2024-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
