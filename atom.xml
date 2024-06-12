@@ -1,0 +1,344 @@
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:webfeeds="http://webfeeds.org/rss/1.0">
+<title>nixgnauhcuy</title>
+ 
+<subtitle>nixgnauhcuy&#39;s blog</subtitle>
+
+<link href="https://www.nixgnauhcuy.cn/atom.xml" rel="self"/>
+
+<link href="https://pubsubhubbub.appspot.com/" rel="hub"/>
+
+<link href="https://www.nixgnauhcuy.cn/"/>
+<updated>2024-05-24T15:02:04.000Z</updated>
+<id>https://www.nixgnauhcuy.cn/</id>
+
+<author>
+<name>nixgnauhcuy</name>
+
+</author>
+
+<generator uri="https://hexo.io/">Hexo</generator>
+<webfeeds:cover image="https://cdn.jsdelivr.net/gh/hayschan/static@master/2020/12/gFn7zm.JPG"/>
+<webfeeds:icon>https://cdn.jsdelivr.net/gh/hayschan/static@master/2020/12/VAlBPs.png</webfeeds:icon>
+<webfeeds:logo>https://cdn.jsdelivr.net/gh/hayschan/static@master/2020/12/XDzm9G.svg</webfeeds:logo>
+<webfeeds:accentColor>0abab5</webfeeds:accentColor>
+<webfeeds:related layout="card" target="browser"/>
+
+<entry>
+<title>S32DS Build Command 技巧</title>
+<link href="https://www.nixgnauhcuy.cn/42c8065d1ad6/"/>
+<id>https://www.nixgnauhcuy.cn/42c8065d1ad6/</id>
+<published>2024-05-24T15:02:04.000Z</published>
+<updated>2024-05-24T15:02:04.000Z</updated>
+ 
+<summary type="html">S32DS IDE 的 build command 使用技巧。</summary>
+  
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+ 
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+
+<category term="软件" scheme="https://www.nixgnauhcuy.cn/tags/%E8%BD%AF%E4%BB%B6/"/>
+
+<category term="S32DS" scheme="https://www.nixgnauhcuy.cn/tags/S32DS/"/>
+
+</entry>
+
+<entry>
+<title>Keil5 Build Command 技巧</title>
+<link href="https://www.nixgnauhcuy.cn/2b6702a14918/"/>
+<id>https://www.nixgnauhcuy.cn/2b6702a14918/</id>
+<published>2024-05-23T15:02:04.000Z</published>
+<updated>2024-05-23T15:02:04.000Z</updated>
+ 
+<summary type="html">Keil mdk 软件的 build command 使用技巧。</summary>
+  
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+ 
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+
+<category term="keil" scheme="https://www.nixgnauhcuy.cn/tags/keil/"/>
+
+<category term="软件" scheme="https://www.nixgnauhcuy.cn/tags/%E8%BD%AF%E4%BB%B6/"/>
+
+</entry>
+
+<entry>
+<title>蓝牙多点测距小记</title>
+<link href="https://www.nixgnauhcuy.cn/91206d67d16b/"/>
+<id>https://www.nixgnauhcuy.cn/91206d67d16b/</id>
+<published>2024-03-28T15:02:04.000Z</published>
+<updated>2024-03-28T15:02:04.000Z</updated>
+ 
+<summary type="html">学习蓝牙多点RSSI测距小记。</summary>
+  
+<category term="蓝牙" scheme="https://www.nixgnauhcuy.cn/categories/%E8%93%9D%E7%89%99/"/>
+ 
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+
+<category term="BLE" scheme="https://www.nixgnauhcuy.cn/tags/BLE/"/>
+
+<category term="蓝牙" scheme="https://www.nixgnauhcuy.cn/tags/%E8%93%9D%E7%89%99/"/>
+
+</entry>
+
+<entry>
+<title>imx6ull logo 更改</title>
+<link href="https://www.nixgnauhcuy.cn/732fd0ca5c67/"/>
+<id>https://www.nixgnauhcuy.cn/732fd0ca5c67/</id>
+<published>2023-12-20T15:02:04.000Z</published>
+<updated>2023-12-20T15:02:04.000Z</updated>
+ 
+<summary type="html">记录基于 imx6ull uboot、kernel logo 更改。</summary>
+  
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+ 
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+
+</entry>
+
+<entry>
+<title>SPI、DSPI、QSPI 笔记</title>
+<link href="https://www.nixgnauhcuy.cn/93cfe9c2432d/"/>
+<id>https://www.nixgnauhcuy.cn/93cfe9c2432d/</id>
+<published>2023-12-01T15:02:04.000Z</published>
+<updated>2023-12-01T15:02:04.000Z</updated>
+ 
+<summary type="html">记录 SPI、DSPI、QSPI 笔记。</summary>
+  
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+ 
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+
+</entry>
+
+<entry>
+<title>ESP32-C3-LCDkit GPIO 学习</title>
+<link href="https://www.nixgnauhcuy.cn/c476b577ab06/"/>
+<id>https://www.nixgnauhcuy.cn/c476b577ab06/</id>
+<published>2023-11-03T15:02:04.000Z</published>
+<updated>2023-11-03T15:02:04.000Z</updated>
+ 
+<summary type="html">记录基于 ESP32-C3-LCDkit GPIO 的学习笔记。</summary>
+  
+<category term="ESP32" scheme="https://www.nixgnauhcuy.cn/categories/ESP32/"/>
+ 
+<category term="ESP32" scheme="https://www.nixgnauhcuy.cn/tags/ESP32/"/>
+
+</entry>
+
+<entry>
+<title>ESP32-C3-LCDkit 基础入门</title>
+<link href="https://www.nixgnauhcuy.cn/272c4a3365cb/"/>
+<id>https://www.nixgnauhcuy.cn/272c4a3365cb/</id>
+<published>2023-11-02T15:02:04.000Z</published>
+<updated>2023-11-02T15:02:04.000Z</updated>
+ 
+<summary type="html">记录基于 ESP32-C3-LCDkit 开发板的基础入门。</summary>
+  
+<category term="ESP32" scheme="https://www.nixgnauhcuy.cn/categories/ESP32/"/>
+ 
+<category term="ESP32" scheme="https://www.nixgnauhcuy.cn/tags/ESP32/"/>
+
+</entry>
+
+<entry>
+<title>ESP32-C3 开发环境搭建</title>
+<link href="https://www.nixgnauhcuy.cn/fab2071f499b/"/>
+<id>https://www.nixgnauhcuy.cn/fab2071f499b/</id>
+<published>2023-10-26T15:02:04.000Z</published>
+<updated>2023-10-27T15:02:04.000Z</updated>
+ 
+<summary type="html">记录基于 ESP32-C3 开发板进行环境搭建。</summary>
+  
+<category term="ESP32" scheme="https://www.nixgnauhcuy.cn/categories/ESP32/"/>
+ 
+<category term="ESP32" scheme="https://www.nixgnauhcuy.cn/tags/ESP32/"/>
+
+</entry>
+
+<entry>
+<title>imx6ull lvgl 移植</title>
+<link href="https://www.nixgnauhcuy.cn/031a4fb624db/"/>
+<id>https://www.nixgnauhcuy.cn/031a4fb624db/</id>
+<published>2023-10-25T15:02:04.000Z</published>
+<updated>2023-10-25T15:02:04.000Z</updated>
+ 
+<summary type="html">基于 NXP I.MX6ULL 的 lvgl 移植。</summary>
+  
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+ 
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+
+</entry>
+
+<entry>
+<title>CC2640 OAD 生产烧录单文件实现</title>
+<link href="https://www.nixgnauhcuy.cn/8159bca7abcd/"/>
+<id>https://www.nixgnauhcuy.cn/8159bca7abcd/</id>
+<published>2023-10-20T15:02:04.000Z</published>
+<updated>2023-10-20T15:02:04.000Z</updated>
+ 
+<summary type="html">CC2640 OAD 生产、烧录单文件的实现方法。</summary>
+  
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+ 
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+
+</entry>
+
+<entry>
+<title>CC2640 仿真烧录方式</title>
+<link href="https://www.nixgnauhcuy.cn/f4985376a128/"/>
+<id>https://www.nixgnauhcuy.cn/f4985376a128/</id>
+<published>2023-10-19T15:02:04.000Z</published>
+<updated>2023-10-19T15:02:04.000Z</updated>
+ 
+<summary type="html">小记关于 Ti CC2640 仿真烧录的方法。</summary>
+  
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+ 
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+
+</entry>
+
+<entry>
+<title>Python 打包工具之 pyinstaller</title>
+<link href="https://www.nixgnauhcuy.cn/047559a4bb5f/"/>
+<id>https://www.nixgnauhcuy.cn/047559a4bb5f/</id>
+<published>2023-06-26T15:02:04.000Z</published>
+<updated>2023-06-26T15:02:04.000Z</updated>
+ 
+<summary type="html">关于 Python 的 pyinstaller 打包方法。</summary>
+  
+<category term="python" scheme="https://www.nixgnauhcuy.cn/categories/python/"/>
+ 
+<category term="python" scheme="https://www.nixgnauhcuy.cn/tags/python/"/>
+
+</entry>
+
+<entry>
+<title>Python 打包工具之 Nuitka</title>
+<link href="https://www.nixgnauhcuy.cn/cc72c04a110b/"/>
+<id>https://www.nixgnauhcuy.cn/cc72c04a110b/</id>
+<published>2023-06-21T15:02:04.000Z</published>
+<updated>2023-06-21T15:02:04.000Z</updated>
+ 
+<summary type="html">关于 Python 的 Nuitka 打包方法。</summary>
+  
+<category term="python" scheme="https://www.nixgnauhcuy.cn/categories/python/"/>
+ 
+<category term="python" scheme="https://www.nixgnauhcuy.cn/tags/python/"/>
+
+</entry>
+
+<entry>
+<title>使用代理 API 接口实现 GPT Chat</title>
+<link href="https://www.nixgnauhcuy.cn/b24e231b6701/"/>
+<id>https://www.nixgnauhcuy.cn/b24e231b6701/</id>
+<published>2023-03-25T11:01:00.000Z</published>
+<updated>2023-03-25T11:01:00.000Z</updated>
+ 
+<summary type="html">使用代理 API 接口实现 GPT Chat。</summary>
+  
+<category term="GPT" scheme="https://www.nixgnauhcuy.cn/categories/GPT/"/>
+ 
+<category term="GPT" scheme="https://www.nixgnauhcuy.cn/tags/GPT/"/>
+
+</entry>
+
+<entry>
+<title>在 FireFox 使用 New Bing Chat</title>
+<link href="https://www.nixgnauhcuy.cn/5cf08051cca4/"/>
+<id>https://www.nixgnauhcuy.cn/5cf08051cca4/</id>
+<published>2023-03-25T11:00:00.000Z</published>
+<updated>2023-03-25T11:00:00.000Z</updated>
+ 
+<summary type="html">在 FireFox 使用 New Bing Chat。</summary>
+  
+<category term="工具" scheme="https://www.nixgnauhcuy.cn/categories/%E5%B7%A5%E5%85%B7/"/>
+ 
+<category term="工具" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B7%A5%E5%85%B7/"/>
+
+</entry>
+
+<entry>
+<title>A Simple GPT Qt Demo</title>
+<link href="https://www.nixgnauhcuy.cn/8ea2fbe8b8db/"/>
+<id>https://www.nixgnauhcuy.cn/8ea2fbe8b8db/</id>
+<published>2023-03-24T12:56:58.000Z</published>
+<updated>2023-03-24T12:56:58.000Z</updated>
+ 
+<summary type="html">用 Pyqt5 简单实现 GPT3.5 应用。</summary>
+  
+<category term="GPT" scheme="https://www.nixgnauhcuy.cn/categories/GPT/"/>
+ 
+<category term="GPT" scheme="https://www.nixgnauhcuy.cn/tags/GPT/"/>
+
+</entry>
+
+<entry>
+<title>集成 GPT-4 的 IDE 工具 Cursor</title>
+<link href="https://www.nixgnauhcuy.cn/10ab07f6c6c9/"/>
+<id>https://www.nixgnauhcuy.cn/10ab07f6c6c9/</id>
+<published>2023-03-17T15:56:58.000Z</published>
+<updated>2023-10-12T15:56:58.000Z</updated>
+ 
+<summary type="html">Cursor 是一种新的 IDE，它使用 AI 来帮助您重构、理解、调试和编写代码。</summary>
+  
+<category term="GPT" scheme="https://www.nixgnauhcuy.cn/categories/GPT/"/>
+ 
+<category term="GPT" scheme="https://www.nixgnauhcuy.cn/tags/GPT/"/>
+
+</entry>
+
+<entry>
+<title>pdf2htmlEx - html高度还原pdf</title>
+<link href="https://www.nixgnauhcuy.cn/2dc15143d194/"/>
+<id>https://www.nixgnauhcuy.cn/2dc15143d194/</id>
+<published>2023-03-17T15:55:04.000Z</published>
+<updated>2023-03-17T15:55:04.000Z</updated>
+ 
+<summary type="html">pdf 转 html 神器</summary>
+  
+<category term="技巧" scheme="https://www.nixgnauhcuy.cn/categories/%E6%8A%80%E5%B7%A7/"/>
+ 
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+
+<category term="技巧" scheme="https://www.nixgnauhcuy.cn/tags/%E6%8A%80%E5%B7%A7/"/>
+
+</entry>
+
+<entry>
+<title>英文芯片手册阅读技巧</title>
+<link href="https://www.nixgnauhcuy.cn/15e677942aff/"/>
+<id>https://www.nixgnauhcuy.cn/15e677942aff/</id>
+<published>2023-03-17T15:02:04.000Z</published>
+<updated>2023-03-17T15:02:04.000Z</updated>
+ 
+<summary type="html">适用于英语水平有限的读者~</summary>
+  
+<category term="技巧" scheme="https://www.nixgnauhcuy.cn/categories/%E6%8A%80%E5%B7%A7/"/>
+ 
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+
+<category term="技巧" scheme="https://www.nixgnauhcuy.cn/tags/%E6%8A%80%E5%B7%A7/"/>
+
+<category term="英文" scheme="https://www.nixgnauhcuy.cn/tags/%E8%8B%B1%E6%96%87/"/>
+
+</entry>
+
+<entry>
+<title>编码命名风格</title>
+<link href="https://www.nixgnauhcuy.cn/e12d07c4a704/"/>
+<id>https://www.nixgnauhcuy.cn/e12d07c4a704/</id>
+<published>2023-03-01T02:45:45.000Z</published>
+<updated>2023-03-01T02:45:45.000Z</updated>
+ 
+<summary type="html">编码命名风格是指在编写代码时使用的变量、函数、类和文件名等标识符的规则和标准。良好的命名风格可以提高代码的可读性、可维护性和可重用性，减少错误和调试时间。在本文中，我们将讨论一些常见的命名风格，例如驼峰命名法、蛇形命名法和匈牙利命名法，以及它们的优缺点和最佳实践。</summary>
+  
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+ 
+<category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+
+</entry>
+
+</feed>
