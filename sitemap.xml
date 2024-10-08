@@ -137,7 +137,7 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/comments/index.html</loc>
+    <loc>https://www.nixgnauhcuy.cn/categories/index.html</loc>
     
     <lastmod>2023-10-26</lastmod>
     
@@ -146,7 +146,7 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/index.html</loc>
+    <loc>https://www.nixgnauhcuy.cn/comments/index.html</loc>
     
     <lastmod>2023-10-26</lastmod>
     
@@ -542,28 +542,7 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/ANCS/</loc>
-    <lastmod>2024-10-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.nixgnauhcuy.cn/tags/AMS/</loc>
-    <lastmod>2024-10-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/Nand-Flash/</loc>
-    <lastmod>2024-10-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/Nor-Flash/</loc>
     <lastmod>2024-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -592,6 +571,27 @@
   
   <url>
     <loc>https://www.nixgnauhcuy.cn/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2024-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.nixgnauhcuy.cn/tags/Nand-Flash/</loc>
+    <lastmod>2024-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.nixgnauhcuy.cn/tags/Nor-Flash/</loc>
+    <lastmod>2024-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.nixgnauhcuy.cn/tags/ANCS/</loc>
     <lastmod>2024-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -698,14 +698,14 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/python/</loc>
+    <loc>https://www.nixgnauhcuy.cn/categories/%E8%BD%AF%E4%BB%B6/</loc>
     <lastmod>2024-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/%E8%BD%AF%E4%BB%B6/</loc>
+    <loc>https://www.nixgnauhcuy.cn/categories/python/</loc>
     <lastmod>2024-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
