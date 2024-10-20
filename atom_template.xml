@@ -28,6 +28,10 @@
 <webfeeds:related layout="card" target="browser"/>
 {% for post in posts.toArray() %}
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>{{ post.title }}</title>
 <link href="{{ post.permalink | uriencode }}"/>
 <id>{{ post.permalink | uriencode }}</id>

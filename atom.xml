@@ -26,6 +26,10 @@
 <webfeeds:related layout="card" target="browser"/>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>记录 axf 转 bin python 脚本笔记</title>
 <link href="https://www.nixgnauhcuy.cn/60a5dd23b536/"/>
 <id>https://www.nixgnauhcuy.cn/60a5dd23b536/</id>
@@ -42,6 +46,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>Pyqt QCustomPlot 简介、安装与实用代码示例（四）</title>
 <link href="https://www.nixgnauhcuy.cn/423b1931ce58/"/>
 <id>https://www.nixgnauhcuy.cn/423b1931ce58/</id>
@@ -65,6 +73,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>Pyqt QCustomPlot 简介、安装与实用代码示例（三）</title>
 <link href="https://www.nixgnauhcuy.cn/a0c7dce1d4fa/"/>
 <id>https://www.nixgnauhcuy.cn/a0c7dce1d4fa/</id>
@@ -88,6 +100,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>Pyqt QCustomPlot 简介、安装与实用代码示例（二）</title>
 <link href="https://www.nixgnauhcuy.cn/f1b80f317887/"/>
 <id>https://www.nixgnauhcuy.cn/f1b80f317887/</id>
@@ -111,6 +127,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>Pyqt QCustomPlot 简介、安装与实用代码示例（一）</title>
 <link href="https://www.nixgnauhcuy.cn/8d34424033d0/"/>
 <id>https://www.nixgnauhcuy.cn/8d34424033d0/</id>
@@ -134,6 +154,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>S32DS Build Command 技巧</title>
 <link href="https://www.nixgnauhcuy.cn/42c8065d1ad6/"/>
 <id>https://www.nixgnauhcuy.cn/42c8065d1ad6/</id>
@@ -157,6 +181,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>Keil5 Build Command 技巧</title>
 <link href="https://www.nixgnauhcuy.cn/2b6702a14918/"/>
 <id>https://www.nixgnauhcuy.cn/2b6702a14918/</id>
@@ -173,13 +201,17 @@
  
 <category term="嵌入式" scheme="https://www.nixgnauhcuy.cn/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
 
-<category term="keil" scheme="https://www.nixgnauhcuy.cn/tags/keil/"/>
-
 <category term="软件" scheme="https://www.nixgnauhcuy.cn/tags/%E8%BD%AF%E4%BB%B6/"/>
+
+<category term="keil" scheme="https://www.nixgnauhcuy.cn/tags/keil/"/>
 
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>蓝牙多点测距小记</title>
 <link href="https://www.nixgnauhcuy.cn/91206d67d16b/"/>
 <id>https://www.nixgnauhcuy.cn/91206d67d16b/</id>
@@ -203,6 +235,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>imx6ull logo 更改</title>
 <link href="https://www.nixgnauhcuy.cn/732fd0ca5c67/"/>
 <id>https://www.nixgnauhcuy.cn/732fd0ca5c67/</id>
@@ -222,6 +258,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>SPI、DSPI、QSPI 笔记</title>
 <link href="https://www.nixgnauhcuy.cn/93cfe9c2432d/"/>
 <id>https://www.nixgnauhcuy.cn/93cfe9c2432d/</id>
@@ -241,6 +281,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>ESP32-C3-LCDkit GPIO 学习</title>
 <link href="https://www.nixgnauhcuy.cn/c476b577ab06/"/>
 <id>https://www.nixgnauhcuy.cn/c476b577ab06/</id>
@@ -260,6 +304,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>ESP32-C3-LCDkit 基础入门</title>
 <link href="https://www.nixgnauhcuy.cn/272c4a3365cb/"/>
 <id>https://www.nixgnauhcuy.cn/272c4a3365cb/</id>
@@ -279,6 +327,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>ESP32-C3 开发环境搭建</title>
 <link href="https://www.nixgnauhcuy.cn/fab2071f499b/"/>
 <id>https://www.nixgnauhcuy.cn/fab2071f499b/</id>
@@ -298,6 +350,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>imx6ull lvgl 移植</title>
 <link href="https://www.nixgnauhcuy.cn/031a4fb624db/"/>
 <id>https://www.nixgnauhcuy.cn/031a4fb624db/</id>
@@ -317,6 +373,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>CC2640 OAD 生产烧录单文件实现</title>
 <link href="https://www.nixgnauhcuy.cn/8159bca7abcd/"/>
 <id>https://www.nixgnauhcuy.cn/8159bca7abcd/</id>
@@ -336,6 +396,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>CC2640 仿真烧录方式</title>
 <link href="https://www.nixgnauhcuy.cn/f4985376a128/"/>
 <id>https://www.nixgnauhcuy.cn/f4985376a128/</id>
@@ -355,6 +419,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>Python 打包工具之 pyinstaller</title>
 <link href="https://www.nixgnauhcuy.cn/047559a4bb5f/"/>
 <id>https://www.nixgnauhcuy.cn/047559a4bb5f/</id>
@@ -374,6 +442,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>Python 打包工具之 Nuitka</title>
 <link href="https://www.nixgnauhcuy.cn/cc72c04a110b/"/>
 <id>https://www.nixgnauhcuy.cn/cc72c04a110b/</id>
@@ -393,6 +465,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>使用代理 API 接口实现 GPT Chat</title>
 <link href="https://www.nixgnauhcuy.cn/b24e231b6701/"/>
 <id>https://www.nixgnauhcuy.cn/b24e231b6701/</id>
@@ -412,6 +488,10 @@
 </entry>
 
 <entry>
+<follow_challenge>
+    <feedId>70808816141833216</feedId>
+    <userId>67406205634646016</userId>
+</follow_challenge>
 <title>在 FireFox 使用 New Bing Chat</title>
 <link href="https://www.nixgnauhcuy.cn/5cf08051cca4/"/>
 <id>https://www.nixgnauhcuy.cn/5cf08051cca4/</id>
