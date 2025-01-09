@@ -1,9 +1,5 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:webfeeds="http://webfeeds.org/rss/1.0">
 <title>{{ config.title }}</title>
-<follow_challenge>
-    <feedId>70808816141833216</feedId>
-    <userId>67406205634646016</userId>
-</follow_challenge>
 {% if icon %}
 <icon>{{ icon }}</icon>
 {% endif %} {% if config.description %}

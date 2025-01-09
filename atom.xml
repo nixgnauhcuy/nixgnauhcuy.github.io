@@ -1,9 +1,5 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:webfeeds="http://webfeeds.org/rss/1.0">
 <title>nixgnauhcuy</title>
-<follow_challenge>
-    <feedId>70808816141833216</feedId>
-    <userId>67406205634646016</userId>
-</follow_challenge>
 
 <icon>https://testingcf.jsdelivr.net/gh/nixgnauhcuy/blog_cdn@1.0/img/other/favicon.png</icon>
  
