@@ -511,27 +511,6 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/C/</loc>
-    <lastmod>2026-04-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/%E4%BD%8D%E5%9F%9F/</loc>
-    <lastmod>2026-04-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/%E4%BD%8D%E5%AD%97%E6%AE%B5/</loc>
-    <lastmod>2026-04-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.nixgnauhcuy.cn/tags/ESP32/</loc>
     <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -567,14 +546,21 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/Nand-Flash/</loc>
+    <loc>https://www.nixgnauhcuy.cn/tags/C/</loc>
     <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/tags/Nor-Flash/</loc>
+    <loc>https://www.nixgnauhcuy.cn/tags/%E4%BD%8D%E5%9F%9F/</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.nixgnauhcuy.cn/tags/%E4%BD%8D%E5%AD%97%E6%AE%B5/</loc>
     <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -596,6 +582,20 @@
   
   <url>
     <loc>https://www.nixgnauhcuy.cn/tags/%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.nixgnauhcuy.cn/tags/Nand-Flash/</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.nixgnauhcuy.cn/tags/Nor-Flash/</loc>
     <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -695,13 +695,6 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/C/</loc>
-    <lastmod>2026-04-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.nixgnauhcuy.cn/categories/ESP32/</loc>
     <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -710,6 +703,13 @@
   
   <url>
     <loc>https://www.nixgnauhcuy.cn/categories/%E8%93%9D%E7%89%99/</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.nixgnauhcuy.cn/categories/C/</loc>
     <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -744,14 +744,14 @@
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/%E5%B7%A5%E5%85%B7/</loc>
+    <loc>https://www.nixgnauhcuy.cn/categories/%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.nixgnauhcuy.cn/categories/%E7%94%9F%E6%B4%BB/</loc>
+    <loc>https://www.nixgnauhcuy.cn/categories/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
