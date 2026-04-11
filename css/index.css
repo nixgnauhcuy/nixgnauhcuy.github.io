@@ -21734,6 +21734,7 @@ body[data-type="essay"] #web_bg {
 
 /* 顶部样式 */
 .author-content.author-content-item.essayPage {
+  width: 100%;
   height: 19rem;
   color: var(--anzhiyu-white);
   overflow: hidden;
